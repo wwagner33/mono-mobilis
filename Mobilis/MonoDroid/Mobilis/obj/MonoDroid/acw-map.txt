@@ -1,0 +1,5 @@
+Mobilis.CoursesActivity;mobilis.CoursesActivity
+Mobilis.SimpleListAdapter`1;mobilis.SimpleListAdapter_1
+Mobilis.SetUpActivity;mobilis.SetUpActivity
+Mobilis.LoginActivity;mobilis.LoginActivity
+Mobilis.Lib.Database.DatabaseHelper;mobilis.lib.database.DatabaseHelper

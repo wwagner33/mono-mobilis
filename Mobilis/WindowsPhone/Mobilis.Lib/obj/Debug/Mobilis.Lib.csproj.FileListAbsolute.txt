@@ -1,0 +1,6 @@
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\Bin\Debug\Mobilis.Lib.dll
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\Bin\Debug\Mobilis.Lib.pdb
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\obj\Debug\Mobilis.Lib.dll
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\obj\Debug\Mobilis.Lib.pdb
+C:\Users\Paulo\documents\visual studio 2010\Projects\Mobilis\WindowsPhone\Mobilis.Lib\Bin\Debug\Mobilis.Lib.dll.config

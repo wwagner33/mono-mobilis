@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoTouch", "MonoTouch\MonoTouch.csproj", "{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Debug|iPhone.Build.0 = Debug|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Release|iPhone.ActiveCfg = Release|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Release|iPhone.Build.0 = Release|iPhone
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{61E63951-DB2A-41F3-AE5C-2A8731CB31EA}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = MonoTouch\MonoTouch.csproj
+	EndGlobalSection
+EndGlobal

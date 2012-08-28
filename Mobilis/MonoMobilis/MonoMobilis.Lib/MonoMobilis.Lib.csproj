@@ -37,5 +37,32 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\CourseDao.cs">
+      <Link>Database\CourseDao.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\SQLite.cs">
+      <Link>Database\SQLite.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\CourseService.cs">
+      <Link>DataServices\CourseService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\LoginService.cs">
+      <Link>DataServices\LoginService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\RestService.cs">
+      <Link>DataServices\RestService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\Result.cs">
+      <Link>DataServices\Result.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Course.cs">
+      <Link>Model\Course.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Util\JSON.cs">
+      <Link>Util\JSON.cs</Link>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,6 @@
 using System.Json;
+using System.Collections.Generic;
+using Mobilis.Lib.Model;
 namespace Mobilis.Lib.Util
 {
     public class JSON
@@ -15,11 +17,8 @@ namespace Mobilis.Lib.Util
             JObject outerObject = new JObject();
             outerObject.Add("user", innerObject);
             */
-                
-            // System.Json
 
-            
-            
+            // System.Json
             JsonObject innerObject = new JsonObject();
             innerObject.Add("login", login);
             innerObject.Add("password", password);
@@ -28,9 +27,33 @@ namespace Mobilis.Lib.Util
             return outerObject.ToString();
         }
 
-        public static string parseToken(string content)
+        public static IEnumerable<string> parseToken(string content) 
         {
-            return null;
+            var json = JsonValue.Parse(content);
+            var session = json["session"];
+            string token = session["auth_token"];
+            yield return token;
+        }
+
+        public static IEnumerable<Course> parseCourses(string content)
+        {
+            List<Course> parsedValues = new List<Course>();
+            var data = JsonValue.Parse(content);
+            System.Diagnostics.Debug.WriteLine("Json value size" + data.Count);
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                var innerObject = data[i];
+                Course course = new Course();
+                course._id = innerObject["id"];
+                course.offerId = innerObject["offer_id"];
+                course.groupId = innerObject["group_id"];
+                course.semester = innerObject["semester"];
+                course.allocationTagId = innerObject["allocation_tag_id"];
+                course.name = innerObject["name"];
+                parsedValues.Add(course);
+            }
+            return parsedValues;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Mobilis.Lib.DataServices
         {
             string tokenUrl = "?auth_token=" + token;
             var webRequest = (HttpWebRequest)WebRequest.Create(_baseUrl + source + tokenUrl);
+            System.Diagnostics.Debug.WriteLine("URL = " + _baseUrl + source + tokenUrl);
 
             webRequest.BeginGetResponse(responseResult =>
                 {
@@ -38,11 +39,15 @@ namespace Mobilis.Lib.DataServices
 
         protected void Post(string source, string content, ResultCallback<IEnumerable<T>> callback)
         {
+            System.Diagnostics.Debug.WriteLine("Content RAW =" + content);
+            string content2 = "{\"user\": {\"login\": \"aluno1\", \"password\": \"123456\"}}";
+            string content3 = content.Replace(" ", string.Empty);
+            System.Diagnostics.Debug.WriteLine("Content certo =" + content2);
+            System.Diagnostics.Debug.WriteLine("Content3 = " + content3);
             var webRequest = (HttpWebRequest)WebRequest.Create(_baseUrl + source);
-
+            System.Diagnostics.Debug.WriteLine("URL = " + _baseUrl + source);
             webRequest.ContentType = "application/json";
             webRequest.Method = "POST";
-
             webRequest.BeginGetRequestStream(responseResult => 
             {
                 try
@@ -65,21 +70,11 @@ namespace Mobilis.Lib.DataServices
                         }
                     }, webRequest);
 
-                    
-                    /*
-                    var response = (HttpWebResponse)webRequest.GetResponse();
-                    System.Diagnostics.Debug.WriteLine("StatusCode = " + response.StatusCode.ToString());
-
-                    if (response != null)
-                    {
-                        var result = ParseResult(response);
-                        response.Close();
-                        callback(new Result<IEnumerable<T>>(result));
-                    }
-                     */
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("PostException");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
                     callback(new Result<IEnumerable<T>>(ex));
                 }
             }, webRequest);
@@ -90,7 +85,7 @@ namespace Mobilis.Lib.DataServices
             Stream responseStream = response.GetResponseStream();
             StreamReader responseReader = new System.IO.StreamReader(responseStream, Encoding.UTF8);
             string result = responseReader.ReadToEnd();
-            System.Diagnostics.Debug.WriteLine("Result from server = " + result);
+            System.Diagnostics.Debug.WriteLine(result);
             return parseJSON(result);
         }
     }

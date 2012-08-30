@@ -1,6 +1,11 @@
 using System.Collections.Generic;
+#if MONODROID || MONOTOUCH
 using Mobilis.Lib.Util;
-using System.Json;
+#endif
+#if WINDOWS_PHONE
+using Mobilis.Lib.WP7Util;
+#endif
+
 
 namespace Mobilis.Lib.DataServices
 {
@@ -14,11 +19,7 @@ namespace Mobilis.Lib.DataServices
 
         public override IEnumerable<string> parseJSON(string content)
         {
-            // System.Json
-            var json = JsonValue.Parse(content);
-            var session = json["session"];
-            string token = session["auth_token"];
-            yield return token;
+            return JSON.parseToken(content);
         }
     }
 }

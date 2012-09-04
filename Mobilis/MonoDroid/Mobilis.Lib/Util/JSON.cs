@@ -9,16 +9,6 @@ namespace Mobilis.Lib.Util
 
         public static string generateLoginObject(string login,string password) 
         {
-            // JSON.NET
-            /*
-            JObject innerObject = new JObject();
-            innerObject.Add("login", login);
-            innerObject.Add("password", password);
-            JObject outerObject = new JObject();
-            outerObject.Add("user", innerObject);
-            */
-
-            // System.Json
             JsonObject innerObject = new JsonObject();
             innerObject.Add("login", login);
             innerObject.Add("password", password);
@@ -37,6 +27,8 @@ namespace Mobilis.Lib.Util
 
         public static IEnumerable<Course> parseCourses(string content)
         {
+            System.Diagnostics.Debug.WriteLine("Content novo = " + content);
+            
             List<Course> parsedValues = new List<Course>();
             var data = JsonValue.Parse(content);
             System.Diagnostics.Debug.WriteLine("Json value size" + data.Count);
@@ -46,9 +38,7 @@ namespace Mobilis.Lib.Util
                 var innerObject = data[i];
                 Course course = new Course();
                 course._id = innerObject["id"];
-                course.offerId = innerObject["offer_id"];
-                course.groupId = innerObject["group_id"];
-                course.semester = innerObject["semester"];
+                course.curriculumUnitTypeId = innerObject["curriculum_unit_type_id"];
                 course.allocationTagId = innerObject["allocation_tag_id"];
                 course.name = innerObject["name"];
                 parsedValues.Add(course);

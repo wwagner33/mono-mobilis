@@ -101,7 +101,6 @@ Desktop.ini
 ## MonoTouch
 #################
 
-Mobilis/WindowsPhoneMobilis/bin/
-Mobilis/WindowsPhoneMobilis/obj/
 obj/
 bin/
+Bin/

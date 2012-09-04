@@ -59,13 +59,29 @@ namespace Mobilis
 
         public void getCourses(string token)
         {
-            courseService.getCourses("curriculum_units.json", token, r => {
+            courseService.getCourses("curriculum_units/list.json", token, r => {
                 courseDao.insertAll(r.Value);
+                System.Diagnostics.Debug.WriteLine("Insert OK");
                 intent = new Intent(this, typeof(CoursesActivity));
                 intent.PutExtra("activity", Constants.ACTIVITY_COURSES);
                 StartActivity(intent);
             });
         }
+
+        /*
+        private void findNearestAirport() 
+        {
+            var coordinates = new MonoMobile.Extensions.GeoLocation();
+            coordinates.getCurrentPosition(positionAvaliable);
+        }
+
+        private void PositionAvaliable(Position position) 
+        {
+            Console.WriteLine("{0},{1}", 
+                position.Coords.Latitude,
+                position.Coords.Longitude);
+        }
+        */
     }
 }
 

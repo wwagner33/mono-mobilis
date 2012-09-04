@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using Mobilis.Lib;
 using Mobilis.Lib.DataServices;
 using Mobilis.Lib.WP7Util;
+using Mobilis.Lib.Database;
 
 namespace Mobilis
 {
@@ -20,6 +21,7 @@ namespace Mobilis
     {
         private CourseService courseService;
         private LoginService loginService;
+        private CourseDao courseDao;
 
         public MainPage()
         {
@@ -29,19 +31,35 @@ namespace Mobilis
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            courseService = new CourseService();
+            loginService = new LoginService();
+            ServiceLocator.Dispatcher = new DispatchAdapter();
+            courseDao = new CourseDao();
+        }
+
+        public void getCourses(string token) 
+        {
+            courseService.getCourses("curriculum_units/list.json", token, r => {
+                System.Diagnostics.Debug.WriteLine("Teste");
+                courseDao.insertAll(r.Value);
+                System.Diagnostics.Debug.WriteLine("Insert OK");
+                ServiceLocator.Dispatcher.invoke(() => {
+                    NavigationService.Navigate(new Uri("/CoursePage.xaml", UriKind.Relative));
+                });
+            });
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            courseService = new CourseService();
-            loginService = new LoginService();
                loginService.getToken(login.Text, password.Password, r => {
                 var enumerator = r.Value.GetEnumerator();
                 enumerator.MoveNext();
                 string token = enumerator.Current;
-                System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);                
-               });
+                System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);
+                ServiceLocator.Dispatcher.invoke(() => {
+                    getCourses(token);
+                });
+             });
         }
     }
 }

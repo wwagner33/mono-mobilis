@@ -25,7 +25,7 @@
             <Image Stretch="none" Source="/images/logo_solar.png" Height="252" />
             <TextBox  x:Name="login"/>
             <PasswordBox  x:Name="password"/>
-            <Button x:Name="Submit" Width="200" Height="70" Background="DarkGray" Content="Submit" Click="Submit_Click"/>
+            <HyperlinkButton x:Name="Submit" Width="200" Height="70" Background="DarkGray" Content="Submit" Click="Submit_Click"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

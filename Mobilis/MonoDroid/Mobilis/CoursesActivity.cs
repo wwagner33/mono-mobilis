@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Mobilis.Lib.Model;
-using SQLite;
+using MWC.DL.SQLite;
 using Mobilis.Lib.Database;
 
 namespace Mobilis
@@ -29,10 +29,7 @@ namespace Mobilis
             ListView list = FindViewById<ListView>(Resource.Id.list);
             courseDao = new CourseDao();
             listContent = courseDao.getAllCourses();
-
             System.Diagnostics.Debug.WriteLine("name = " + listContent[0].name);
-
-
             adapter = new SimpleListAdapter<Course>(this, listContent);
             list.Adapter = adapter;
         }

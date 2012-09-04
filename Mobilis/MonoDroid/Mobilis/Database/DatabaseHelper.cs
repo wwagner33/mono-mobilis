@@ -1,7 +1,7 @@
 
 using Android.Database.Sqlite;
 using Android.Content;
-using SQLite;
+using MWC.DL.SQLite;
 using Mobilis.Lib.Model;
 
 namespace Mobilis.Lib.Database

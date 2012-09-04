@@ -1,8 +1,9 @@
 
-using SQLite;
 using Mobilis.Lib.Model;
 using System;
 using System.IO;
+using MWC.DL.SQLite;
+
 namespace Mobilis.Lib.Database
 {
     class MobilisDatabase : SQLiteConnection

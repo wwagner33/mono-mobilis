@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Mobilis.Lib.Database;
-using SQLite;
 using Mobilis.Lib.Model;
 using Mobilis.Lib;
 namespace Mobilis
@@ -20,11 +19,12 @@ namespace Mobilis
         {
             base.OnCreate(bundle);
             helper = new DatabaseHelper(this);
-            createDatabase();
+            //createDatabase();
             intent = new Intent(this, typeof(LoginActivity));
             StartActivity(intent);
         }
 
+        /*
         public void createDatabase()
         {
             var database = helper.WritableDatabase;
@@ -33,10 +33,6 @@ namespace Mobilis
             var databaseConnection = new SQLiteConnection(Constants.DATABASE_PATH);
             databaseConnection.CreateTable<Course>();
         }
-
-        public string getToken()
-        {
-            return null;
-        }
+         */
     }
 }

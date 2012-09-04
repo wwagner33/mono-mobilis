@@ -1,7 +1,12 @@
 using Mobilis.Lib.Model;
 using System.Collections.Generic;
 using System.Collections;
+#if MONODROID || MONOTOUCH
 using Mobilis.Lib.Util;
+#endif
+#if SILVERLIGHT
+using Mobilis.Lib.WP7Util;
+#endif
 
 namespace Mobilis.Lib.DataServices
 {

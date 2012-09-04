@@ -15,7 +15,6 @@ namespace MonoMobilis
 	{
 		// class-level declarations
 		UIWindow window;
-		MonoMobilisViewController viewController;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -26,12 +25,13 @@ namespace MonoMobilis
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			
-			viewController = new MonoMobilisViewController ();
-			window.RootViewController = viewController;
-			window.MakeKeyAndVisible ();
-			
+			this.window = new UIWindow (UIScreen.MainScreen.Bounds);
+
+			var rootNavigationController = new UINavigationController();
+			MonoMobilisViewController loginView = new MonoMobilisViewController();
+			rootNavigationController.PushViewController(loginView,false);
+			this.window.RootViewController = rootNavigationController;
+			this.window.MakeKeyAndVisible();
 			return true;
 		}
 	}

@@ -23,8 +23,16 @@ namespace MonoMobilis
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
-			// Perform any additional setup after loading the view, typically from a nib.
+			this.submit.TouchUpInside += (sender, e) => {
+				System.Diagnostics.Debug.WriteLine("Teste");
+				System.Diagnostics.Debug.WriteLine("Login = " + login.Text);
+				System.Diagnostics.Debug.WriteLine("Password = " + password.Text);
+			};
+		}
+
+		partial void actionSubmit (NSObject sender)
+		{
+			System.Diagnostics.Debug.WriteLine("Teste2");
 		}
 		
 		public override void ViewDidUnload ()

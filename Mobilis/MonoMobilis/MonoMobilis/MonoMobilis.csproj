@@ -90,9 +90,21 @@
     <Compile Include="MonoMobilisViewController.designer.cs">
       <DependentUpon>MonoMobilisViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="DIspatchAdapter.cs" />
+    <Compile Include="CoursesViewController.cs" />
+    <Compile Include="CoursesViewController.designer.cs">
+      <DependentUpon>CoursesViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MonoMobilisViewController.xib" />
+    <InterfaceDefinition Include="CoursesViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\MonoMobilis.Lib\MonoMobilis.Lib.csproj">
+      <Project>{3ED55A28-890A-48A3-A3ED-65237064474C}</Project>
+      <Name>MonoMobilis.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

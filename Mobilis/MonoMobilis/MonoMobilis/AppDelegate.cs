@@ -4,6 +4,7 @@ using System.Linq;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Mobilis.Lib;
 
 namespace MonoMobilis
 {
@@ -26,12 +27,12 @@ namespace MonoMobilis
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			this.window = new UIWindow (UIScreen.MainScreen.Bounds);
-
 			var rootNavigationController = new UINavigationController();
 			MonoMobilisViewController loginView = new MonoMobilisViewController();
 			rootNavigationController.PushViewController(loginView,false);
 			this.window.RootViewController = rootNavigationController;
 			this.window.MakeKeyAndVisible();
+			ServiceLocator.Dispatcher = new DispatchAdapter(this);
 			return true;
 		}
 	}

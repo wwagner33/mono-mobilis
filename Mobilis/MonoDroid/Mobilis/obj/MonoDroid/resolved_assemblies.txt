@@ -1,2 +1,0 @@
-C:\Users\Paulo\Documents\Visual Studio 2010\Projects\Mobilis\MonoDroid\Mobilis\bin\MonoDroid\Mobilis.dll
-C:\Users\Paulo\Documents\Visual Studio 2010\Projects\Mobilis\MonoDroid\Mobilis\bin\MonoDroid\Mobilis.Lib.dll

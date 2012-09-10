@@ -101,6 +101,8 @@ Desktop.ini
 ## MonoTouch
 #################
 
+*~
+MonoDroid/Mobilis/obj
 obj/
 bin/
 Bin/

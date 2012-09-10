@@ -1,7 +1,0 @@
-﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="Mobilis" EntryPointType="Mobilis.App" RuntimeVersion="4.7.50308.0">
-  <Deployment.Parts>
-    <AssemblyPart x:Name="Mobilis" Source="Mobilis.dll" />
-    <AssemblyPart x:Name="Mobilis.Lib" Source="Mobilis.Lib.dll" />
-    <AssemblyPart x:Name="System.Json" Source="System.Json.dll" />
-  </Deployment.Parts>
-</Deployment>

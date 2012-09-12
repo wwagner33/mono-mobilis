@@ -21,6 +21,7 @@ namespace Mobilis
         private List<Course> listContent;
         private SimpleListAdapter<Course> adapter;
         private CourseDao courseDao;
+        private Intent intent;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -29,9 +30,23 @@ namespace Mobilis
             ListView list = FindViewById<ListView>(Resource.Id.list);
             courseDao = new CourseDao();
             listContent = courseDao.getAllCourses();
-            System.Diagnostics.Debug.WriteLine("name = " + listContent[0].name);
             adapter = new SimpleListAdapter<Course>(this, listContent);
             list.Adapter = adapter;
+
+            list.ItemClick += new EventHandler<Android.Widget.AdapterView.ItemClickEventArgs>(list_ItemClick);
+        }
+
+        void list_ItemClick(object sender, Android.Widget.AdapterView.ItemClickEventArgs e) 
+        {
+            Toast.MakeText(this, "itemClick", ToastLength.Short).Show();
+        }
+
+        public override void OnBackPressed()
+        {
+            intent = new Intent(this, typeof(SetUpActivity));
+            intent.PutExtra("content", SetUpActivity.TERMINATE);
+            intent.SetFlags(ActivityFlags.ClearTop);
+            StartActivity(intent);
         }
     }
 }

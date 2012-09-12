@@ -78,9 +78,11 @@
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.4.5.8\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.9\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Json, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Json">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Servicemodel.Web" />
     <Reference Include="System.Windows" />
@@ -102,6 +104,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\SQLite.cs">
       <Link>Database\SQLite.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\ClassService.cs">
+      <Link>DataServices\ClassService.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\CourseService.cs">
       <Link>DataServices\CourseService.cs</Link>
     </Compile>
@@ -117,8 +122,17 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\IDispatchOnUIThread.cs">
       <Link>IDispatchOnUIThread.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Class.cs">
+      <Link>Model\Class.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Course.cs">
       <Link>Model\Course.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Discussion.cs">
+      <Link>Model\Discussion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Post.cs">
+      <Link>Model\Post.cs</Link>
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ServiceLocator.cs">
       <Link>ServiceLocator.cs</Link>
@@ -143,7 +157,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" />
+      <UserProperties ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

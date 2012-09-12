@@ -43,7 +43,7 @@ namespace Mobilis
 
         public override long GetItemId(int position)
         {
-            throw new NotImplementedException();
+            return position;
         }
 
         public override int Count

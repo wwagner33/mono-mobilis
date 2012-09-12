@@ -10,6 +10,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MonoMobilis.Lib</RootNamespace>
     <AssemblyName>MonoMobilis.Lib</AssemblyName>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>MONOTOUCH</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,6 +53,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\SQLite.cs">
       <Link>Database\SQLite.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\ClassService.cs">
+      <Link>DataServices\ClassService.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\CourseService.cs">
       <Link>DataServices\CourseService.cs</Link>
     </Compile>
@@ -65,8 +71,17 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\IDispatchOnUIThread.cs">
       <Link>IDispatchOnUIThread.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Class.cs">
+      <Link>Model\Class.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Course.cs">
       <Link>Model\Course.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Discussion.cs">
+      <Link>Model\Discussion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Post.cs">
+      <Link>Model\Post.cs</Link>
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ServiceLocator.cs">
       <Link>ServiceLocator.cs</Link>

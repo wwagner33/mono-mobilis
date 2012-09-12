@@ -12,7 +12,7 @@ using Android.Util;
 
 namespace Mobilis
 {
-    [Activity(Label = "Login")]
+    [Activity(Theme = "@android:style/Theme.NoTitleBar")]
     public class LoginActivity : Activity, View.IOnClickListener
     {
         private Button submit;
@@ -54,7 +54,6 @@ namespace Mobilis
                    });
                 });
             }
-             
         }
 
         public void getCourses(string token)
@@ -63,25 +62,18 @@ namespace Mobilis
                 courseDao.insertAll(r.Value);
                 System.Diagnostics.Debug.WriteLine("Insert OK");
                 intent = new Intent(this, typeof(CoursesActivity));
-                intent.PutExtra("activity", Constants.ACTIVITY_COURSES);
+                intent.SetFlags(ActivityFlags.ClearTop);
                 StartActivity(intent);
             });
         }
 
-        /*
-        private void findNearestAirport() 
+        public override void OnBackPressed()
         {
-            var coordinates = new MonoMobile.Extensions.GeoLocation();
-            coordinates.getCurrentPosition(positionAvaliable);
+            intent = new Intent(this, typeof(SetUpActivity));
+            intent.PutExtra("content", SetUpActivity.TERMINATE);
+            intent.SetFlags(ActivityFlags.ClearTop);
+            StartActivity(intent);
         }
-
-        private void PositionAvaliable(Position position) 
-        {
-            Console.WriteLine("{0},{1}", 
-                position.Coords.Latitude,
-                position.Coords.Longitude);
-        }
-        */
     }
 }
 

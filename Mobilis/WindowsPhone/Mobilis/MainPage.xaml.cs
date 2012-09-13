@@ -12,7 +12,6 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Mobilis.Lib;
 using Mobilis.Lib.DataServices;
-using Mobilis.Lib.WP7Util;
 using Mobilis.Lib.Database;
 
 namespace Mobilis

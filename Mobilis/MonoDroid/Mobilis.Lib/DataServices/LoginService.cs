@@ -1,11 +1,5 @@
 using System.Collections.Generic;
-#if MONODROID || MONOTOUCH
 using Mobilis.Lib.Util;
-#endif
-#if WINDOWS_PHONE
-using Mobilis.Lib.WP7Util;
-#endif
-
 
 namespace Mobilis.Lib.DataServices
 {

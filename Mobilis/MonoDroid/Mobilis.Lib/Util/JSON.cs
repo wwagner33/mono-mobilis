@@ -1,46 +1,43 @@
-using System.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Mobilis.Lib.Model;
+using System;
 namespace Mobilis.Lib.Util
 {
     public class JSON
     {
-        public JSON() { }
-
-        public static string generateLoginObject(string login,string password) 
+        public static string generateLoginObject(string login, string password)
         {
-            JsonObject innerObject = new JsonObject();
+            JObject innerObject = new JObject();
             innerObject.Add("login", login);
             innerObject.Add("password", password);
-            JsonObject outerObject = new JsonObject();
+            JObject outerObject = new JObject();
             outerObject.Add("user", innerObject);
             return outerObject.ToString();
         }
 
-        public static IEnumerable<string> parseToken(string content) 
+        public static IEnumerable<string> parseToken(string content)
         {
-            var json = JsonValue.Parse(content);
-            var session = json["session"];
-            string token = session["auth_token"];
+            JObject jObject = JObject.Parse(content);
+            var innerObject = jObject.SelectToken("session");
+            string token = (string)innerObject.SelectToken("auth_token");
             yield return token;
         }
 
         public static IEnumerable<Course> parseCourses(string content)
         {
-            System.Diagnostics.Debug.WriteLine("Content novo = " + content);
-            
             List<Course> parsedValues = new List<Course>();
-            var data = JsonValue.Parse(content);
-            System.Diagnostics.Debug.WriteLine("Json value size" + data.Count);
-
-            for (int i = 0; i < data.Count; i++)
+            JArray jArray = JArray.Parse(content);
+            System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
+            for (int i = 0; i < jArray.Count; i++)
             {
-                var innerObject = data[i];
+                JObject innerObject = (JObject)jArray[i];
                 Course course = new Course();
-                course._id = innerObject["id"];
-                course.curriculumUnitTypeId = innerObject["curriculum_unit_type_id"];
-                course.allocationTagId = innerObject["allocation_tag_id"];
-                course.name = innerObject["name"];
+                course.name = (string)innerObject.SelectToken("name");
+                course._id = (int)innerObject.SelectToken("id");
+                course.allocationTagId = Convert.ToInt32((string)innerObject.SelectToken("allocation_tag_id"));
+                course.curriculumUnitTypeId = (int)innerObject.SelectToken("curriculum_unit_type_id");
                 parsedValues.Add(course);
             }
             return parsedValues;

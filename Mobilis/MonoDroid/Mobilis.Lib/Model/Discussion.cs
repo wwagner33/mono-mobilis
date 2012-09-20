@@ -6,16 +6,22 @@ namespace Mobilis.Lib.Model
     public class Discussion
     {
     [PrimaryKey]
-	private int _id {get;set;}
-    private string name { get; set; }
-    private DateTime lastPostDate { get; set; }
-    private int status { get; set; }
-    private int classId { get; set; }
-    private string description { get; set; }
-    private int nextPosts { get; set; }
-    private int previousPosts { get; set; }
-	//private bool hasNewPosts = false {get;set;}
-	private string startDate {get;set;}
-	private string endDate {get;set;}
+	public int _id {get;set;}
+    public string name { get; set; }
+    public int status { get; set; }
+    public int classId { get; set; }
+    public string description { get; set; }
+    public int nextPosts { get; set; }
+    public int previousPosts { get; set; }
+    [Ignore]
+    public bool hasNewPosts { get; set; }
+    public string startDate { get; set; }
+    public string endDate { get; set; }
+    public string lastPostDate { get; set; }
+
+    public override string ToString()
+        {
+        return name;
+        }
     }
 }

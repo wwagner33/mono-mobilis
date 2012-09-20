@@ -83,6 +83,7 @@
     <Compile Include="ClassActivity.cs" />
     <Compile Include="CoursesActivity.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
+    <Compile Include="DiscussionActivity.cs" />
     <Compile Include="DispatchAdapter.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

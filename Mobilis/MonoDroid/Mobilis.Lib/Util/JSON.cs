@@ -62,8 +62,26 @@ namespace Mobilis.Lib.Util
         }
 
         public static IEnumerable<Discussion> parseDiscussion(string content) 
-        { 
-            return null;
+        {
+            List<Discussion> parsedValues = new List<Discussion>();
+            JArray jArray = JArray.Parse(content);
+            System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
+            for (int i = 0; i < jArray.Count; i++)
+            {
+                JObject innerObject = (JObject)jArray[i];
+                Discussion discussion = new Discussion();
+                discussion._id = (int)innerObject.SelectToken("id");
+                discussion.name = (string)innerObject.SelectToken("name");
+                discussion.description = (string)innerObject.SelectToken("description");
+                discussion.status = Convert.ToInt32((string)innerObject.SelectToken("status"));
+                discussion.classId = ContextUtil.Instance.Class;
+                discussion.lastPostDate = (string)innerObject.SelectToken("last_post_date");
+                discussion.startDate = (string)innerObject.SelectToken("start_date");
+                discussion.endDate = (string)innerObject.SelectToken("end_date");
+                 
+                parsedValues.Add(discussion);
+            }
+            return parsedValues;
         }
     }
 }

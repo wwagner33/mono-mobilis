@@ -47,6 +47,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\CourseDao.cs">
       <Link>Database\CourseDao.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\DiscussionDao.cs">
+      <Link>Database\DiscussionDao.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\MobilisDatabase.cs">
       <Link>Database\MobilisDatabase.cs</Link>
     </Compile>
@@ -61,6 +64,9 @@
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\CourseService.cs">
       <Link>DataServices\CourseService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\DiscussionService.cs">
+      <Link>DataServices\DiscussionService.cs</Link>
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\LoginService.cs">
       <Link>DataServices\LoginService.cs</Link>

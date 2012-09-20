@@ -50,5 +50,10 @@ namespace Mobilis
         {
             get { return _content.Count; }
         }
+
+        public T getItemAtPosition(int position) 
+        {
+            return _content[position];
+        }
     }
 }

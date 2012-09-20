@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Mobilis.Lib.Model;
-using MWC.DL.SQLite;
 using Mobilis.Lib.Database;
+using Mobilis.Lib.DataServices;
+using Mobilis.Lib.Util;
 
 namespace Mobilis
 {
-    [Activity(Label = "CourseActivity")]
+    [Activity(Label = "CourseActivity", Theme = "@android:style/Theme.NoTitleBar")]
     public class CoursesActivity : Activity
     {
         private List<Course> listContent;
         private SimpleListAdapter<Course> adapter;
         private CourseDao courseDao;
+        private UserDao userDao;
+        private ClassService classService;
+        private ClassDao classDao;
         private Intent intent;
 
         protected override void OnCreate(Bundle bundle)
@@ -28,7 +28,10 @@ namespace Mobilis
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.SimpleList);
             ListView list = FindViewById<ListView>(Resource.Id.list);
+            classService = new ClassService();
             courseDao = new CourseDao();
+            userDao = new UserDao();
+            classDao = new ClassDao();
             listContent = courseDao.getAllCourses();
             adapter = new SimpleListAdapter<Course>(this, listContent);
             list.Adapter = adapter;
@@ -38,7 +41,16 @@ namespace Mobilis
 
         void list_ItemClick(object sender, Android.Widget.AdapterView.ItemClickEventArgs e) 
         {
-            Toast.MakeText(this, "itemClick", ToastLength.Short).Show();
+            Course selectedCourse = adapter.getItemAtPosition(e.Position);
+            ContextUtil.Instance.Course = selectedCourse._id;
+            System.Diagnostics.Debug.WriteLine("Course id = " + selectedCourse._id);
+            classService.getClasses(Constants.ClassesURL,userDao.getToken(), r => {
+                System.Diagnostics.Debug.WriteLine("Classes callback");
+                classDao.insertClasses(r.Value);
+                System.Diagnostics.Debug.WriteLine("Insert OK");
+                intent = new Intent(this, typeof(ClassActivity));
+                StartActivity(intent);
+            });
         }
 
         public override void OnBackPressed()

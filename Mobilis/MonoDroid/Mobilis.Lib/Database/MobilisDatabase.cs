@@ -15,6 +15,8 @@ namespace Mobilis.Lib.Database
 		{
 			// create the tables
 			CreateTable<Course>();
+            CreateTable<User>();
+            CreateTable<Class>();
 		}
 
         static MobilisDatabase() 

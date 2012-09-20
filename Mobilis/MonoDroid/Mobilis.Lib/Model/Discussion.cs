@@ -3,7 +3,7 @@ using System;
 
 namespace Mobilis.Lib.Model
 {
-    class Discussion
+    public class Discussion
     {
     [PrimaryKey]
 	private int _id {get;set;}
@@ -15,7 +15,7 @@ namespace Mobilis.Lib.Model
     private int nextPosts { get; set; }
     private int previousPosts { get; set; }
 	//private bool hasNewPosts = false {get;set;}
-	private DateTime startDate {get;set;}
-	private DateTime endDate {get;set;}
+	private string startDate {get;set;}
+	private string endDate {get;set;}
     }
 }

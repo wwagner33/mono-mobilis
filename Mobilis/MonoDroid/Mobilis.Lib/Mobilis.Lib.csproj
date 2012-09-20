@@ -78,10 +78,11 @@
     <Reference Include="System.Json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Database\ClassDao.cs" />
     <Compile Include="Database\CourseDao.cs" />
     <Compile Include="Database\MobilisDatabase.cs" />
     <Compile Include="Database\SQLite.cs" />
+    <Compile Include="Database\UserDao.cs" />
     <Compile Include="DataServices\ClassService.cs" />
     <Compile Include="DataServices\CourseService.cs" />
     <Compile Include="DataServices\LoginService.cs" />
@@ -92,8 +93,11 @@
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Discussion.cs" />
     <Compile Include="Model\Post.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\ContextUtil.cs" />
     <Compile Include="Util\JSON.cs" />
   </ItemGroup>
   <ItemGroup>

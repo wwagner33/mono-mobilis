@@ -9,6 +9,7 @@ using Mobilis.Lib.DataServices;
 using Android.Content;
 using Mobilis.Lib.Database;
 using Android.Util;
+using Mobilis.Lib.Model;
 
 namespace Mobilis
 {
@@ -23,6 +24,7 @@ namespace Mobilis
         private DatabaseHelper helper;
         private CourseDao courseDao;
         private const string TAG = "login";
+        private UserDao userDao;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -30,6 +32,7 @@ namespace Mobilis
             SetContentView(Resource.Layout.Login);
             helper = new DatabaseHelper(this);
             courseDao = new CourseDao();
+            userDao = new UserDao();
             ServiceLocator.Dispatcher = new DispatchAdapter(this);
             loginService = new LoginService();
             courseService = new CourseService();
@@ -49,6 +52,13 @@ namespace Mobilis
                     enumerator.MoveNext();
                     string token = enumerator.Current;
                     System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);
+
+                    User user = new User();
+                    user.token = token;
+                    user._id = 1;
+
+                    userDao.addUser(user);
+
                     ServiceLocator.Dispatcher.invoke( () => {
                         getCourses(token);
                    });
@@ -58,7 +68,7 @@ namespace Mobilis
 
         public void getCourses(string token)
         {
-            courseService.getCourses("curriculum_units/list.json", token, r => {
+            courseService.getCourses(Constants.CoursesURL, token, r => {
                 courseDao.insertAll(r.Value);
                 System.Diagnostics.Debug.WriteLine("Insert OK");
                 intent = new Intent(this, typeof(CoursesActivity));

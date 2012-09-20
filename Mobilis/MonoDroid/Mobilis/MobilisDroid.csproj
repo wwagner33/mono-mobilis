@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassActivity.cs" />
     <Compile Include="CoursesActivity.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="DispatchAdapter.cs" />

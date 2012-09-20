@@ -42,5 +42,28 @@ namespace Mobilis.Lib.Util
             }
             return parsedValues;
         }
+
+        public static IEnumerable<Class> parseClasses(string content) 
+        {
+            List<Class> parsedValues = new List<Class>();
+            JArray jArray = JArray.Parse(content);
+            System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
+            for (int i = 0; i < jArray.Count; i++)
+            {
+                JObject innerObject = (JObject)jArray[i];
+                Class mClass = new Class();
+                mClass.code = (string)innerObject.SelectToken("code");
+                mClass._id = (int)innerObject.SelectToken("id");
+                mClass.status = (bool)innerObject.SelectToken("status");
+                mClass.courseId = ContextUtil.Instance.Course;
+                parsedValues.Add(mClass);
+            }
+            return parsedValues;
+        }
+
+        public static IEnumerable<Discussion> parseDiscussion(string content) 
+        { 
+            return null;
+        }
     }
 }

@@ -53,6 +53,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\MobilisDatabase.cs">
       <Link>Database\MobilisDatabase.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\PostDao.cs">
+      <Link>Database\PostDao.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\SQLite.cs">
       <Link>Database\SQLite.cs</Link>
     </Compile>
@@ -70,6 +73,9 @@
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\LoginService.cs">
       <Link>DataServices\LoginService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\PostService.cs">
+      <Link>DataServices\PostService.cs</Link>
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\DataServices\RestService.cs">
       <Link>DataServices\RestService.cs</Link>
@@ -111,7 +117,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" />
+      <UserProperties ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

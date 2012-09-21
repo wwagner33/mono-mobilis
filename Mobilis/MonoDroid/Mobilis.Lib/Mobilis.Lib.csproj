@@ -82,12 +82,14 @@
     <Compile Include="Database\CourseDao.cs" />
     <Compile Include="Database\DiscussionDao.cs" />
     <Compile Include="Database\MobilisDatabase.cs" />
+    <Compile Include="Database\PostDao.cs" />
     <Compile Include="Database\SQLite.cs" />
     <Compile Include="Database\UserDao.cs" />
     <Compile Include="DataServices\ClassService.cs" />
     <Compile Include="DataServices\CourseService.cs" />
     <Compile Include="DataServices\DiscussionService.cs" />
     <Compile Include="DataServices\LoginService.cs" />
+    <Compile Include="DataServices\PostService.cs" />
     <Compile Include="DataServices\RestService.cs" />
     <Compile Include="DataServices\Result.cs" />
     <Compile Include="IDispatchOnUIThread.cs" />

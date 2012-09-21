@@ -5,4 +5,7 @@
   <color name="text_color">#2A2B71</color>
   <color name="course_list_idle">#e7e7f1</color>
   <color name="course_list_pressed">#fceaa0</color>
+  <color name="white">#FFFFFF</color>
+  <color name="list_divider">#000000</color>
+  <color name="text_white_color">#222222</color>
 </resources>

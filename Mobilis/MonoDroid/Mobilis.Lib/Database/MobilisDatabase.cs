@@ -18,6 +18,7 @@ namespace Mobilis.Lib.Database
             CreateTable<User>();
             CreateTable<Class>();
             CreateTable<Discussion>();
+            CreateTable<Post>();
 		}
 
         static MobilisDatabase() 

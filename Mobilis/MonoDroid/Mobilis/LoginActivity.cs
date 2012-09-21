@@ -21,7 +21,6 @@ namespace Mobilis
         private LoginService loginService;
         private CourseService courseService;
         private Intent intent;
-        private DatabaseHelper helper;
         private CourseDao courseDao;
         private const string TAG = "login";
         private UserDao userDao;
@@ -30,7 +29,6 @@ namespace Mobilis
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Login);
-            helper = new DatabaseHelper(this);
             courseDao = new CourseDao();
             userDao = new UserDao();
             ServiceLocator.Dispatcher = new DispatchAdapter(this);

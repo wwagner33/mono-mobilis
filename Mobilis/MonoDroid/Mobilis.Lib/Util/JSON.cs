@@ -83,5 +83,36 @@ namespace Mobilis.Lib.Util
             }
             return parsedValues;
         }
+
+        public static IEnumerable<Post> parsePosts(string content) 
+        {
+            List<Post> parsedValues = new List<Post>();
+            JArray jArray = JArray.Parse(content);
+            System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
+            for (int i = 1; i < jArray.Count; i++)
+            {
+                JObject innerObject = (JObject)jArray[i];
+                Post post = new Post();
+                post._id = (int)innerObject.SelectToken("id");
+                try
+                {
+                    post.parentId = (int)innerObject.SelectToken("parent_id");
+                }
+                catch (Exception e) 
+                {
+                    System.Diagnostics.Debug.WriteLine("Erro no parentid");
+                    post.parentId = 0;
+                }
+
+                post.discussionId = ContextUtil.Instance.Discussion;
+                post.userId = (int)innerObject.SelectToken("user_id");
+                post.content = (string)innerObject.SelectToken("content");
+                post.userName = (string)innerObject.SelectToken("user_nick");
+                post.updatedAt = (string)innerObject.SelectToken("updated_at");
+                post.level = (int)innerObject.SelectToken("level");
+                parsedValues.Add(post);
+            }
+            return parsedValues;
+        }
     }
 }

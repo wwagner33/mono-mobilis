@@ -37,5 +37,11 @@ namespace Mobilis.Lib.Database
         {
             MobilisDatabase.getDatabase().Delete<Course>(course);
         }
+
+        public bool existCourses() 
+        {
+            List<Course> list = MobilisDatabase.getDatabase().Query<Course>("select * from Course limit 1");
+            return (list.Count > 0) ? true : false;
+        }
     }
 }

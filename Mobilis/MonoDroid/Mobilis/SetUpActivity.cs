@@ -13,13 +13,14 @@ namespace Mobilis
 
     {
         private const string TAG = "setup";
-        private DatabaseHelper helper;
         private Intent intent;
         public const int TERMINATE = 1;
+        private CourseDao courseDao;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            courseDao = new CourseDao();
             int flag = Intent.GetIntExtra("content",0);
 
             if (flag == TERMINATE)
@@ -29,7 +30,6 @@ namespace Mobilis
 
             else 
             {
-            helper = new DatabaseHelper(this);
             intent = new Intent(this, typeof(LoginActivity));
             StartActivity(intent);
            }

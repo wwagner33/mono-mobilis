@@ -23,5 +23,11 @@ namespace Mobilis.Lib.Database
             List<User> list = MobilisDatabase.getDatabase().Query<User>("select * from User where _id = 1");
             return list[0].token;
         }
+
+        public bool tokenExists() 
+        {
+            List<User> list = MobilisDatabase.getDatabase().Query<User>("select * from user where _id = 1");
+            return (list.Count > 0) ? true : false;
+        }
     }
 }

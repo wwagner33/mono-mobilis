@@ -50,4 +50,5 @@
     <string name="post_title">Nome</string>
     <string name="x">X</string>
     <string name="record_image_description">Imagem que indica que há gravação de áudio</string>
+    <string name="view_holder_tag">1</string>
 </resources>

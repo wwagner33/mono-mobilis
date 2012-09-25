@@ -6,6 +6,9 @@ using System.IO;
 
 namespace Mobilis.Lib.DataServices
 {
+    /* Classe abstrata que serve como base para acesso a rede.
+       Serialização deve ser implementada na subclasse*/
+
     public abstract class RestService<T> where T : class
     {
         private string _baseUrl = "http://apolo11teste.virtual.ufc.br/solar/";
@@ -39,11 +42,7 @@ namespace Mobilis.Lib.DataServices
 
         protected void Post(string source, string content, ResultCallback<IEnumerable<T>> callback)
         {
-            System.Diagnostics.Debug.WriteLine("Content RAW =" + content);
-            string content2 = "{\"user\": {\"login\": \"aluno1\", \"password\": \"123456\"}}";
-            string content3 = content.Replace(" ", string.Empty);
-            System.Diagnostics.Debug.WriteLine("Content certo =" + content2);
-            System.Diagnostics.Debug.WriteLine("Content3 = " + content3);
+            System.Diagnostics.Debug.WriteLine("content  =" + content);
             var webRequest = (HttpWebRequest)WebRequest.Create(_baseUrl + source);
             System.Diagnostics.Debug.WriteLine("URL = " + _baseUrl + source);
             webRequest.ContentType = "application/json";
@@ -52,7 +51,7 @@ namespace Mobilis.Lib.DataServices
             {
                 try
                 {
-                    // Push data to server
+                    // Envia dados ao servidor
                     Stream streamResponse = webRequest.EndGetRequestStream(responseResult);
                     byte[] byteArray = Encoding.UTF8.GetBytes(content);
                     streamResponse.Write(byteArray, 0, content.Length);

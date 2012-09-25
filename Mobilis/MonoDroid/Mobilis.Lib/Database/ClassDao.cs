@@ -1,11 +1,10 @@
-
 using System.Collections.Generic;
 using Mobilis.Lib.Model;
+
 namespace Mobilis.Lib.Database
 {
     public class ClassDao
     {
-
         public void insertClasses(IEnumerable<Class> classes) 
         {
             MobilisDatabase.getDatabase().InsertAll(classes);     

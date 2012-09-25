@@ -1,5 +1,4 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
@@ -22,8 +21,10 @@ namespace Mobilis
         private CourseService courseService;
         private Intent intent;
         private CourseDao courseDao;
-        private const string TAG = "login";
+        public const string TAG = "mobilis";
         private UserDao userDao;
+        private ProgressDialog dialog;
+        
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -40,24 +41,31 @@ namespace Mobilis
             submit.SetOnClickListener(this);
         }
 
+        protected override void OnStop()
+        {
+            if (dialog != null) 
+            {
+                dialog.Dismiss();
+            }
+            base.OnStop();
+        }
+
         public void OnClick(View v)
         {
             if (v.Id == Resource.Id.submit) {
                 string loginData = JSON.generateLoginObject(loginField.Text, passwordField.Text);
-                System.Diagnostics.Debug.WriteLine("User data = " + loginData);
+                Log.Info(TAG,"User data = " + loginData);
+                dialog = ProgressDialog.Show(this,"Carregando","Por favor, aguarde...",true);
                 loginService.getToken(loginField.Text, passwordField.Text, r => {
                     var enumerator = r.Value.GetEnumerator();
                     enumerator.MoveNext();
                     string token = enumerator.Current;
-                    System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);
-
+                    Log.Info(TAG,"Token = " + enumerator.Current);
                     User user = new User();
                     user.token = token;
                     user._id = 1;
-
                     userDao.addUser(user);
-
-                    ServiceLocator.Dispatcher.invoke( () => {
+                    ServiceLocator.Dispatcher.invoke(() => {
                         getCourses(token);
                    });
                 });
@@ -68,7 +76,7 @@ namespace Mobilis
         {
             courseService.getCourses(Constants.CoursesURL, token, r => {
                 courseDao.insertAll(r.Value);
-                System.Diagnostics.Debug.WriteLine("Insert OK");
+                Log.Info(TAG, "Insert OK");
                 intent = new Intent(this, typeof(CoursesActivity));
                 intent.SetFlags(ActivityFlags.ClearTop);
                 StartActivity(intent);

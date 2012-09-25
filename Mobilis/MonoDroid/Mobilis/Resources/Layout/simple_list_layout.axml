@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="9dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/yellow_hightlight"
+        android:background="@color/yellow_highlight"
         android:orientation="vertical" />
     <ListView
         android:id="@+id/list"

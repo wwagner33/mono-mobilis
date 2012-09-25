@@ -1,5 +1,4 @@
 namespace Mobilis.Lib
-
 {
     public static class ServiceLocator
     {

@@ -1,4 +1,3 @@
-
 using Mobilis.Lib.Model;
 using System;
 using System.IO;
@@ -6,6 +5,9 @@ using MWC.DL.SQLite;
 
 namespace Mobilis.Lib.Database
 {
+    /* Classe de criação do banco. Responsável pela localização do banco de 
+       dados e fornece o acesso ao banco para os DAOs*/
+
     class MobilisDatabase : SQLiteConnection
     {
         protected static MobilisDatabase me = null;

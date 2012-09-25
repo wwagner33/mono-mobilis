@@ -1,4 +1,3 @@
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -6,6 +5,8 @@ using Mobilis.Lib.Database;
 using Mobilis.Lib.Model;
 using Mobilis.Lib;
 using System;
+using Android.Widget;
+
 namespace Mobilis
 {
     [Activity(MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.NoTitleBar",Label = "Mobilis")]
@@ -27,7 +28,6 @@ namespace Mobilis
             {
                 this.Finish();
             }
-
             else 
             {
             intent = new Intent(this, typeof(LoginActivity));

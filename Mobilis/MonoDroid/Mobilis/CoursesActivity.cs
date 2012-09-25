@@ -22,6 +22,7 @@ namespace Mobilis
         private ClassService classService;
         private ClassDao classDao;
         private Intent intent;
+        private ProgressDialog dialog;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -35,8 +36,16 @@ namespace Mobilis
             listContent = courseDao.getAllCourses();
             adapter = new SimpleListAdapter<Course>(this, listContent);
             list.Adapter = adapter;
-
             list.ItemClick += new EventHandler<Android.Widget.AdapterView.ItemClickEventArgs>(list_ItemClick);
+        }
+
+        protected override void OnStop()
+        {
+            if (dialog != null) 
+            {
+                dialog.Dismiss();
+            }
+            base.OnStop();
         }
 
         void list_ItemClick(object sender, Android.Widget.AdapterView.ItemClickEventArgs e) 
@@ -44,6 +53,7 @@ namespace Mobilis
             Course selectedCourse = adapter.getItemAtPosition(e.Position);
             ContextUtil.Instance.Course = selectedCourse._id;
             System.Diagnostics.Debug.WriteLine("Course id = " + selectedCourse._id);
+            dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
             classService.getClasses(Constants.ClassesURL,userDao.getToken(), r => {
                 System.Diagnostics.Debug.WriteLine("Classes callback");
                 classDao.insertClasses(r.Value);

@@ -1,83 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E57FA7C6-A24F-44C6-BABB-876D25310211}</ProjectGuid>
+    <ProjectGuid>{070236F3-8BC7-4123-82CB-EE00251F6D0D}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mobilis</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AssemblyName>Mobilis</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <AndroidApplication>true</AndroidApplication>
-    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MonoDroid|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\MonoDroid\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\Mobilis.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;G:\Programas\Visual Studio\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;G:\Programas\Visual Studio\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'MonoTouch|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\MonoTouch\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\Mobilis.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;G:\Programas\Visual Studio\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;G:\Programas\Visual Studio\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Support.v4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassActivity.cs" />
@@ -87,7 +59,7 @@
     <Compile Include="LoginActivity.cs" />
     <Compile Include="PostActivity.cs" />
     <Compile Include="PostAdapter.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUpActivity.cs" />
     <Compile Include="SimpleListAdapter.cs" />
@@ -95,55 +67,105 @@
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\Layout\SimpleList.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\Layout\SimpleListItem.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Post.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\Layout\PostItem.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
+    <None Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\layout\main\Login.axml" />
+    <AndroidResource Include="Resources\layout\main\Post.axml" />
+    <AndroidResource Include="Resources\layout\main\PostItem.axml" />
+    <AndroidResource Include="Resources\layout\main\SimpleList.axml" />
+    <AndroidResource Include="Resources\layout\main\SimpleListItem.axml" />
+    <AndroidResource Include="Resources\layout\main\simple_list_layout.axml" />
+    <AndroidResource Include="Resources\layout\SimpleListItem.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\Post.axml" />
+    <AndroidResource Include="Resources\layout\PostItem.axml" />
+    <AndroidResource Include="Resources\layout\simple_list_layout.axml" />
+    <AndroidResource Include="Resources\layout\SimpleList.axml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Layout\Login.axml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+    <AndroidResource Include="Resources\drawable\bg_striped.xml" />
+    <AndroidResource Include="Resources\drawable\bg_striped_split.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_striped_img.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\bg_striped_split_img.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_compose.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_compose_inverse.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_launcher_settings.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_magnifying_glass.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_refresh.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_refresh_inverse.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_search_inverse.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_title_share_default.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_striped_img.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\bg_striped_split_img.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_compose.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_compose_inverse.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_launcher_settings.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_magnifying_glass.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_refresh.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_refresh_inverse.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_search.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_search_inverse.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_striped_img.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\bg_striped_split_img.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher_settings.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\layout\action_modes.xml" />
+    <AndroidResource Include="Resources\layout\collapsible_edittext.xml" />
+    <AndroidResource Include="Resources\layout\context_menus.xml" />
+    <AndroidResource Include="Resources\layout\custom_view.xml" />
+    <AndroidResource Include="Resources\layout\feature_toggles.xml" />
+    <AndroidResource Include="Resources\layout\iprogress.xml" />
+    <AndroidResource Include="Resources\layout\list_navigation.xml" />
+    <AndroidResource Include="Resources\layout\overlay.xml" />
+    <AndroidResource Include="Resources\layout\preferences.xml" />
+    <AndroidResource Include="Resources\layout\progress.xml" />
+    <AndroidResource Include="Resources\layout\settings_action_provider.xml" />
+    <AndroidResource Include="Resources\layout\tab_custom_view.xml" />
+    <AndroidResource Include="Resources\layout\tab_navigation.xml" />
+    <AndroidResource Include="Resources\layout\text.xml" />
+    <AndroidResource Include="Resources\layout-large-land\feature_toggles.xml" />
+    <AndroidResource Include="Resources\menu\settings_action_provider.xml" />
+    <AndroidResource Include="Resources\menu\share_action_provider.xml" />
+    <AndroidResource Include="Resources\raw\robot.png" />
+    <AndroidResource Include="Resources\values\arrays.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\themes.xml" />
+    <AndroidResource Include="Resources\xml\preferences.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <AndroidJavaLibrary Include="..\ActionBarSherlock\Jars\android-support-v4.jar">
+      <Link>android-support-v4.jar</Link>
+    </AndroidJavaLibrary>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\ActionBarSherlock\ActionBarSherlock.csproj">
+      <Project>{2D5471B2-8255-4E47-97E9-EEB28678CC82}</Project>
+      <Name>ActionBarSherlock</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mobilis.Lib\Mobilis.Lib.csproj">
       <Project>{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}</Project>
-      <Name>Mobilis.Lib %28MonoDroid\Mobilis.Lib%29</Name>
+      <Name>Mobilis.Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\login_gradient.xml" />
+    <AndroidResource Include="Resources\drawable\course_list_selector.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\logo_solar.png" />
+    <AndroidResource Include="Resources\drawable\login_gradient.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Values\Colors.xml" />
+    <AndroidResource Include="Resources\drawable\logo_solar.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\course_list_selector.xml" />
+    <AndroidResource Include="Resources\drawable\no_picture.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\no_picture.png" />
+    <AndroidResource Include="Resources\drawable\stock_person.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-     Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

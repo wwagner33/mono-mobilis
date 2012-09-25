@@ -1,4 +1,3 @@
-
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -7,11 +6,13 @@ using Mobilis.Lib.Model;
 using Mobilis.Lib.Util;
 using Mobilis.Lib.DataServices;
 using Android.Content;
+using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
 
 namespace Mobilis
 {
-    [Activity(Label = "ClassActivity",Theme = "@android:style/Theme.NoTitleBar")]
-    public class ClassActivity : Activity
+    [Activity(Label = "ClassActivity",Theme = "@style/Theme.Mobilis")]
+    public class ClassActivity : SherlockActivity
     {
         private ClassDao classDao;
         private UserDao userDao;
@@ -19,6 +20,8 @@ namespace Mobilis
         private DiscussionService discussionService;
         private SimpleListAdapter<Class> adapter;
         private Intent intent;
+        private ProgressDialog dialog;
+        private ActionBar actionBar;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -32,6 +35,23 @@ namespace Mobilis
             adapter = new SimpleListAdapter<Class>(this, classDao.getClassesFromCourse(ContextUtil.Instance.Course));
             list.Adapter = adapter;
             list.ItemClick += new System.EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
+
+            actionBar = SupportActionBar;
+            actionBar.SetHomeButtonEnabled(false);
+            actionBar.SetDisplayHomeAsUpEnabled(false);
+            actionBar.SetDisplayUseLogoEnabled(false);
+            actionBar.SetDisplayShowHomeEnabled(false);
+            actionBar.Title = "Cursos";
+           
+        }
+
+        protected override void OnStop()
+        {
+            if (dialog != null) 
+            {
+                dialog.Dismiss();
+            }
+            base.OnStop();
         }
 
         public void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e) 
@@ -39,6 +59,7 @@ namespace Mobilis
             System.Diagnostics.Debug.WriteLine("Click item de turmas");
             Class selectedClass = adapter.getItemAtPosition(e.Position);
             ContextUtil.Instance.Class = selectedClass._id;
+            dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
             discussionService.getDiscussions(Constants.DiscussionURL, userDao.getToken(), r => {
                 System.Diagnostics.Debug.WriteLine("Discussions callback");
                 discussionDao.insertDiscussion(r.Value);

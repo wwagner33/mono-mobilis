@@ -1,6 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+<?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+	<drawable name="ab_bg_black">#aa000000</drawable>
   <color name ="yellow_highlight">#FFFF00</color>
   <color name="text_color">#2A2B71</color>
   <color name="course_list_idle">#e7e7f1</color>
@@ -8,4 +9,5 @@
   <color name="white">#FFFFFF</color>
   <color name="list_divider">#000000</color>
   <color name="text_white_color">#222222</color>
+  <color name="action_bar_idle">#08237f</color>
 </resources>

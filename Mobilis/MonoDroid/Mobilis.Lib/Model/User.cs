@@ -1,5 +1,5 @@
-
 using MWC.DL.SQLite;
+
 namespace Mobilis.Lib.Model
 {
     public class User

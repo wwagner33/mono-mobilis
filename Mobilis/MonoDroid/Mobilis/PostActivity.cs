@@ -14,7 +14,7 @@ using Mobilis.Lib.Util;
 
 namespace Mobilis
 {
-    [Activity(Label = "Post Activity")]
+    [Activity(Label = "Post Activity", Theme = "@android:style/Theme.NoTitleBar")]
     public class PostActivity : Activity
     {
         private PostAdapter adapter;

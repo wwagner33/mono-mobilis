@@ -5,6 +5,8 @@ using Mobilis.Lib.Model;
 using System;
 namespace Mobilis.Lib.Util
 {
+    /*Classe responsável pela Serialização de JSON*/
+
     public class JSON
     {
         public static string generateLoginObject(string login, string password)
@@ -106,7 +108,7 @@ namespace Mobilis.Lib.Util
 
                 post.discussionId = ContextUtil.Instance.Discussion;
                 post.userId = (int)innerObject.SelectToken("user_id");
-                post.content = (string)innerObject.SelectToken("content");
+                post.content = HttpUtils.Strip((string)innerObject.SelectToken("content"));
                 post.userName = (string)innerObject.SelectToken("user_nick");
                 post.updatedAt = (string)innerObject.SelectToken("updated_at");
                 post.level = (int)innerObject.SelectToken("level");

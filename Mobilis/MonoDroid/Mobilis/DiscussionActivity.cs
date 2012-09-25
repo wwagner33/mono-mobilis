@@ -19,6 +19,7 @@ namespace Mobilis
         private PostDao postDao;
         private PostService postService;
         private Intent intent;
+        private ProgressDialog dialog;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -34,10 +35,20 @@ namespace Mobilis
             list.ItemClick += new System.EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
         }
 
+        protected override void OnStop()
+        {
+            if (dialog != null) 
+            {
+                dialog.Dismiss();
+            }
+            base.OnStop();
+        }
+
         void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Discussion selectedDiscussion = adapter.getItemAtPosition(e.Position);
             ContextUtil.Instance.Discussion = selectedDiscussion._id;
+            dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
             postService.getPosts(Constants.NewPostURL(Constants.OLD_POST_URL), userDao.getToken(), r => {
                 System.Diagnostics.Debug.WriteLine("Posts callback");
                 postDao.insertPost(r.Value);

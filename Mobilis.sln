@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilisDroid", "Mobilis\MonoDroid\Mobilis\MobilisDroid.csproj", "{070236F3-8BC7-4123-82CB-EE00251F6D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionBarSherlock", "Mobilis\MonoDroid\ActionBarSherlock\ActionBarSherlock.csproj", "{2D5471B2-8255-4E47-97E9-EEB28678CC82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{00B06E61-5243-400E-8872-4A0AA62D9662}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{2EA224B3-5D6E-40A5-B5BB-497FADDF210D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Phone", "Windows Phone", "{FB2333B3-7ABB-440B-86D1-E002D1989BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobilis.Lib", "Mobilis\MonoDroid\Mobilis.Lib\Mobilis.Lib.csproj", "{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobilis.Lib", "Mobilis\Windows Phone\Mobilis.Lib\Mobilis.Lib.csproj", "{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobilis", "Mobilis\Windows Phone\Mobilis\Mobilis.csproj", "{80995699-7A24-4C2F-ABC7-27A7EE6F5681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoMobilis.Lib", "Mobilis\MonoTouch\MonoMobilis.Lib\MonoMobilis.Lib.csproj", "{3ED55A28-890A-48A3-A3ED-65237064474C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		MonoDroid|Any CPU = MonoDroid|Any CPU
+		MonoTouch|Any CPU = MonoTouch|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.MonoDroid|Any CPU.ActiveCfg = Release|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.MonoDroid|Any CPU.Build.0 = Release|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.MonoDroid|Any CPU.Deploy.0 = Release|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.MonoTouch|Any CPU.ActiveCfg = Release|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.MonoDroid|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.MonoDroid|Any CPU.Build.0 = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.MonoTouch|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.MonoDroid|Any CPU.ActiveCfg = MonoDroid|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.MonoDroid|Any CPU.Build.0 = MonoDroid|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.MonoTouch|Any CPU.ActiveCfg = MonoTouch|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.MonoDroid|Any CPU.ActiveCfg = MonoDroid|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.MonoDroid|Any CPU.Build.0 = MonoDroid|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.MonoTouch|Any CPU.ActiveCfg = MonoTouch|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.MonoDroid|Any CPU.ActiveCfg = MonoDroid|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.MonoDroid|Any CPU.Build.0 = MonoDroid|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.MonoDroid|Any CPU.Deploy.0 = MonoDroid|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.MonoTouch|Any CPU.ActiveCfg = MonoTouch|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.MonoDroid|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.MonoDroid|Any CPU.Build.0 = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.MonoTouch|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.MonoTouch|Any CPU.Build.0 = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED55A28-890A-48A3-A3ED-65237064474C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D5471B2-8255-4E47-97E9-EEB28678CC82} = {00B06E61-5243-400E-8872-4A0AA62D9662}
+		{070236F3-8BC7-4123-82CB-EE00251F6D0D} = {00B06E61-5243-400E-8872-4A0AA62D9662}
+		{DFEE9F1F-5F28-4A67-9B9B-0780A39AAEEC} = {00B06E61-5243-400E-8872-4A0AA62D9662}
+		{3ED55A28-890A-48A3-A3ED-65237064474C} = {2EA224B3-5D6E-40A5-B5BB-497FADDF210D}
+		{D2F00BD2-C015-4A94-8CC8-67E4A86A76B4} = {FB2333B3-7ABB-440B-86D1-E002D1989BFA}
+		{80995699-7A24-4C2F-ABC7-27A7EE6F5681} = {FB2333B3-7ABB-440B-86D1-E002D1989BFA}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Mobilis\MonoDroid\Mobilis\MobilisDroid.csproj
+	EndGlobalSection
+EndGlobal

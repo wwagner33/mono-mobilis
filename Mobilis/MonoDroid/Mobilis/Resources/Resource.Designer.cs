@@ -1218,7 +1218,16 @@ namespace Mobilis
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int robot = 2131034112;
+			public const int errodeconexao = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int fimdalista = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int proxpost = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int robot = 2131034115;
 			
 			private Raw()
 			{

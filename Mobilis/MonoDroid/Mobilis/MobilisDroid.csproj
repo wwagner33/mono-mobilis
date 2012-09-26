@@ -162,4 +162,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\stock_person.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\errodeconexao.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\fimdalista.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\proxpost.mp3" />
+  </ItemGroup>
 </Project>

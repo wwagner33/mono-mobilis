@@ -30,8 +30,16 @@ namespace Mobilis
             }
             else 
             {
-            intent = new Intent(this, typeof(LoginActivity));
-            StartActivity(intent);
+                if (courseDao.existCourses())
+                {
+                    intent = new Intent(this, typeof(CoursesActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    intent = new Intent(this, typeof(LoginActivity));
+                    StartActivity(intent);
+                }
            }
         }
     }

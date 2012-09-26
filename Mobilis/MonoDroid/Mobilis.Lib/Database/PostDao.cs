@@ -14,5 +14,11 @@ namespace Mobilis.Lib.Database
         {
             return MobilisDatabase.getDatabase().Query<Post>("select * from Post where discussionId = ?", discussionId);
         }
+
+        public bool existPostsAtDiscussion(int discussionId)
+        {
+            List<Post> list = MobilisDatabase.getDatabase().Query<Post>("select * from Post where discussionId= ? limit 1", discussionId);
+            return (list.Count > 0) ? true : false;                    
+        }
     }
 }

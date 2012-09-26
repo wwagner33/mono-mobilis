@@ -68,14 +68,8 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\layout\main\Login.axml" />
-    <AndroidResource Include="Resources\layout\main\Post.axml" />
-    <AndroidResource Include="Resources\layout\main\PostItem.axml" />
-    <AndroidResource Include="Resources\layout\main\SimpleList.axml" />
-    <AndroidResource Include="Resources\layout\main\SimpleListItem.axml" />
-    <AndroidResource Include="Resources\layout\main\simple_list_layout.axml" />
-    <AndroidResource Include="Resources\layout\SimpleListItem.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\SimpleListItem.axml" />
     <AndroidResource Include="Resources\layout\Post.axml" />
     <AndroidResource Include="Resources\layout\PostItem.axml" />
     <AndroidResource Include="Resources\layout\simple_list_layout.axml" />

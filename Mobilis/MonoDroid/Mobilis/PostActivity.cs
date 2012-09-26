@@ -11,15 +11,17 @@ using Android.Views;
 using Android.Widget;
 using Mobilis.Lib.Database;
 using Mobilis.Lib.Util;
+using Com.Actionbarsherlock.App;
 
 namespace Mobilis
 {
-    [Activity(Label = "Post Activity", Theme = "@android:style/Theme.NoTitleBar")]
-    public class PostActivity : Activity
+    [Activity(Label = "Post Activity", Theme = "@style/Theme.Mobilis")]
+    public class PostActivity : SherlockActivity
     {
         private PostAdapter adapter;
         private ListView list;
         private PostDao postDao;
+        private ActionBar actionBar;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -29,6 +31,13 @@ namespace Mobilis
             list = FindViewById<ListView>(Resource.Id.list);
             adapter = new PostAdapter(this, postDao.getPostsFromDiscussion(ContextUtil.Instance.Discussion));
             list.Adapter = adapter;
+
+            actionBar = SupportActionBar;
+            actionBar.SetHomeButtonEnabled(false);
+            actionBar.SetDisplayHomeAsUpEnabled(false);
+            actionBar.SetDisplayUseLogoEnabled(false);
+            actionBar.SetDisplayShowHomeEnabled(false);
+            actionBar.Title = "Fóruns";
         }
     }
 }

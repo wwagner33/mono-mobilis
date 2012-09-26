@@ -27,6 +27,7 @@ namespace Mobilis
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.SimpleList);
+            FindViewById<TextView>(Resource.Id.screen_title).Text = "Turmas Disponíveis";
             classDao = new ClassDao();
             userDao = new UserDao();
             discussionDao = new DiscussionDao();
@@ -41,7 +42,7 @@ namespace Mobilis
             actionBar.SetDisplayHomeAsUpEnabled(false);
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
-            actionBar.Title = "Cursos";
+            actionBar.Title = "Turmas";
            
         }
 
@@ -59,14 +60,23 @@ namespace Mobilis
             System.Diagnostics.Debug.WriteLine("Click item de turmas");
             Class selectedClass = adapter.getItemAtPosition(e.Position);
             ContextUtil.Instance.Class = selectedClass._id;
-            dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-            discussionService.getDiscussions(Constants.DiscussionURL, userDao.getToken(), r => {
-                System.Diagnostics.Debug.WriteLine("Discussions callback");
-                discussionDao.insertDiscussion(r.Value);
-                System.Diagnostics.Debug.WriteLine("Insert OK");
+            if (discussionDao.existDiscussionsAtClass(selectedClass._id))
+            {
                 intent = new Intent(this, typeof(DiscussionActivity));
                 StartActivity(intent);
-            });
+            }
+            else
+            {
+                dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
+                discussionService.getDiscussions(Constants.DiscussionURL, userDao.getToken(), r =>
+                {
+                    System.Diagnostics.Debug.WriteLine("Discussions callback");
+                    discussionDao.insertDiscussion(r.Value);
+                    System.Diagnostics.Debug.WriteLine("Insert OK");
+                    intent = new Intent(this, typeof(DiscussionActivity));
+                    StartActivity(intent);
+                });
+            }
         }
     }
 }

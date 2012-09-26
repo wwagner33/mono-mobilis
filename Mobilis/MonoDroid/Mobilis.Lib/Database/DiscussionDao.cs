@@ -14,5 +14,11 @@ namespace Mobilis.Lib.Database
         {
             MobilisDatabase.getDatabase().InsertAll(discussions);
         }
+
+        public bool existDiscussionsAtClass(int classId) 
+        {
+            List<Discussion> list = MobilisDatabase.getDatabase().Query<Discussion>("select * from Discussion where classId = ? limit 1", classId);
+            return (list.Count > 0) ? true : false;
+        }
     }
 }

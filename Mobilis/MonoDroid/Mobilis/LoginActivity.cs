@@ -9,11 +9,12 @@ using Android.Content;
 using Mobilis.Lib.Database;
 using Android.Util;
 using Mobilis.Lib.Model;
+using Com.Actionbarsherlock.App;
 
 namespace Mobilis
 {
-    [Activity(Theme = "@android:style/Theme.NoTitleBar")]
-    public class LoginActivity : Activity, View.IOnClickListener
+    [Activity(Theme = "@style/Theme.Mobilis")]
+    public class LoginActivity : SherlockActivity, View.IOnClickListener
     {
         private Button submit;
         private EditText loginField, passwordField;
@@ -25,10 +26,10 @@ namespace Mobilis
         private UserDao userDao;
         private ProgressDialog dialog;
         
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            SupportActionBar.Hide();
             SetContentView(Resource.Layout.Login);
             courseDao = new CourseDao();
             userDao = new UserDao();

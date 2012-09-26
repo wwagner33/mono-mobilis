@@ -14,5 +14,11 @@ namespace Mobilis.Lib.Database
         {
             return MobilisDatabase.getDatabase().Query<Class>("select * from Class where courseId = ?", courseId);       
         }
+
+        public bool existClassAtCourse(int courseId)
+        {
+            List<Class> list = MobilisDatabase.getDatabase().Query<Class>("select * from Class where courseId = ? limit 1", courseId);
+            return (list.Count > 0) ? true : false;
+        }
     }
 }

@@ -171,4 +171,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\raw\proxpost.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\action_bar_selected.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\options_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\options_menu_action.xml" />
+  </ItemGroup>
 </Project>

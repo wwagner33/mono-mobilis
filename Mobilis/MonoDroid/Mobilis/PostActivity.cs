@@ -37,7 +37,14 @@ namespace Mobilis
             actionBar.SetDisplayHomeAsUpEnabled(false);
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
-            actionBar.Title = "Fóruns";
+            actionBar.Title = "Postagens";
+
+            list.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
+        }
+
+        void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+           // TODO marcar post   
         }
     }
 }

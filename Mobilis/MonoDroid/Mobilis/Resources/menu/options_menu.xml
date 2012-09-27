@@ -3,18 +3,14 @@
 
     <item
         android:id="@+id/menu_refresh"
-        android:icon="@drawable/ic_menu_refresh"
         android:showAsAction="never"
         android:title="Atualizar"/>
     <item
         android:id="@+id/menu_logout"
-        android:icon="@drawable/ic_menu_logout"
         android:showAsAction="never"
         android:title="Logout"/>
     <item
         android:id="@+id/menu_config"
-        android:icon="@drawable/ic_menu_config"
         android:showAsAction="never"
         android:title="Configurações"/>
-
 </menu>

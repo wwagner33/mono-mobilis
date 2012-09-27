@@ -427,8 +427,8 @@ namespace Mobilis
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020068
-			public const int ab_bg_black = 2130837608;
+			// aapt resource value: 0x7f020076
+			public const int ab_bg_black = 2130837622;
 			
 			// aapt resource value: 0x7f020000
 			public const int abs__ab_bottom_solid_dark_holo = 2130837504;
@@ -686,61 +686,103 @@ namespace Mobilis
 			public const int abs__tab_unselected_pressed_holo = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int bg_striped = 2130837589;
+			public const int action_expand = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int bg_striped_img = 2130837590;
+			public const int action_favorite_empty = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int bg_striped_split = 2130837591;
+			public const int action_favorite_marked = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int bg_striped_split_img = 2130837592;
+			public const int action_favorite_unmarked = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int course_list_selector = 2130837593;
+			public const int action_info = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_compose = 2130837594;
+			public const int action_menu = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_compose_inverse = 2130837595;
+			public const int action_playback = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ic_launcher_settings = 2130837596;
+			public const int action_reply = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int ic_magnifying_glass = 2130837597;
+			public const int action_reply_forum = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int ic_refresh = 2130837598;
+			public const int bg_striped = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int ic_refresh_inverse = 2130837599;
+			public const int bg_striped_img = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int ic_search = 2130837600;
+			public const int bg_striped_split = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int ic_search_inverse = 2130837601;
+			public const int bg_striped_split_img = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int ic_title_share_default = 2130837602;
+			public const int course_list_selector = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int Icon = 2130837603;
+			public const int ic_compose = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int login_gradient = 2130837604;
+			public const int ic_compose_inverse = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int logo_solar = 2130837605;
+			public const int ic_launcher_settings = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int no_picture = 2130837606;
+			public const int ic_magnifying_glass = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int stock_person = 2130837607;
+			public const int ic_refresh = 2130837607;
+			
+			// aapt resource value: 0x7f020068
+			public const int ic_refresh_inverse = 2130837608;
+			
+			// aapt resource value: 0x7f020069
+			public const int ic_search = 2130837609;
+			
+			// aapt resource value: 0x7f02006a
+			public const int ic_search_inverse = 2130837610;
+			
+			// aapt resource value: 0x7f02006b
+			public const int ic_title_share_default = 2130837611;
+			
+			// aapt resource value: 0x7f02006c
+			public const int Icon = 2130837612;
+			
+			// aapt resource value: 0x7f02006d
+			public const int login_gradient = 2130837613;
+			
+			// aapt resource value: 0x7f02006e
+			public const int logo_solar = 2130837614;
+			
+			// aapt resource value: 0x7f02006f
+			public const int no_picture = 2130837615;
+			
+			// aapt resource value: 0x7f020070
+			public const int playback_next = 2130837616;
+			
+			// aapt resource value: 0x7f020071
+			public const int playback_pause = 2130837617;
+			
+			// aapt resource value: 0x7f020072
+			public const int playback_play = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int playback_previous = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int playback_stop = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int stock_person = 2130837621;
 			
 			private Drawable()
 			{
@@ -849,6 +891,9 @@ namespace Mobilis
 			// aapt resource value: 0x7f060028
 			public const int cancel = 2131099688;
 			
+			// aapt resource value: 0x7f060065
+			public const int details = 2131099749;
+			
 			// aapt resource value: 0x7f060047
 			public const int disable = 2131099719;
 			
@@ -930,6 +975,9 @@ namespace Mobilis
 			// aapt resource value: 0x7f060046
 			public const int enable = 2131099718;
 			
+			// aapt resource value: 0x7f060061
+			public const int expand = 2131099745;
+			
 			// aapt resource value: 0x7f06004d
 			public const int footer = 2131099725;
 			
@@ -963,14 +1011,26 @@ namespace Mobilis
 			// aapt resource value: 0x7f060049
 			public const int logo = 2131099721;
 			
-			// aapt resource value: 0x7f060061
-			public const int menu_item_action_provider_action_bar = 2131099745;
-			
-			// aapt resource value: 0x7f060062
-			public const int menu_item_action_provider_overflow = 2131099746;
-			
 			// aapt resource value: 0x7f060063
-			public const int menu_item_share_action_provider_action_bar = 2131099747;
+			public const int mark = 2131099747;
+			
+			// aapt resource value: 0x7f060068
+			public const int menu_config = 2131099752;
+			
+			// aapt resource value: 0x7f060069
+			public const int menu_item_action_provider_action_bar = 2131099753;
+			
+			// aapt resource value: 0x7f06006a
+			public const int menu_item_action_provider_overflow = 2131099754;
+			
+			// aapt resource value: 0x7f06006b
+			public const int menu_item_share_action_provider_action_bar = 2131099755;
+			
+			// aapt resource value: 0x7f060067
+			public const int menu_logout = 2131099751;
+			
+			// aapt resource value: 0x7f060066
+			public const int menu_refresh = 2131099750;
 			
 			// aapt resource value: 0x7f06005b
 			public const int middle_bar = 2131099739;
@@ -990,6 +1050,9 @@ namespace Mobilis
 			// aapt resource value: 0x7f06004b
 			public const int password = 2131099723;
 			
+			// aapt resource value: 0x7f060062
+			public const int play = 2131099746;
+			
 			// aapt resource value: 0x7f060058
 			public const int post_content = 2131099736;
 			
@@ -998,6 +1061,9 @@ namespace Mobilis
 			
 			// aapt resource value: 0x7f06002a
 			public const int radio_nav = 2131099690;
+			
+			// aapt resource value: 0x7f060064
+			public const int reply = 2131099748;
 			
 			// aapt resource value: 0x7f06005c
 			public const int screen_title = 2131099740;
@@ -1204,10 +1270,19 @@ namespace Mobilis
 		{
 			
 			// aapt resource value: 0x7f0e0000
-			public const int settings_action_provider = 2131623936;
+			public const int action_bar_selected = 2131623936;
 			
 			// aapt resource value: 0x7f0e0001
-			public const int share_action_provider = 2131623937;
+			public const int options_menu = 2131623937;
+			
+			// aapt resource value: 0x7f0e0002
+			public const int options_menu_action = 2131623938;
+			
+			// aapt resource value: 0x7f0e0003
+			public const int settings_action_provider = 2131623939;
+			
+			// aapt resource value: 0x7f0e0004
+			public const int share_action_provider = 2131623940;
 			
 			private Menu()
 			{

@@ -23,13 +23,10 @@ namespace Mobilis.Lib.Database
             MobilisDatabase.getDatabase().Insert(course);
         }
 
-        public void insertAll(List<Course> courses)
-        {
-            MobilisDatabase.getDatabase().InsertAll(courses);
-        }
-
         public void insertAll(IEnumerable<Course> courses)
          {
+            MobilisDatabase.getDatabase().CreateCommand("delete from Course", 0).ExecuteNonQuery();
+            System.Diagnostics.Debug.WriteLine("courses deleted");
             MobilisDatabase.getDatabase().InsertAll(courses);
          }
 

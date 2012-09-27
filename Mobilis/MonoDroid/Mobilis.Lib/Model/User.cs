@@ -7,5 +7,6 @@ namespace Mobilis.Lib.Model
         [PrimaryKey]
         public int _id { get; set; }
         public string token { get; set; }
+        public bool autoLogin { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using Mobilis.Lib.Database;
 using Mobilis.Lib.DataServices;
 using Mobilis.Lib.Util;
 using Com.Actionbarsherlock.App;
+using Com.Actionbarsherlock.View;
 
 namespace Mobilis
 {
@@ -47,6 +48,34 @@ namespace Mobilis
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
             actionBar.Title = "Cursos";
+        }
+
+        public override bool OnCreateOptionsMenu(Com.Actionbarsherlock.View.IMenu menu)
+        {
+            Com.Actionbarsherlock.View.MenuInflater inflater = SupportMenuInflater;
+            inflater.Inflate(Resource.Menu.options_menu, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId) 
+            { 
+                case Resource.Id.menu_config:
+                    return true;
+                case Resource.Id.menu_logout:
+                    User user = userDao.getUser();
+                    user.token = null;
+                    userDao.addUser(user);
+                    intent = new Intent(this, typeof(LoginActivity));
+                    intent.SetFlags(ActivityFlags.ClearTop);
+                    StartActivity(intent);
+                    return true;
+                case Resource.Id.menu_refresh:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         protected override void OnStop()

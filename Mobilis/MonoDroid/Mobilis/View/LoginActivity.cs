@@ -10,6 +10,7 @@ using Mobilis.Lib.Database;
 using Android.Util;
 using Mobilis.Lib.Model;
 using Com.Actionbarsherlock.App;
+using System;
 
 namespace Mobilis
 {
@@ -62,10 +63,26 @@ namespace Mobilis
                     enumerator.MoveNext();
                     string token = enumerator.Current;
                     Log.Info(TAG,"Token = " + enumerator.Current);
-                    User user = new User();
-                    user.token = token;
-                    user._id = 1;
-                    userDao.addUser(user);
+
+                    try
+                    {
+                        Log.Info("mobilis", "updating old user");
+                        // updates user token
+                        User user = userDao.getUser();
+                        user.token = token;
+                        userDao.addUser(user);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Info("mobilis", "creating new user");
+                        // no previous user
+                        User user = new User();
+                        user.token = token;
+                        user._id = 1;
+                        user.autoLogin = true;
+                        userDao.addUser(user);
+                    }
+                 
                     ServiceLocator.Dispatcher.invoke(() => {
                         getCourses(token);
                    });

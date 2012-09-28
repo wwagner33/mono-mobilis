@@ -40,8 +40,14 @@ namespace Mobilis.Lib.Database
 
         public bool tokenExists() 
         {
-            List<User> list = MobilisDatabase.getDatabase().Query<User>("select token from user where _id = 1");
+            List<User> list = MobilisDatabase.getDatabase().Query<User>("select token from User where _id = 1");
             return (list.Count > 0) ? true : false;
+        }
+
+        public bool isAutologinEnabled() 
+        {
+            List<User> list = MobilisDatabase.getDatabase().Query<User>("select autoLogin from User where _id = 1");
+            return (list[0].autoLogin == true) ? true : false;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Mobilis
             get {return posts.Count; }
         }
 
-        public override View GetView(int position, View convertView, ViewGroup parent)
+        public override Android.Views.View GetView(int position, Android.Views.View convertView, ViewGroup parent)
         {
             ViewHolder holder;
 

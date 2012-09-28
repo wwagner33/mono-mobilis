@@ -1202,64 +1202,67 @@ namespace Mobilis
 			public const int collapsible_edittext = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int context_menus = 2130903062;
+			public const int Config = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int custom_view = 2130903063;
+			public const int context_menus = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int feature_toggles = 2130903064;
+			public const int custom_view = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int iprogress = 2130903065;
+			public const int feature_toggles = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int list_navigation = 2130903066;
+			public const int iprogress = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int Login = 2130903067;
+			public const int list_navigation = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int overlay = 2130903068;
+			public const int Login = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int Post = 2130903069;
+			public const int overlay = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int PostItem = 2130903070;
+			public const int Post = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int preferences = 2130903071;
+			public const int PostItem = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int progress = 2130903072;
+			public const int preferences = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int settings_action_provider = 2130903073;
+			public const int progress = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int sherlock_spinner_dropdown_item = 2130903074;
+			public const int settings_action_provider = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int sherlock_spinner_item = 2130903075;
+			public const int sherlock_spinner_dropdown_item = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int simple_list_layout = 2130903076;
+			public const int sherlock_spinner_item = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int SimpleList = 2130903077;
+			public const int simple_list_layout = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int SimpleListItem = 2130903078;
+			public const int SimpleList = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int tab_custom_view = 2130903079;
+			public const int SimpleListItem = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int tab_navigation = 2130903080;
+			public const int tab_custom_view = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int text = 2130903081;
+			public const int tab_navigation = 2130903081;
+			
+			// aapt resource value: 0x7f03002a
+			public const int text = 2130903082;
 			
 			private Layout()
 			{

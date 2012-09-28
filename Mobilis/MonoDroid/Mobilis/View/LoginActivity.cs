@@ -15,7 +15,7 @@ using System;
 namespace Mobilis
 {
     [Activity(Theme = "@style/Theme.Mobilis")]
-    public class LoginActivity : SherlockActivity, View.IOnClickListener
+    public class LoginActivity : SherlockActivity, Android.Views.View.IOnClickListener
     {
         private Button submit;
         private EditText loginField, passwordField;
@@ -52,7 +52,7 @@ namespace Mobilis
             base.OnStop();
         }
 
-        public void OnClick(View v)
+        public void OnClick(Android.Views.View v)
         {
             if (v.Id == Resource.Id.submit) {
                 string loginData = JSON.generateLoginObject(loginField.Text, passwordField.Text);
@@ -66,11 +66,11 @@ namespace Mobilis
 
                     try
                     {
-                        Log.Info("mobilis", "updating old user");
                         // updates user token
                         User user = userDao.getUser();
                         user.token = token;
                         userDao.addUser(user);
+                        Log.Info("mobilis", "updating old user");
                     }
                     catch (Exception e)
                     {

@@ -46,6 +46,37 @@ namespace Mobilis
            
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            Com.Actionbarsherlock.View.MenuInflater inflater = SupportMenuInflater;
+            inflater.Inflate(Resource.Menu.options_menu, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_config:
+                    intent = new Intent(this, typeof(PreferenceActivity));
+                    StartActivity(intent);
+                    return true;
+                case Resource.Id.menu_logout:
+                    User user = userDao.getUser();
+                    user.token = null;
+                    userDao.addUser(user);
+                    intent = new Intent(this, typeof(LoginActivity));
+                    intent.SetFlags(ActivityFlags.ClearTop);
+                    StartActivity(intent);
+                    return true;
+                case Resource.Id.menu_refresh:
+                    // TODO testar observable collection
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         protected override void OnStop()
         {
             if (dialog != null) 

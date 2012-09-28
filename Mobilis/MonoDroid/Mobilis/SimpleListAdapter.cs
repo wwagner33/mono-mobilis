@@ -26,7 +26,7 @@ namespace Mobilis
         }
 
 
-        public override View GetView(int position, View convertView, ViewGroup parent)
+        public override Android.Views.View GetView(int position, Android.Views.View convertView, ViewGroup parent)
         {
             var item = _content[position];
             System.Diagnostics.Debug.WriteLine("item name = " + item.ToString());

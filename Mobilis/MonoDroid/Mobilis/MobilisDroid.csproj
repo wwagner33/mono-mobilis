@@ -61,6 +61,7 @@
     <Compile Include="PostAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\PreferenceActivity.cs" />
     <Compile Include="View\SetUpActivity.cs" />
     <Compile Include="SimpleListAdapter.cs" />
   </ItemGroup>
@@ -68,12 +69,15 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\SimpleListItem.axml" />
     <AndroidResource Include="Resources\layout\Post.axml" />
     <AndroidResource Include="Resources\layout\PostItem.axml" />
     <AndroidResource Include="Resources\layout\simple_list_layout.axml" />
     <AndroidResource Include="Resources\layout\SimpleList.axml" />
+    <AndroidResource Include="Resources\layout\Config.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />

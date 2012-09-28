@@ -62,6 +62,8 @@ namespace Mobilis
             switch (item.ItemId) 
             { 
                 case Resource.Id.menu_config:
+                    intent = new Intent(this,typeof(PreferenceActivity));
+                    StartActivity(intent);
                     return true;
                 case Resource.Id.menu_logout:
                     User user = userDao.getUser();
@@ -72,6 +74,7 @@ namespace Mobilis
                     StartActivity(intent);
                     return true;
                 case Resource.Id.menu_refresh:
+                    // TODO testar observable collection
                     return true;
                 default:
                     return false;

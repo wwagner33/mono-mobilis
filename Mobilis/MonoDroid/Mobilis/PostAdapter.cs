@@ -5,6 +5,8 @@ using Android.Widget;
 using Android.Views;
 using Android.Content;
 using Mobilis.Lib.Model;
+using System.Collections.ObjectModel;
+using Android.Graphics;
 
 namespace Mobilis
 {
@@ -15,16 +17,19 @@ namespace Mobilis
               public TextView userNick { get; set;}
               public TextView postDate { get; set;}
               public TextView postContent { get; set;}
-              public ImageView avatar { get; set;} 
+              public ImageView avatar { get; set;}
         }
 
-        private List<Post> posts;
+        private ObservableCollection<Post> posts;
         private LayoutInflater inflater;
+        private Context context;
 
-        public PostAdapter(Context context, List<Post> posts) 
+        public PostAdapter(Context context, ObservableCollection<Post> posts) 
         {
             this.posts = posts;
+            this.context = context;
             inflater = LayoutInflater.From(context);
+            posts.CollectionChanged += (o,e) => this.NotifyDataSetChanged();
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -73,7 +78,8 @@ namespace Mobilis
             holder.postContent.Text = postAtPosition.content;
             holder.userNick.Text = postAtPosition.userName;
             //holder.postDate = postAtPosition. TODO Post date.
-
+            Color backgroundColor = postAtPosition.marked ? context.Resources.GetColor(Resource.Color.post_selected) : context.Resources.GetColor(Resource.Color.post_idle);
+            convertView.SetBackgroundColor(backgroundColor);
             return convertView;
         }
     }

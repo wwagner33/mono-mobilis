@@ -13,5 +13,7 @@ namespace Mobilis.Lib.Model
         public int level { get; set; }
         public string userName { get; set; }
         public string updatedAt { get; set; }
+        [Ignore]
+        public bool marked { get; set; }
     }
 }

@@ -14,5 +14,4 @@
         android:icon="@drawable/action_reply_forum"
         android:showAsAction="always"
         android:title="Responder"/>
-
 </menu>

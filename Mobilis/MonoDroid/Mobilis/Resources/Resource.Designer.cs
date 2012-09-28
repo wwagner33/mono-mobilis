@@ -339,17 +339,20 @@ namespace Mobilis
 			// aapt resource value: 0x7f080008
 			public const int abs__holo_blue_light = 2131230728;
 			
-			// aapt resource value: 0x7f080011
-			public const int abs__primary_text_disable_only_holo_dark = 2131230737;
-			
-			// aapt resource value: 0x7f080012
-			public const int abs__primary_text_disable_only_holo_light = 2131230738;
-			
-			// aapt resource value: 0x7f080013
-			public const int abs__primary_text_holo_dark = 2131230739;
-			
 			// aapt resource value: 0x7f080014
-			public const int abs__primary_text_holo_light = 2131230740;
+			public const int abs__primary_text_disable_only_holo_dark = 2131230740;
+			
+			// aapt resource value: 0x7f080015
+			public const int abs__primary_text_disable_only_holo_light = 2131230741;
+			
+			// aapt resource value: 0x7f080016
+			public const int abs__primary_text_holo_dark = 2131230742;
+			
+			// aapt resource value: 0x7f080017
+			public const int abs__primary_text_holo_light = 2131230743;
+			
+			// aapt resource value: 0x7f080011
+			public const int action_bar_active = 2131230737;
 			
 			// aapt resource value: 0x7f080010
 			public const int action_bar_idle = 2131230736;
@@ -362,6 +365,12 @@ namespace Mobilis
 			
 			// aapt resource value: 0x7f08000e
 			public const int list_divider = 2131230734;
+			
+			// aapt resource value: 0x7f080012
+			public const int post_idle = 2131230738;
+			
+			// aapt resource value: 0x7f080013
+			public const int post_selected = 2131230739;
 			
 			// aapt resource value: 0x7f08000a
 			public const int text_color = 2131230730;

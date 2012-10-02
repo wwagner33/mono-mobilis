@@ -903,14 +903,14 @@ namespace Mobilis
 			// aapt resource value: 0x7f060051
 			public const int bunch_of_text = 2131099729;
 			
-			// aapt resource value: 0x7f06005d
-			public const int button = 2131099741;
+			// aapt resource value: 0x7f06005e
+			public const int button = 2131099742;
 			
 			// aapt resource value: 0x7f060028
 			public const int cancel = 2131099688;
 			
-			// aapt resource value: 0x7f060068
-			public const int details = 2131099752;
+			// aapt resource value: 0x7f060069
+			public const int details = 2131099753;
 			
 			// aapt resource value: 0x7f060047
 			public const int disable = 2131099719;
@@ -993,8 +993,8 @@ namespace Mobilis
 			// aapt resource value: 0x7f060046
 			public const int enable = 2131099718;
 			
-			// aapt resource value: 0x7f060064
-			public const int expand = 2131099748;
+			// aapt resource value: 0x7f060065
+			public const int expand = 2131099749;
 			
 			// aapt resource value: 0x7f06004d
 			public const int footer = 2131099725;
@@ -1008,17 +1008,17 @@ namespace Mobilis
 			// aapt resource value: 0x7f060053
 			public const int forum_title = 2131099731;
 			
-			// aapt resource value: 0x7f06005b
-			public const int go = 2131099739;
+			// aapt resource value: 0x7f06005c
+			public const int go = 2131099740;
 			
-			// aapt resource value: 0x7f060061
-			public const int highlight_bar = 2131099745;
+			// aapt resource value: 0x7f060062
+			public const int highlight_bar = 2131099746;
 			
 			// aapt resource value: 0x7f060006
 			public const int homeAsUp = 2131099654;
 			
-			// aapt resource value: 0x7f060062
-			public const int left_bar = 2131099746;
+			// aapt resource value: 0x7f060063
+			public const int left_bar = 2131099747;
 			
 			// aapt resource value: 0x7f060055
 			public const int list = 2131099733;
@@ -1032,29 +1032,29 @@ namespace Mobilis
 			// aapt resource value: 0x7f060049
 			public const int logo = 2131099721;
 			
-			// aapt resource value: 0x7f060066
-			public const int mark = 2131099750;
-			
-			// aapt resource value: 0x7f06006b
-			public const int menu_config = 2131099755;
+			// aapt resource value: 0x7f060067
+			public const int mark = 2131099751;
 			
 			// aapt resource value: 0x7f06006c
-			public const int menu_item_action_provider_action_bar = 2131099756;
+			public const int menu_config = 2131099756;
 			
 			// aapt resource value: 0x7f06006d
-			public const int menu_item_action_provider_overflow = 2131099757;
+			public const int menu_item_action_provider_action_bar = 2131099757;
 			
 			// aapt resource value: 0x7f06006e
-			public const int menu_item_share_action_provider_action_bar = 2131099758;
+			public const int menu_item_action_provider_overflow = 2131099758;
+			
+			// aapt resource value: 0x7f06006f
+			public const int menu_item_share_action_provider_action_bar = 2131099759;
+			
+			// aapt resource value: 0x7f06006b
+			public const int menu_logout = 2131099755;
 			
 			// aapt resource value: 0x7f06006a
-			public const int menu_logout = 2131099754;
+			public const int menu_refresh = 2131099754;
 			
-			// aapt resource value: 0x7f060069
-			public const int menu_refresh = 2131099753;
-			
-			// aapt resource value: 0x7f06005f
-			public const int middle_bar = 2131099743;
+			// aapt resource value: 0x7f060060
+			public const int middle_bar = 2131099744;
 			
 			// aapt resource value: 0x7f06002e
 			public const int navigation_list = 2131099694;
@@ -1071,26 +1071,26 @@ namespace Mobilis
 			// aapt resource value: 0x7f06004b
 			public const int password = 2131099723;
 			
-			// aapt resource value: 0x7f060065
-			public const int play = 2131099749;
+			// aapt resource value: 0x7f060066
+			public const int play = 2131099750;
+			
+			// aapt resource value: 0x7f06005b
+			public const int post_content = 2131099739;
 			
 			// aapt resource value: 0x7f06005a
-			public const int post_content = 2131099738;
-			
-			// aapt resource value: 0x7f060059
-			public const int post_date = 2131099737;
+			public const int post_date = 2131099738;
 			
 			// aapt resource value: 0x7f06002a
 			public const int radio_nav = 2131099690;
 			
-			// aapt resource value: 0x7f06005c
-			public const int refresh_button = 2131099740;
+			// aapt resource value: 0x7f06005d
+			public const int refresh_button = 2131099741;
 			
-			// aapt resource value: 0x7f060067
-			public const int reply = 2131099751;
+			// aapt resource value: 0x7f060068
+			public const int reply = 2131099752;
 			
-			// aapt resource value: 0x7f060060
-			public const int screen_title = 2131099744;
+			// aapt resource value: 0x7f060061
+			public const int screen_title = 2131099745;
 			
 			// aapt resource value: 0x7f060008
 			public const int showCustom = 2131099656;
@@ -1113,26 +1113,29 @@ namespace Mobilis
 			// aapt resource value: 0x7f060003
 			public const int tabMode = 2131099651;
 			
-			// aapt resource value: 0x7f06005e
-			public const int testel = 2131099742;
+			// aapt resource value: 0x7f06005f
+			public const int testel = 2131099743;
 			
 			// aapt resource value: 0x7f060048
 			public const int text = 2131099720;
 			
-			// aapt resource value: 0x7f060057
-			public const int top_text = 2131099735;
+			// aapt resource value: 0x7f060056
+			public const int top_divider = 2131099734;
 			
-			// aapt resource value: 0x7f060063
-			public const int topic_name = 2131099747;
+			// aapt resource value: 0x7f060058
+			public const int top_text = 2131099736;
+			
+			// aapt resource value: 0x7f060064
+			public const int topic_name = 2131099748;
 			
 			// aapt resource value: 0x7f060004
 			public const int useLogo = 2131099652;
 			
-			// aapt resource value: 0x7f060058
-			public const int user_nick = 2131099736;
+			// aapt resource value: 0x7f060059
+			public const int user_nick = 2131099737;
 			
-			// aapt resource value: 0x7f060056
-			public const int user_photo = 2131099734;
+			// aapt resource value: 0x7f060057
+			public const int user_photo = 2131099735;
 			
 			// aapt resource value: 0x7f06004a
 			public const int username = 2131099722;

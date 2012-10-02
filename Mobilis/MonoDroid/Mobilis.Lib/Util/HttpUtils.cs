@@ -13,5 +13,10 @@ namespace Mobilis.Lib.Util
         {
             return date.Substring(0, 19).Replace("T", string.Empty).Replace("-",string.Empty).Replace(":",string.Empty);
         }
+
+        public static string discussionDateToShowFormat(string date) 
+        {
+            return date.Substring(0, 10).Replace("-", "/");
+        }
     }
 }

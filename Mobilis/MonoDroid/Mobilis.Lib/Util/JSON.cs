@@ -99,13 +99,6 @@ namespace Mobilis.Lib.Util
             int postsAfter = (int)nextAndPreviousPosts.SelectToken("after");
             ContextUtil.Instance.postsAfter = postsAfter;
             ContextUtil.Instance.postsBefore = postsBefore;
-            /*
-            DiscussionDao discussionDao = new DiscussionDao();
-            Discussion discussion = discussionDao.getDiscussion(ContextUtil.Instance.Discussion);
-            discussion.nextPosts = postsAfter;
-            discussion.previousPosts = discussion.previousPosts + postsAfter;
-            discussionDao.updateDiscussion(discussion);
-            */
 
             for (int i = 1; i < jArray.Count; i++)
             {

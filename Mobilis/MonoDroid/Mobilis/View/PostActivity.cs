@@ -65,6 +65,9 @@ namespace Mobilis
             };
             discussionDao = new DiscussionDao();
             selectedDiscussion = discussionDao.getDiscussion(ContextUtil.Instance.Discussion);
+            FindViewById<TextView>(Resource.Id.forum_title).Text = selectedDiscussion.name;
+            FindViewById<TextView>(Resource.Id.forum_range).Text = HttpUtils.discussionDateToShowFormat(selectedDiscussion.startDate) + " - "
+                + HttpUtils.discussionDateToShowFormat(selectedDiscussion.endDate);
             ContextUtil.Instance.postsBefore = selectedDiscussion.previousPosts;
             ContextUtil.Instance.postsAfter = selectedDiscussion.nextPosts;
             toggleHeader();
@@ -74,12 +77,15 @@ namespace Mobilis
 
         public void unmarkSelectedPost() 
         {
-            posts[selectedPosition].marked = false;
-            adapter.NotifyDataSetChanged();
-            actionBarSelected = false;
-            selectedPosition = -1;
-            setActionBarIdle();
-            SupportInvalidateOptionsMenu();
+            if (selectedPosition != -1)
+            {
+                posts[selectedPosition].marked = false;
+                adapter.NotifyDataSetChanged();
+                actionBarSelected = false;
+                selectedPosition = -1;
+                setActionBarIdle();
+                SupportInvalidateOptionsMenu();
+            }
         }
 
         protected override void OnPause()

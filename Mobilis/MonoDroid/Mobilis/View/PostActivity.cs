@@ -14,6 +14,7 @@ using Mobilis.Lib.DataServices;
 using System.Collections.Generic;
 using Android.Util;
 using Mobilis.Lib;
+using Android.Content;
 
 namespace Mobilis
 {
@@ -33,6 +34,7 @@ namespace Mobilis
         private PostService postService;
         private UserDao userDao;
         private ProgressDialog dialog;
+        private Intent intent;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -220,6 +222,19 @@ namespace Mobilis
             return true;
         }
 
+        public override bool OnOptionsItemSelected(Com.Actionbarsherlock.View.IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.reply:
+                    intent = new Intent(this, typeof(ResponseActivity));
+                    StartActivity(intent);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         public void setActionBarSelected() 
         {
             actionBar.SetHomeButtonEnabled(false);
@@ -245,6 +260,7 @@ namespace Mobilis
         void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             int position = (list.HeaderViewsCount > 0) ? e.Position - 1 : e.Position;
+            ContextUtil.Instance.Post = posts[position]._id;
             if (selectedPosition == -1) 
             {
                 posts[position].marked = true;

@@ -7,6 +7,7 @@ using Android.Content;
 using Mobilis.Lib.Model;
 using System.Collections.ObjectModel;
 using Android.Graphics;
+using Mobilis.Lib.Util;
 
 namespace Mobilis
 {
@@ -77,7 +78,7 @@ namespace Mobilis
             Post postAtPosition = posts[position];
             holder.postContent.Text = postAtPosition.content;
             holder.userNick.Text = postAtPosition.userName;
-            //holder.postDate = postAtPosition. TODO Post date.
+            holder.postDate.Text = HttpUtils.postDateToShowFormat(postAtPosition.updatedAt);
             Color backgroundColor = postAtPosition.marked ? context.Resources.GetColor(Resource.Color.post_selected) : context.Resources.GetColor(Resource.Color.post_idle);
             convertView.SetBackgroundColor(backgroundColor);
             return convertView;

@@ -93,6 +93,7 @@
     <Compile Include="DataServices\PostService.cs" />
     <Compile Include="DataServices\RestService.cs" />
     <Compile Include="DataServices\Result.cs" />
+    <Compile Include="IAsyncPlayer.cs" />
     <Compile Include="IDispatchOnUIThread.cs" />
     <Compile Include="Model\Class.cs" />
     <Compile Include="Model\Course.cs" />

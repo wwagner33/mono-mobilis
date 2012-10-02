@@ -13,4 +13,5 @@
   <color name="action_bar_active">#f9db43</color>
   <color name="post_idle">#FFFFFF</color>
   <color name="post_selected">#FFF0E68C</color>
+  <color name="post_count">#FF666666</color>
 </resources>

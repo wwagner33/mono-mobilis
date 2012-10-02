@@ -339,17 +339,17 @@ namespace Mobilis
 			// aapt resource value: 0x7f080008
 			public const int abs__holo_blue_light = 2131230728;
 			
-			// aapt resource value: 0x7f080014
-			public const int abs__primary_text_disable_only_holo_dark = 2131230740;
-			
 			// aapt resource value: 0x7f080015
-			public const int abs__primary_text_disable_only_holo_light = 2131230741;
+			public const int abs__primary_text_disable_only_holo_dark = 2131230741;
 			
 			// aapt resource value: 0x7f080016
-			public const int abs__primary_text_holo_dark = 2131230742;
+			public const int abs__primary_text_disable_only_holo_light = 2131230742;
 			
 			// aapt resource value: 0x7f080017
-			public const int abs__primary_text_holo_light = 2131230743;
+			public const int abs__primary_text_holo_dark = 2131230743;
+			
+			// aapt resource value: 0x7f080018
+			public const int abs__primary_text_holo_light = 2131230744;
 			
 			// aapt resource value: 0x7f080011
 			public const int action_bar_active = 2131230737;
@@ -365,6 +365,9 @@ namespace Mobilis
 			
 			// aapt resource value: 0x7f08000e
 			public const int list_divider = 2131230734;
+			
+			// aapt resource value: 0x7f080014
+			public const int post_count = 2131230740;
 			
 			// aapt resource value: 0x7f080012
 			public const int post_idle = 2131230738;
@@ -436,8 +439,8 @@ namespace Mobilis
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020076
-			public const int ab_bg_black = 2130837622;
+			// aapt resource value: 0x7f020077
+			public const int ab_bg_black = 2130837623;
 			
 			// aapt resource value: 0x7f020000
 			public const int abs__ab_bottom_solid_dark_holo = 2130837504;
@@ -791,7 +794,10 @@ namespace Mobilis
 			public const int playback_stop = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int stock_person = 2130837621;
+			public const int refresh_button = 2130837621;
+			
+			// aapt resource value: 0x7f020076
+			public const int stock_person = 2130837622;
 			
 			private Drawable()
 			{
@@ -888,20 +894,23 @@ namespace Mobilis
 			// aapt resource value: 0x7f06000b
 			public const int abs__up = 2131099659;
 			
-			// aapt resource value: 0x7f060050
-			public const int action_bar_footer = 2131099728;
+			// aapt resource value: 0x7f060052
+			public const int action_bar_footer = 2131099730;
 			
 			// aapt resource value: 0x7f06004f
-			public const int bunch_of_text = 2131099727;
+			public const int blue_line = 2131099727;
 			
-			// aapt resource value: 0x7f06005a
-			public const int button = 2131099738;
+			// aapt resource value: 0x7f060051
+			public const int bunch_of_text = 2131099729;
+			
+			// aapt resource value: 0x7f06005d
+			public const int button = 2131099741;
 			
 			// aapt resource value: 0x7f060028
 			public const int cancel = 2131099688;
 			
-			// aapt resource value: 0x7f060065
-			public const int details = 2131099749;
+			// aapt resource value: 0x7f060068
+			public const int details = 2131099752;
 			
 			// aapt resource value: 0x7f060047
 			public const int disable = 2131099719;
@@ -984,8 +993,8 @@ namespace Mobilis
 			// aapt resource value: 0x7f060046
 			public const int enable = 2131099718;
 			
-			// aapt resource value: 0x7f060061
-			public const int expand = 2131099745;
+			// aapt resource value: 0x7f060064
+			public const int expand = 2131099748;
 			
 			// aapt resource value: 0x7f06004d
 			public const int footer = 2131099725;
@@ -993,56 +1002,59 @@ namespace Mobilis
 			// aapt resource value: 0x7f06004e
 			public const int footer_text = 2131099726;
 			
-			// aapt resource value: 0x7f060052
-			public const int forum_range = 2131099730;
+			// aapt resource value: 0x7f060054
+			public const int forum_range = 2131099732;
 			
-			// aapt resource value: 0x7f060051
-			public const int forum_title = 2131099729;
+			// aapt resource value: 0x7f060053
+			public const int forum_title = 2131099731;
 			
-			// aapt resource value: 0x7f060059
-			public const int go = 2131099737;
+			// aapt resource value: 0x7f06005b
+			public const int go = 2131099739;
 			
-			// aapt resource value: 0x7f06005d
-			public const int highlight_bar = 2131099741;
+			// aapt resource value: 0x7f060061
+			public const int highlight_bar = 2131099745;
 			
 			// aapt resource value: 0x7f060006
 			public const int homeAsUp = 2131099654;
 			
-			// aapt resource value: 0x7f06005f
-			public const int left_bar = 2131099743;
+			// aapt resource value: 0x7f060062
+			public const int left_bar = 2131099746;
 			
-			// aapt resource value: 0x7f060053
-			public const int list = 2131099731;
+			// aapt resource value: 0x7f060055
+			public const int list = 2131099733;
 			
 			// aapt resource value: 0x7f060002
 			public const int listMode = 2131099650;
 			
+			// aapt resource value: 0x7f060050
+			public const int load_available_posts = 2131099728;
+			
 			// aapt resource value: 0x7f060049
 			public const int logo = 2131099721;
 			
-			// aapt resource value: 0x7f060063
-			public const int mark = 2131099747;
-			
-			// aapt resource value: 0x7f060068
-			public const int menu_config = 2131099752;
-			
-			// aapt resource value: 0x7f060069
-			public const int menu_item_action_provider_action_bar = 2131099753;
-			
-			// aapt resource value: 0x7f06006a
-			public const int menu_item_action_provider_overflow = 2131099754;
+			// aapt resource value: 0x7f060066
+			public const int mark = 2131099750;
 			
 			// aapt resource value: 0x7f06006b
-			public const int menu_item_share_action_provider_action_bar = 2131099755;
+			public const int menu_config = 2131099755;
 			
-			// aapt resource value: 0x7f060067
-			public const int menu_logout = 2131099751;
+			// aapt resource value: 0x7f06006c
+			public const int menu_item_action_provider_action_bar = 2131099756;
 			
-			// aapt resource value: 0x7f060066
-			public const int menu_refresh = 2131099750;
+			// aapt resource value: 0x7f06006d
+			public const int menu_item_action_provider_overflow = 2131099757;
 			
-			// aapt resource value: 0x7f06005b
-			public const int middle_bar = 2131099739;
+			// aapt resource value: 0x7f06006e
+			public const int menu_item_share_action_provider_action_bar = 2131099758;
+			
+			// aapt resource value: 0x7f06006a
+			public const int menu_logout = 2131099754;
+			
+			// aapt resource value: 0x7f060069
+			public const int menu_refresh = 2131099753;
+			
+			// aapt resource value: 0x7f06005f
+			public const int middle_bar = 2131099743;
 			
 			// aapt resource value: 0x7f06002e
 			public const int navigation_list = 2131099694;
@@ -1059,23 +1071,26 @@ namespace Mobilis
 			// aapt resource value: 0x7f06004b
 			public const int password = 2131099723;
 			
-			// aapt resource value: 0x7f060062
-			public const int play = 2131099746;
+			// aapt resource value: 0x7f060065
+			public const int play = 2131099749;
 			
-			// aapt resource value: 0x7f060058
-			public const int post_content = 2131099736;
+			// aapt resource value: 0x7f06005a
+			public const int post_content = 2131099738;
 			
-			// aapt resource value: 0x7f060057
-			public const int post_date = 2131099735;
+			// aapt resource value: 0x7f060059
+			public const int post_date = 2131099737;
 			
 			// aapt resource value: 0x7f06002a
 			public const int radio_nav = 2131099690;
 			
-			// aapt resource value: 0x7f060064
-			public const int reply = 2131099748;
-			
 			// aapt resource value: 0x7f06005c
-			public const int screen_title = 2131099740;
+			public const int refresh_button = 2131099740;
+			
+			// aapt resource value: 0x7f060067
+			public const int reply = 2131099751;
+			
+			// aapt resource value: 0x7f060060
+			public const int screen_title = 2131099744;
 			
 			// aapt resource value: 0x7f060008
 			public const int showCustom = 2131099656;
@@ -1104,20 +1119,20 @@ namespace Mobilis
 			// aapt resource value: 0x7f060048
 			public const int text = 2131099720;
 			
-			// aapt resource value: 0x7f060055
-			public const int top_text = 2131099733;
+			// aapt resource value: 0x7f060057
+			public const int top_text = 2131099735;
 			
-			// aapt resource value: 0x7f060060
-			public const int topic_name = 2131099744;
+			// aapt resource value: 0x7f060063
+			public const int topic_name = 2131099747;
 			
 			// aapt resource value: 0x7f060004
 			public const int useLogo = 2131099652;
 			
-			// aapt resource value: 0x7f060056
-			public const int user_nick = 2131099734;
+			// aapt resource value: 0x7f060058
+			public const int user_nick = 2131099736;
 			
-			// aapt resource value: 0x7f060054
-			public const int user_photo = 2131099732;
+			// aapt resource value: 0x7f060056
+			public const int user_photo = 2131099734;
 			
 			// aapt resource value: 0x7f06004a
 			public const int username = 2131099722;
@@ -1232,46 +1247,52 @@ namespace Mobilis
 			public const int Login = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int overlay = 2130903069;
+			public const int NextPostFooter = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int Post = 2130903070;
+			public const int overlay = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int PostItem = 2130903071;
+			public const int Post = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int preferences = 2130903072;
+			public const int PostItem = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int progress = 2130903073;
+			public const int preferences = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int settings_action_provider = 2130903074;
+			public const int PreviousPostsHeader = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int sherlock_spinner_dropdown_item = 2130903075;
+			public const int progress = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int sherlock_spinner_item = 2130903076;
+			public const int RefreshFooter = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int simple_list_layout = 2130903077;
+			public const int settings_action_provider = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int SimpleList = 2130903078;
+			public const int sherlock_spinner_dropdown_item = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int SimpleListItem = 2130903079;
+			public const int sherlock_spinner_item = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int tab_custom_view = 2130903080;
+			public const int SimpleList = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int tab_navigation = 2130903081;
+			public const int SimpleListItem = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int text = 2130903082;
+			public const int tab_custom_view = 2130903082;
+			
+			// aapt resource value: 0x7f03002b
+			public const int tab_navigation = 2130903083;
+			
+			// aapt resource value: 0x7f03002c
+			public const int text = 2130903084;
 			
 			private Layout()
 			{
@@ -1540,9 +1561,6 @@ namespace Mobilis
 			// aapt resource value: 0x7f0b006b
 			public const int no_new_posts = 2131427435;
 			
-			// aapt resource value: 0x7f0b0069
-			public const int not_loaded_posts_count = 2131427433;
-			
 			// aapt resource value: 0x7f0b0025
 			public const int overlay = 2131427365;
 			
@@ -1722,6 +1740,9 @@ namespace Mobilis
 			
 			// aapt resource value: 0x7f0b007d
 			public const int try_again = 2131427453;
+			
+			// aapt resource value: 0x7f0b0069
+			public const int unloaded_posts_count = 2131427433;
 			
 			// aapt resource value: 0x7f0b007e
 			public const int username_hint = 2131427454;

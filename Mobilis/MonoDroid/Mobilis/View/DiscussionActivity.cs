@@ -23,6 +23,7 @@ namespace Mobilis
         private Intent intent;
         private ProgressDialog dialog;
         private ActionBar actionBar;
+        private Discussion selectedDiscussion;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -34,7 +35,7 @@ namespace Mobilis
             postDao = new PostDao();
             postService = new PostService();
             ListView list = FindViewById<ListView>(Resource.Id.list);
-            adapter = new SimpleListAdapter<Discussion>(this, discussionDao.getDiscussionFromClass(ContextUtil.Instance.Class));
+            adapter = new SimpleListAdapter<Discussion>(this, discussionDao.getDiscussionsFromClass(ContextUtil.Instance.Class));
             list.Adapter = adapter;
             list.ItemClick += new System.EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
 
@@ -88,7 +89,7 @@ namespace Mobilis
 
         void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            Discussion selectedDiscussion = adapter.getItemAtPosition(e.Position);
+            selectedDiscussion = adapter.getItemAtPosition(e.Position);
             ContextUtil.Instance.Discussion = selectedDiscussion._id;
             if (postDao.existPostsAtDiscussion(selectedDiscussion._id))
             {
@@ -98,10 +99,13 @@ namespace Mobilis
             else
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                postService.getPosts(Constants.NewPostURL(Constants.OLD_POST_URL), userDao.getToken(), r =>
+                postService.getPosts(Constants.NewPostURL(Constants.OLD_POST_DATE), userDao.getToken(), r =>
                 {
                     System.Diagnostics.Debug.WriteLine("Posts callback");
                     postDao.insertPost(r.Value);
+                    selectedDiscussion.nextPosts = ContextUtil.Instance.postsAfter;
+                    selectedDiscussion.previousPosts = ContextUtil.Instance.postsBefore;
+                    discussionDao.updateDiscussion(selectedDiscussion);
                     System.Diagnostics.Debug.WriteLine("Insert OK");
                     intent = new Intent(this, typeof(PostActivity));
                     StartActivity(intent);

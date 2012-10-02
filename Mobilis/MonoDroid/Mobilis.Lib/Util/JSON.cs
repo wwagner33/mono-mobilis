@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Mobilis.Lib.Model;
 using System;
+using Mobilis.Lib.Database;
 namespace Mobilis.Lib.Util
 {
     /*Classe responsável pela Serialização de JSON*/
@@ -91,6 +92,21 @@ namespace Mobilis.Lib.Util
             List<Post> parsedValues = new List<Post>();
             JArray jArray = JArray.Parse(content);
             System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
+
+            
+            JObject nextAndPreviousPosts = (JObject)jArray[0];
+            int postsBefore = (int)nextAndPreviousPosts.SelectToken("before");
+            int postsAfter = (int)nextAndPreviousPosts.SelectToken("after");
+            ContextUtil.Instance.postsAfter = postsAfter;
+            ContextUtil.Instance.postsBefore = postsBefore;
+            /*
+            DiscussionDao discussionDao = new DiscussionDao();
+            Discussion discussion = discussionDao.getDiscussion(ContextUtil.Instance.Discussion);
+            discussion.nextPosts = postsAfter;
+            discussion.previousPosts = discussion.previousPosts + postsAfter;
+            discussionDao.updateDiscussion(discussion);
+            */
+
             for (int i = 1; i < jArray.Count; i++)
             {
                 JObject innerObject = (JObject)jArray[i];

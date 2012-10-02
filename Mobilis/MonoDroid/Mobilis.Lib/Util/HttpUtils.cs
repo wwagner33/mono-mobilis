@@ -8,5 +8,10 @@ namespace Mobilis.Lib.Util
         {
             return Regex.Replace(text, @"<(.|\n)*?>", string.Empty).Replace("//s"," ").Trim();
         }
+
+        public static string postDateToServerFormat(string date) 
+        {
+            return date.Substring(0, 19).Replace("T", string.Empty).Replace("-",string.Empty).Replace(":",string.Empty);
+        }
     }
 }

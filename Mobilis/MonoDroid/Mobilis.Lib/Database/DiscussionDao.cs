@@ -5,7 +5,7 @@ namespace Mobilis.Lib.Database
 {
     public class DiscussionDao
     {
-        public List<Discussion> getDiscussionFromClass(int classId) 
+        public List<Discussion> getDiscussionsFromClass(int classId) 
         {
             return MobilisDatabase.getDatabase().Query<Discussion>("select * from Discussion where classId = ?", classId);       
         }
@@ -13,6 +13,16 @@ namespace Mobilis.Lib.Database
         public void insertDiscussion(IEnumerable<Discussion> discussions) 
         {
             MobilisDatabase.getDatabase().InsertAll(discussions);
+        }
+
+        public Discussion getDiscussion(int discussionId) 
+        {
+            return MobilisDatabase.getDatabase().Query<Discussion>("select * from Discussion where _id = ?", discussionId)[0];
+        }
+
+        public void updateDiscussion(Discussion discussion) 
+        {
+            MobilisDatabase.getDatabase().Update(discussion);
         }
 
         public bool existDiscussionsAtClass(int classId) 

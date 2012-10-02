@@ -9,7 +9,7 @@ namespace Mobilis.Lib.Util
             get { return 20;}
         }
 
-        public static string OLD_POST_URL = "2000101010241010";
+        public static string OLD_POST_DATE = "2000101010241010";
 
         public static string  CoursesURL 
         {
@@ -41,7 +41,7 @@ namespace Mobilis.Lib.Util
 
         public static string HistoryPostURL(string date)
         {
-            return "discussions/" + ContextUtil.Instance.Discussion + "/posts/history/" + date + "/order/asc/limit/" + TOTAL_POSTS_TO_LOAD + ".json";
+            return "discussions/" + ContextUtil.Instance.Discussion + "/posts/history/" + date + "/order/desc/limit/" + TOTAL_POSTS_TO_LOAD + ".json";
         }
     }
 }

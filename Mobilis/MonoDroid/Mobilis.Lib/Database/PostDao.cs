@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mobilis.Lib.Model;
+using Mobilis.Lib.Util;
 
 namespace Mobilis.Lib.Database
 {
@@ -7,7 +8,13 @@ namespace Mobilis.Lib.Database
     {
         public void insertPost(IEnumerable<Post> posts) 
         {
-            MobilisDatabase.getDatabase().InsertAll(posts);
+            List<Post> teste = new List<Post>(posts);
+            System.Diagnostics.Debug.WriteLine("POSTS SIZE " + teste.Count);
+            System.Diagnostics.Debug.WriteLine("antes do delete");
+            MobilisDatabase.getDatabase().CreateCommand("delete from Post where discussionId = ?", ContextUtil.Instance.Discussion).ExecuteNonQuery();
+            System.Diagnostics.Debug.WriteLine("depoid do delete");
+            MobilisDatabase.getDatabase().InsertAll(teste);
+            System.Diagnostics.Debug.WriteLine("depoid do insert");
         }
 
         public List<Post> getPostsFromDiscussion(int discussionId) 

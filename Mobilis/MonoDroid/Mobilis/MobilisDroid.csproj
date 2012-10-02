@@ -75,9 +75,17 @@
     <AndroidResource Include="Resources\layout\SimpleListItem.axml" />
     <AndroidResource Include="Resources\layout\Post.axml" />
     <AndroidResource Include="Resources\layout\PostItem.axml" />
-    <AndroidResource Include="Resources\layout\simple_list_layout.axml" />
     <AndroidResource Include="Resources\layout\SimpleList.axml" />
     <AndroidResource Include="Resources\layout\Config.axml" />
+    <AndroidResource Include="Resources\layout\RefreshFooter.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PreviousPostsHeader.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NextPostFooter.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />
@@ -339,5 +347,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\action_playback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\refresh_button.png" />
   </ItemGroup>
 </Project>

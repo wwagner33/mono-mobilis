@@ -77,5 +77,10 @@ namespace Mobilis.Lib.Util
             }
             return header;
         }
+
+        public static byte[] toByteArray(string s) 
+        {
+            return System.Text.Encoding.UTF8.GetBytes(s);       
+        }
     }
 }

@@ -27,5 +27,10 @@ namespace Mobilis.Lib.Database
             List<Post> list = MobilisDatabase.getDatabase().Query<Post>("select * from Post where discussionId= ? limit 1", discussionId);
             return (list.Count > 0) ? true : false;                    
         }
+
+        public Post getPost(int postId) 
+        {
+            return MobilisDatabase.getDatabase().Query<Post>("select * from Post where _id = ?",postId)[0];
+        }
     }
 }

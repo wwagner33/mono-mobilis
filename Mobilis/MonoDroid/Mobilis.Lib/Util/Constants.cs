@@ -43,5 +43,18 @@ namespace Mobilis.Lib.Util
         {
             return "discussions/" + ContextUtil.Instance.Discussion + "/posts/history/" + date + "/order/desc/limit/" + TOTAL_POSTS_TO_LOAD + ".json";
         }
+
+        public static string DeliverPostURL 
+        {
+            get
+            {
+                return "discussions/" + ContextUtil.Instance.Discussion + "/posts.json";
+            }
+        }
+
+        public static string DeliverAudioURL(int postId) 
+        {
+                return "posts/" + postId + "/post_files";
+        }
     }
 }

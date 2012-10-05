@@ -1,6 +1,7 @@
 using Mobilis.Lib.Model;
 using System.Collections.Generic;
 using Mobilis.Lib.Util;
+using System;
 
 namespace Mobilis.Lib.DataServices
 {
@@ -11,7 +12,7 @@ namespace Mobilis.Lib.DataServices
             Get(source, token, callback);
         }
 
-        public override IEnumerable<Class> parseJSON(string content)
+        public override IEnumerable<Class> parseJSON(string content,int method)
         {
             return JSON.parseClasses(content);
         }

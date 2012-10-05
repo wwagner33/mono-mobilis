@@ -125,5 +125,28 @@ namespace Mobilis.Lib.Util
             }
             return parsedValues;
         }
+
+        public static string createJSONPostEntity(string content,int parentId) 
+        {
+            JObject innerObject = new JObject();
+            innerObject.Add("content", content);
+            if (parentId == 0) 
+            {
+                innerObject.Add("parent_id", string.Empty);
+            }
+            else
+            {
+                innerObject.Add("parent_id", parentId);
+            }
+            JObject entity = new JObject();
+            entity.Add("discussion_post", innerObject);
+            return entity.ToString();
+        }
+
+        public static int parsePostDelivered(string content) 
+        {
+            JObject json = JObject.Parse(content);
+            return (int)json.SelectToken("post_id");
+        }
     }
 }

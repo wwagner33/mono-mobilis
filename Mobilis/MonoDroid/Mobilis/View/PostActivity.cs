@@ -261,6 +261,7 @@ namespace Mobilis
         {
             int position = (list.HeaderViewsCount > 0) ? e.Position - 1 : e.Position;
             ContextUtil.Instance.Post = posts[position]._id;
+            Log.Info("teste", "postId = " + posts[position]._id);
             if (selectedPosition == -1) 
             {
                 posts[position].marked = true;

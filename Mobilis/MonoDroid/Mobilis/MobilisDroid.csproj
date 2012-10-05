@@ -52,6 +52,9 @@
     <Reference Include="Mono.Android.Support.v4" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlayerAdapter.cs" />
+    <Compile Include="RecordAdapter.cs" />
+    <Compile Include="SmsManager.cs" />
     <Compile Include="View\ClassActivity.cs" />
     <Compile Include="View\CoursesActivity.cs" />
     <Compile Include="View\DiscussionActivity.cs" />

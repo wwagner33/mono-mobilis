@@ -43,6 +43,7 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkSkip />
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <DefineConstants>MONODROID</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,7 +55,6 @@
   <ItemGroup>
     <Compile Include="PlayerAdapter.cs" />
     <Compile Include="RecordAdapter.cs" />
-    <Compile Include="SmsManager.cs" />
     <Compile Include="View\ClassActivity.cs" />
     <Compile Include="View\CoursesActivity.cs" />
     <Compile Include="View\DiscussionActivity.cs" />
@@ -366,5 +366,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\recorder_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\playback_bar_selector.xml" />
   </ItemGroup>
 </Project>

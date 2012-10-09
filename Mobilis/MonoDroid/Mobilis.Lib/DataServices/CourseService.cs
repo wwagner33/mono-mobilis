@@ -13,9 +13,15 @@ namespace Mobilis.Lib.DataServices
             Get(source,token, callback);
         }
 
+        /*
         public override IEnumerable<Course> parseJSON(string content,int method)
         {
             return JSON.parseCourses(content);
+        }
+         */
+        public override IEnumerable<Course> parseJSON(System.Net.WebResponse content, int method)
+        {
+            return JSON.parseCourses(HttpUtils.WebResponseToString(content));
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
 namespace Mobilis.Lib.DataServices
 {
     public class SendAudioService : RestService<int>
@@ -9,14 +11,10 @@ namespace Mobilis.Lib.DataServices
             Post(source, token, content,CONTENT_TYPE_AUDIO, callback);   
         }
 
-        public void SendAudio2(string url,string token,string filePath,string paramName,string contentType,NameValueCollection nvc) 
-        {
-            PostFile(url, token, filePath, paramName, contentType, nvc);        
-        }
 
-        public override System.Collections.Generic.IEnumerable<int> parseJSON(string content, int method)
+        public override IEnumerable<int> parseJSON(WebResponse content, int method)
         {
-           yield return 0;
+            yield return 1;
         }
     }
 }

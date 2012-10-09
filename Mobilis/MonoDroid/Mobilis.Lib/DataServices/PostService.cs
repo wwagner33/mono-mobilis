@@ -14,18 +14,8 @@ namespace Mobilis.Lib.DataServices
             Get(source, token, callback);
         }
 
-        /*
-        public void sendPost(string source, string token, string content, ResultCallback<IEnumerable<Post>> callback) 
-        {
-            Post(source, token, content, callback);
-        }
-
-        public void sendRecording(string source, string token, byte[] content, ResultCallback<IEnumerable<Post>> callback) 
-        {
-            Post(source, token, content, callback);
-        }
-        */
          
+        /*
         public override System.Collections.Generic.IEnumerable<Post> parseJSON(string content,int method)
         {
             if (method == METHOD_GET)
@@ -38,6 +28,27 @@ namespace Mobilis.Lib.DataServices
             {
                 System.Diagnostics.Debug.WriteLine("POST");
                 System.Diagnostics.Debug.WriteLine("Resultado do post" + content);
+                Post newPost = new Post();
+                newPost._id = 1;
+            }
+            return null;
+        }
+         * */
+
+        public override IEnumerable<Post> parseJSON(System.Net.WebResponse content, int method)
+        {
+            string result = HttpUtils.WebResponseToString(content);
+
+            if (method == METHOD_GET)
+            {
+                System.Diagnostics.Debug.WriteLine("GET");
+                System.Diagnostics.Debug.WriteLine("Post content" + result);
+                return JSON.parsePosts(result);
+            }
+            if (method == METHOD_POST)
+            {
+                System.Diagnostics.Debug.WriteLine("POST");
+                System.Diagnostics.Debug.WriteLine("Resultado do post" + result);
                 Post newPost = new Post();
                 newPost._id = 1;
             }

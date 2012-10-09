@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading;
 using Mobilis.Lib.Util;
 using System.Collections.Specialized;
+using System.Web;
 
 namespace Mobilis.Lib.DataServices
 {
@@ -14,8 +15,9 @@ namespace Mobilis.Lib.DataServices
 
     public abstract class RestService<T>
     {
-        private string _baseUrl = "http://apolo11teste.virtual.ufc.br/solar/";
-        public abstract IEnumerable<T> parseJSON(string content,int method);
+        //public string _baseUrl = "http://apolo11teste.virtual.ufc.br/solar/";
+        //public abstract IEnumerable<T> parseJSON(string content,int method);
+        public abstract IEnumerable<T> parseJSON(WebResponse content, int method);
         public static int METHOD_GET = 1;
         public static int METHOD_POST = 2;
         public static string CONTENT_TYPE_AUDIO = "audio/3gpp";
@@ -23,9 +25,10 @@ namespace Mobilis.Lib.DataServices
 
         protected void Get(string source,string token,ResultCallback<IEnumerable<T>> callback) 
         {
-            string tokenUrl = "?auth_token=" + token;
-            var webRequest = (HttpWebRequest)WebRequest.Create(_baseUrl + source + tokenUrl);
-            System.Diagnostics.Debug.WriteLine("URL = " + _baseUrl + source + tokenUrl);
+            string tokenUrl = (token == null || token.Equals(string.Empty)) ? string.Empty : ("?auth_token=" + token);
+            //string tokenUrl = "?auth_token=" + token;
+            var webRequest = (HttpWebRequest)WebRequest.Create(source + tokenUrl);
+            System.Diagnostics.Debug.WriteLine("URL = " + source + tokenUrl);
 
             webRequest.BeginGetResponse(responseResult =>
                 {
@@ -34,13 +37,16 @@ namespace Mobilis.Lib.DataServices
                         var response = webRequest.EndGetResponse(responseResult);
                         if (response != null)
                         {
-                            var result = ParseResult(response,METHOD_GET);
+                            System.Diagnostics.Debug.WriteLine("Response not null");
+                            var result = parseJSON(response, METHOD_GET);
                             response.Close();
                             callback(new Result<IEnumerable<T>>(result));
                         }
                     }
                     catch (Exception ex)
                     {
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                        System.Diagnostics.Debug.WriteLine("Response IS null");
                         callback(new Result<IEnumerable<T>>(ex));
                     }
 
@@ -57,10 +63,9 @@ namespace Mobilis.Lib.DataServices
 
         public void Post(string source,string token, byte[] content,string contentType, ResultCallback<IEnumerable<T>> callback)
         {
-            string tokenUrl = (token == null) ? string.Empty : ("?auth_token=" + token);
-            var webRequest = (HttpWebRequest)WebRequest.Create(_baseUrl + source + tokenUrl);
-            System.Diagnostics.Debug.WriteLine("URL = " + _baseUrl + source);
-            // webRequest.ContentType = "application/json";
+            string tokenUrl = (token == null || token.Equals(string.Empty)) ? string.Empty : ("?auth_token=" + token);
+            var webRequest = (HttpWebRequest)WebRequest.Create(source + tokenUrl);
+            System.Diagnostics.Debug.WriteLine("URL = " + source);
             System.Diagnostics.Debug.WriteLine("Temanho do array de bytes = " + content.Length);
             webRequest.ContentType = contentType;
             webRequest.ContentLength = content.Length;
@@ -82,12 +87,11 @@ namespace Mobilis.Lib.DataServices
 
                         if (response != null)
                         {
-                            var postResult = ParseResult(response,METHOD_POST);
+                            var postResult = parseJSON(response, METHOD_POST);
                             response.Close();
                             callback(new Result<IEnumerable<T>>(postResult));
                         }
                     }, webRequest);
-
                 }
                 catch (Exception ex)
                 {
@@ -98,73 +102,45 @@ namespace Mobilis.Lib.DataServices
             }, webRequest);
         }
 
-        public void PostFile(string url,string token, string filePath, string paramName, string contentType, NameValueCollection nvc)
+        public void getAudio(string teste,int id,ResultCallback<IEnumerable<T>> callback) 
         {
-            System.Diagnostics.Debug.WriteLine(string.Format("Uploading {0} to {1}", filePath, url));
-            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
+            WebRequest webRequest = WebRequest.Create(teste);
+            HttpWebResponse response = null;
+            System.Diagnostics.Debug.WriteLine("BING URL =" + teste);
 
-            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create((_baseUrl + url + "?auth_token=" + token));
-            wr.ContentType = "multipart/form-data; boundary=" + boundary;
-            wr.Method = "POST";
-            wr.KeepAlive = true;
-            wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
-
-            Stream rs = wr.GetRequestStream();
-
-            string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
-            foreach (string key in nvc.Keys)
-            {
-                rs.Write(boundarybytes, 0, boundarybytes.Length);
-                string formitem = string.Format(formdataTemplate, key, nvc[key]);
-                byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
-                rs.Write(formitembytes, 0, formitembytes.Length);
-            }
-            rs.Write(boundarybytes, 0, boundarybytes.Length);
-
-            string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            string header = string.Format(headerTemplate, paramName, filePath, contentType);
-            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
-            rs.Write(headerbytes, 0, headerbytes.Length);
-
-            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            byte[] buffer = new byte[4096];
-            int bytesRead = 0;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            {
-                rs.Write(buffer, 0, bytesRead);
-            }
-            fileStream.Close();
-
-            byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
-            rs.Write(trailer, 0, trailer.Length);
-            rs.Close();
-
-            WebResponse wresp = null;
-            try
-            {
-                wresp = wr.GetResponse();
-                Stream stream2 = wresp.GetResponseStream();
-                StreamReader reader2 = new StreamReader(stream2);
-                System.Diagnostics.Debug.WriteLine(string.Format("File uploaded, server response is: {0}", reader2.ReadToEnd()));
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error uploading file", ex);
-                System.Diagnostics.Debug.WriteLine("Error uploading file", ex.Message);
-                if (wresp != null)
+                webRequest.BeginGetResponse(responseResult =>
                 {
-                    wresp.Close();
-                    wresp = null;
-                }
-            }
-            finally
-            {
-                wr = null;
-            }
-        }
+                    try
+                    {
+                        response = (HttpWebResponse)webRequest.EndGetResponse(responseResult);
+                        if (response != null) 
+                        {
+                            System.Diagnostics.Debug.WriteLine("Bing status code = " + response.StatusCode);
+                            HttpUtils.SaveFileToStorage(response,id);
+                            // TODO REMOVER ESSE CALLBACK
+                            var result = parseJSON(response, METHOD_GET);
+                            callback(new Result<IEnumerable<T>>(result));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Exception no Bing " + e.StackTrace);
+                        throw;
+                    }
+                    finally 
+                    {
+                        if (response != null) 
+                        {
+                            response.Close();
+                            response = null;
+                        }
+                    }
 
+                },webRequest);
+        }
+        
+        /*
         private IEnumerable<T> ParseResult(WebResponse response, int method)
         {
             Stream responseStream = response.GetResponseStream();
@@ -173,5 +149,6 @@ namespace Mobilis.Lib.DataServices
             System.Diagnostics.Debug.WriteLine(result);
             return parseJSON(result,method);
         }
+         * */
     }
 }

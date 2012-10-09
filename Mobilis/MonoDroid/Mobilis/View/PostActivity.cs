@@ -35,6 +35,7 @@ namespace Mobilis
         private UserDao userDao;
         private ProgressDialog dialog;
         private Intent intent;
+        private ImageButton play, next, prev, stop;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -75,6 +76,35 @@ namespace Mobilis
             toggleHeader();
             toggleFooter();
             list.Adapter = adapter;
+
+            // player
+            play = FindViewById<ImageButton>(Resource.Id.button_play);
+
+            play.Click += (o, e) => 
+            { 
+                
+            };
+
+            stop = FindViewById<ImageButton>(Resource.Id.button_stop);
+
+            stop.Click += (o, e) =>
+            {
+
+            };
+
+            next = FindViewById<ImageButton>(Resource.Id.button_next);
+
+            next.Click += (o, e) =>
+            {
+
+            };
+
+            prev = FindViewById<ImageButton>(Resource.Id.button_prev);
+
+            prev.Click += (o, e) =>
+            {
+
+            };
         }
 
         public void unmarkSelectedPost() 
@@ -127,6 +157,24 @@ namespace Mobilis
             else 
             {
                 list.AddFooterView(footerRefresh,null,true);
+            }
+        }
+
+        public void togglePlayerBar(bool status) 
+        {
+            if (status)
+            {
+                play.Visibility = ViewStates.Visible;
+                stop.Visibility = ViewStates.Visible;
+                prev.Visibility = ViewStates.Visible;
+                next.Visibility = ViewStates.Visible;
+            }
+            else 
+            {
+                play.Visibility = ViewStates.Gone;
+                stop.Visibility = ViewStates.Gone;
+                prev.Visibility = ViewStates.Gone;
+                next.Visibility = ViewStates.Gone;
             }
         }
 
@@ -229,6 +277,23 @@ namespace Mobilis
                 case Resource.Id.reply:
                     intent = new Intent(this, typeof(ResponseActivity));
                     StartActivity(intent);
+                    return true;
+
+                case Resource.Id.play:
+                    //togglePlayerBar(true);
+                    /*
+                    Log.Info("teste", "TESTE");
+                    BingService bs = new BingService();
+                    bs.GetAsAudio2("teste",0, r => 
+                    {
+                        System.Diagnostics.Debug.WriteLine("retorno");
+                        var teste = r.Value.GetEnumerator();
+                        teste.MoveNext();
+                        Log.Info("teste", "BING RETORNO = " + teste.Current);
+                    });
+                     */
+                    SmsManager m = new SmsManager();
+                    m.start(posts[selectedPosition]);
                     return true;
                 default:
                     return false;

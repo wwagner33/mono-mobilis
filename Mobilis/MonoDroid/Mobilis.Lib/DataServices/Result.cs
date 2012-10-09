@@ -12,8 +12,6 @@ namespace Mobilis.Lib.DataServices
     {
         public Exception Error { get; private set; }
         public T Value { get; private set;}
-        //public int statusCode { get; set; }
-
         public Result(T value)
         {
             Value = value;

@@ -12,9 +12,14 @@ namespace Mobilis.Lib.DataServices
             Get(source, token, callback);        
         }
 
+        /*
         public override System.Collections.Generic.IEnumerable<Discussion> parseJSON(string content,int method)
         {
             return JSON.parseDiscussion(content);
+        }*/
+        public override IEnumerable<Discussion> parseJSON(System.Net.WebResponse content, int method)
+        {
+            return JSON.parseDiscussion(HttpUtils.WebResponseToString(content));
         }
     }
 }

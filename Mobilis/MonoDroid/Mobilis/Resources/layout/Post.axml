@@ -54,4 +54,60 @@
      android:alpha="0.5"
      android:background="@color/list_divider"/>
 
+  <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/black"
+        android:gravity="center_horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+      <ImageButton
+          android:id="@+id/button_prev"
+          style="?android:attr/borderlessButtonStyle"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_weight="1"
+          android:background="@drawable/playback_bar_selector"
+          android:contentDescription="@string/prev"
+          android:src="@drawable/playback_previous"
+          android:visibility="gone" />
+
+      <ImageButton
+          android:id="@+id/button_play"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_weight="1"
+          android:background="@drawable/playback_bar_selector"
+          android:contentDescription="@string/play"
+          android:src="@drawable/playback_play"
+          android:visibility="gone" />
+
+      <ImageButton
+          android:id="@+id/button_stop"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_weight="1"
+          android:background="@drawable/playback_bar_selector"
+          android:contentDescription="stop button"
+          android:src="@drawable/playback_stop"
+          android:visibility="gone" />
+
+      <ImageButton
+          android:id="@+id/button_next"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_weight="1"
+          android:background="@drawable/playback_bar_selector"
+          android:contentDescription="@string/next"
+          android:src="@drawable/playback_next"
+          android:visibility="gone" />
+    </LinearLayout>
+  </RelativeLayout>
+
 </RelativeLayout>

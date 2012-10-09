@@ -103,14 +103,13 @@ namespace Mobilis
             Log.Info("teste", "Enviando áudio");
             ThreadPool.QueueUserWorkItem(status => 
             {
-                /*
+                
                 audioService.SendAudio(Constants.DeliverAudioURL(postId), userDao.getToken(), File.ReadAllBytes(RecordAdapter.FILE_PATH + RecordAdapter.FILE_NAME), r => 
                 {
                     Log.Info("teste", "Envio de áudio OK");
                 });
-                 */
-                audioService.SendAudio2(Constants.DeliverAudioURL(postId), userDao.getToken(), RecordAdapter.FILE_PATH + RecordAdapter.FILE_NAME, "", "audio/3gpp", null);
-
+                //audioService.SendAudio2(Constants.DeliverAudioURL(postId), userDao.getToken(), RecordAdapter.FILE_PATH + RecordAdapter.FILE_NAME, "", "audio/3gpp", null);
+                //audioService.SendAudio2(Constants.DeliverAudioURL(postId), userDao.getToken(), RecordAdapter.FILE_PATH + RecordAdapter.FILE_NAME);
             });
         }
 

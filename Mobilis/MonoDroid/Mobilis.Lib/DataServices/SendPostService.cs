@@ -10,10 +10,17 @@ namespace Mobilis.Lib.DataServices
             Post(source, token, content,CONTENT_TYPE_JSON, callback);
         }
 
+        /*
         public override System.Collections.Generic.IEnumerable<int> parseJSON(string content, int method)
         {
             System.Diagnostics.Debug.WriteLine("Post return = " + content);
             yield return JSON.parsePostDelivered(content);
+        }
+        */
+        public override IEnumerable<int> parseJSON(System.Net.WebResponse content, int method)
+        {
+            System.Diagnostics.Debug.WriteLine("Post return = " + content);
+            yield return JSON.parsePostDelivered(HttpUtils.WebResponseToString(content));
         }
     }
 }

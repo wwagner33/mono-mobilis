@@ -58,7 +58,7 @@ namespace Mobilis
                 string loginData = JSON.generateLoginObject(loginField.Text, passwordField.Text);
                 Log.Info(TAG,"User data = " + loginData);
                 dialog = ProgressDialog.Show(this,"Carregando","Por favor, aguarde...",true);
-                loginService.getToken(loginField.Text, passwordField.Text, r => {
+                loginService.getToken(Constants.tokenURL,loginField.Text, passwordField.Text, r => {
                     var enumerator = r.Value.GetEnumerator();
                     enumerator.MoveNext();
                     string token = enumerator.Current;

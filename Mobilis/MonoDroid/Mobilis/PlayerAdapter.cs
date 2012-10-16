@@ -1,11 +1,16 @@
 using Mobilis.Lib;
 using Android.Media;
 using System.Threading;
+using Mobilis.Lib.Util;
+using System;
+using Java.IO;
 
 namespace Mobilis
 {
-    public class PlayerAdapter : MediaPlayer,IAsyncPlayer
+    public class PlayerAdapter : MediaPlayer,IAsyncPlayer, MediaPlayer.IOnCompletionListener,MediaPlayer.IOnErrorListener
     {
+        public Mobilis.Lib.TTSManager.BlockFinishedPlaying callback;
+
         /*Implementação do player de posts na plataforma Android 
           
          * O player deve ter conhecimento do endereço dos blocos a
@@ -19,37 +24,56 @@ namespace Mobilis
          * ao terminar de tocar um bloco.
          * 
          */
-        //public void init()
 
+        /*
         public override void Start()
         {
+            Sobrescrevendo o start para ser rodado em uma thread separada.
             base.Reset();
             ThreadPool.QueueUserWorkItem(state => 
             {
                 base.Start();
             });
         }
+         */
 
-        public void play() 
+        public PlayerAdapter() 
         {
+            this.SetOnCompletionListener(this);
+            this.SetOnErrorListener(this);
+        }
+
+        public void play(int blockId,Mobilis.Lib.TTSManager.BlockFinishedPlaying callback) 
+        {
+            this.callback = callback;
+            base.Reset();
+            File playingFile = new File(Constants.RECORGING_PATH + blockId + Constants.AUDIO_FILE_EXTENSION);
+            base.SetDataSource(playingFile.AbsolutePath);
+            base.SetVolume(100, 100);
+            base.Prepare();
             base.Start();
         }
 
-        /*
-        public void pause() 
-        {
-            base.Pause();
-        }
-        */
         public void stop() 
         {
             base.Stop();
         }
-        public void previous() 
-        { 
+
+        public void OnCompletion(MediaPlayer mp)
+        {
+            System.Diagnostics.Debug.WriteLine("Finished player calling callback");
+            callback();
         }
-        public void next() 
-        { 
+
+        public bool OnError(MediaPlayer mp, MediaError what, int extra)
+        {
+            System.Diagnostics.Debug.WriteLine("MediaPlayer on ErrorListener");
+            return true;
+        }
+
+        public void reset() 
+        {
+            base.Reset();
         }
     }
 }

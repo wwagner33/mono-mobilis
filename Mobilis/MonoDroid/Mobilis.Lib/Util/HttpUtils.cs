@@ -96,16 +96,35 @@ namespace Mobilis.Lib.Util
 
         public static void SaveFileToStorage(WebResponse response,int fileId) 
         {
-            Stream stream = response.GetResponseStream();
-            StreamReader oReader = new StreamReader(stream, Encoding.ASCII);
-            string path = Constants.RECORGING_PATH + "/Mobilis/TTS/"+fileId+".wav";
-            if (!File.Exists(path))
-                File.Create(path);
-            System.Diagnostics.Debug.WriteLine(path);
-            StreamWriter oWriter = new StreamWriter(path);
-            oWriter.Write(oReader.ReadToEnd());
-            oWriter.Close();
-            oReader.Close();
+            byte[] result = null;
+            byte[] buffer = new byte[4097];
+
+            Stream responseStream = response.GetResponseStream();
+            MemoryStream memoryStream = new MemoryStream();
+
+            int count = 0;
+
+            do
+            {
+                count = responseStream.Read(buffer, 0, buffer.Length);
+                memoryStream.Write(buffer, 0, count);
+
+                if (count == 0)
+                {
+                    break;
+                }
+            }
+            while (true);
+
+            result = memoryStream.ToArray();
+
+            FileStream fs = new FileStream(Constants.RECORGING_PATH + fileId + ".wav", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+            fs.Write(result, 0, result.Length);
+
+            fs.Close();
+            memoryStream.Close();
+            responseStream.Close();
         }
     }
 }

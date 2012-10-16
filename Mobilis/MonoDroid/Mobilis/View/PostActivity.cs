@@ -36,6 +36,7 @@ namespace Mobilis
         private ProgressDialog dialog;
         private Intent intent;
         private ImageButton play, next, prev, stop;
+        private TTSManager manager;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -77,33 +78,50 @@ namespace Mobilis
             toggleFooter();
             list.Adapter = adapter;
 
+            manager = new TTSManager(new PlayerAdapter());
             // player
             play = FindViewById<ImageButton>(Resource.Id.button_play);
 
             play.Click += (o, e) => 
-            { 
-                
+            {
+                // TODO checar se já estiver tocando e pausar
+                manager.start(posts[selectedPosition]);
             };
 
             stop = FindViewById<ImageButton>(Resource.Id.button_stop);
 
             stop.Click += (o, e) =>
             {
-
+                play.SetImageResource(Resource.Drawable.playback_play);
+                manager.releaseResources();
+                togglePlayerBar(false);
+                selectedPosition = -1;
             };
 
             next = FindViewById<ImageButton>(Resource.Id.button_next);
 
             next.Click += (o, e) =>
             {
-
+                if (selectedPosition != posts.Count - 1) 
+                {
+                    selectedPosition++;
+                    manager.releaseResources();
+                    play.SetImageResource(Resource.Drawable.playback_pause);
+                    manager.start(posts[selectedPosition]);
+                }
             };
 
             prev = FindViewById<ImageButton>(Resource.Id.button_prev);
 
             prev.Click += (o, e) =>
             {
-
+                if (selectedPosition != 0) 
+                {
+                    selectedPosition--;
+                    manager.releaseResources();
+                    play.SetImageResource(Resource.Drawable.playback_pause);
+                    manager.start(posts[selectedPosition]);
+                }
             };
         }
 
@@ -278,22 +296,8 @@ namespace Mobilis
                     intent = new Intent(this, typeof(ResponseActivity));
                     StartActivity(intent);
                     return true;
-
                 case Resource.Id.play:
-                    //togglePlayerBar(true);
-                    /*
-                    Log.Info("teste", "TESTE");
-                    BingService bs = new BingService();
-                    bs.GetAsAudio2("teste",0, r => 
-                    {
-                        System.Diagnostics.Debug.WriteLine("retorno");
-                        var teste = r.Value.GetEnumerator();
-                        teste.MoveNext();
-                        Log.Info("teste", "BING RETORNO = " + teste.Current);
-                    });
-                     */
-                    SmsManager m = new SmsManager();
-                    m.start(posts[selectedPosition]);
+                    togglePlayerBar(true);
                     return true;
                 default:
                     return false;

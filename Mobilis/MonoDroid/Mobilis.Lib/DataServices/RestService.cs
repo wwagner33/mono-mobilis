@@ -12,7 +12,6 @@ namespace Mobilis.Lib.DataServices
 {
     /* Classe abstrata que serve como base para acesso a rede.
        Serialização deve ser implementada na subclasse*/
-
     public abstract class RestService<T>
     {
         //public string _baseUrl = "http://apolo11teste.virtual.ufc.br/solar/";
@@ -22,6 +21,7 @@ namespace Mobilis.Lib.DataServices
         public static int METHOD_POST = 2;
         public static string CONTENT_TYPE_AUDIO = "audio/3gpp";
         public static string CONTENT_TYPE_JSON = "application/json";
+        private WebRequest TTSRequest;
 
         protected void Get(string source,string token,ResultCallback<IEnumerable<T>> callback) 
         {
@@ -102,25 +102,22 @@ namespace Mobilis.Lib.DataServices
             }, webRequest);
         }
 
-        public void getAudio(string teste,int id,ResultCallback<IEnumerable<T>> callback) 
+        public void getAudio(string teste,int id,AudioCallback callback) 
         {
-
-            WebRequest webRequest = WebRequest.Create(teste);
+            TTSRequest = WebRequest.Create(teste);
             HttpWebResponse response = null;
             System.Diagnostics.Debug.WriteLine("BING URL =" + teste);
 
-                webRequest.BeginGetResponse(responseResult =>
+            TTSRequest.BeginGetResponse(responseResult =>
                 {
                     try
                     {
-                        response = (HttpWebResponse)webRequest.EndGetResponse(responseResult);
+                        response = (HttpWebResponse)TTSRequest.EndGetResponse(responseResult);
                         if (response != null) 
                         {
                             System.Diagnostics.Debug.WriteLine("Bing status code = " + response.StatusCode);
                             HttpUtils.SaveFileToStorage(response,id);
-                            // TODO REMOVER ESSE CALLBACK
-                            var result = parseJSON(response, METHOD_GET);
-                            callback(new Result<IEnumerable<T>>(result));
+                            callback(id);    
                         }
                     }
                     catch (Exception e)
@@ -137,18 +134,14 @@ namespace Mobilis.Lib.DataServices
                         }
                     }
 
-                },webRequest);
+                }, TTSRequest);
         }
-        
-        /*
-        private IEnumerable<T> ParseResult(WebResponse response, int method)
+        public void abortTTSRequests() 
         {
-            Stream responseStream = response.GetResponseStream();
-            StreamReader responseReader = new System.IO.StreamReader(responseStream, Encoding.UTF8);
-            string result = responseReader.ReadToEnd();
-            System.Diagnostics.Debug.WriteLine(result);
-            return parseJSON(result,method);
+            if (TTSRequest != null) 
+            {
+                TTSRequest.Abort();
+            }         
         }
-         * */
     }
 }

@@ -1,40 +1,96 @@
 using Mobilis.Lib.Model;
 using System.Collections.Generic;
 using System;
+using Mobilis.Lib.DataServices;
+using System.Threading;
+using Mobilis.Lib.Util;
+using System.IO;
 
 namespace Mobilis.Lib
 {
-    public class SmsManager
+    public class TTSManager
     {
-        public delegate void FinishedPlaying();
-        List<string> blocks;
+        public delegate void BlockFinishedPlaying();
+        public delegate void PostFinishedPlaying();
+        private List<string> blocks;
         private const int MIN_BLOCK_LENGTH = 200;
         private const int MAX_BLOCK_LENGTH = 400;
         private IAsyncPlayer player;
+        private BingService bingService;
+        bool[] blocksAvaliability;
+        int playedLast = -1;
+        bool isPlaying = false;
 
-        public SmsManager(IAsyncPlayer player) 
-        { 
-
-        }
-
-        public SmsManager() 
+        public TTSManager(IAsyncPlayer player) 
         {
-           // Para testes
+            this.player = player;
+            bingService = new BingService();
         }
 
+        public TTSManager() 
+        {
+           //Para testes
+           bingService = new BingService();
+        }
+        
         public void start(Post post) 
         { 
             // separa em blocos e começa as requisições
+            // Para TODAS as threads secundárias criadas pela aplicação.
             createBlocks(post);
-            if (blocks.Count > 0) 
-            {
-                System.Diagnostics.Debug.WriteLine("Printing Blocks");
-                foreach (string s in blocks)
-                {
-                    System.Diagnostics.Debug.WriteLine(s);
-                }
-            }
+            makeRequests(post);
         }
+
+        private void playAudioBlock(int blockId) 
+        {
+            System.Diagnostics.Debug.WriteLine("Tocando Bloco " + blockId);
+            isPlaying = true;
+            playedLast = blockId;
+            player.play(blockId, () => 
+            {
+                if (blockId == (blocks.Count - 1)) 
+                {
+                    // última posição.
+                    System.Diagnostics.Debug.WriteLine("Última posição tocada, parando áudio.");
+                    isPlaying = false;
+                }
+                else if (blocksAvaliability[(blockId + 1)])
+                {
+                    // Toca o próximo bloco
+                    System.Diagnostics.Debug.WriteLine("Bloco " + blockId + " Tocado, Tocando bloco " + (blockId+1));
+                    playAudioBlock((blockId + 1));
+                }
+                else 
+                {
+                    // Bloco não baixado ainda
+                    System.Diagnostics.Debug.WriteLine("Próximo bloco ainda não foi baixado. Aguardando.");
+                    isPlaying = false;
+                }
+            });
+          }
+        
+        private void makeRequests(Post post) // TODO uma Thread para cada requisição
+        {
+           ThreadPool.QueueUserWorkItem(state => 
+           {
+                for (int i = 0; i < blocks.Count; i++)
+               {
+                    bingService.GetAsAudio2(blocks[i], i, r =>
+                    {
+                       System.Diagnostics.Debug.WriteLine("Block " + r + " Downloaded");
+                        blocksAvaliability[r] = true;
+                        if (r == 0) 
+                        {
+                            playAudioBlock(r); 
+                        }
+                        else if ((r - 1 == playedLast) && !isPlaying) 
+                        {
+                            playAudioBlock(r);
+                        }
+                    });
+                }
+            });
+         }
 
         public void createBlocks(Post post) 
         {
@@ -95,7 +151,6 @@ namespace Mobilis.Lib
 
                 if (blockContent != null)
                 {
-                    //blocks.addBlock(blockContent);
                     blocks.Add(blockContent);
                 }
                 else
@@ -103,16 +158,16 @@ namespace Mobilis.Lib
                     System.Diagnostics.Debug.WriteLine("ContentBlock is null");
                     break;
                 }
-                System.Diagnostics.Debug.WriteLine("BlockLenght = " + blocks.Count);
             }
+            System.Diagnostics.Debug.WriteLine("BlockLenght = " + blocks.Count);
+            blocksAvaliability = new bool[blocks.Count];
         }
 
         /*
         public bool containsLetter(string content) 
         {
-       
         }
-         * */
+        */
 
         public void generateHeader(Post post) 
         {
@@ -125,6 +180,26 @@ namespace Mobilis.Lib
             int hour = Integer.parseInt(date.substring(11, 13));
             int minute = Integer.parseInt(date.substring(14, 16));
              * */
+        }
+        public void releaseResources() 
+        {
+            /*Liberação de recursos quando ocorrer stop,next ou previous*/
+            bingService.abortTTSRequests();
+            player.reset();
+            deleteTTSFiles();
+        }
+        public void deleteTTSFiles()
+        {
+            System.IO.DirectoryInfo downloadedMessageInfo = new DirectoryInfo(Constants.RECORGING_PATH);
+
+            foreach (FileInfo file in downloadedMessageInfo.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in downloadedMessageInfo.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
     }
 }

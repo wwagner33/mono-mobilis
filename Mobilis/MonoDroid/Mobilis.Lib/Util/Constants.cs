@@ -8,12 +8,13 @@ namespace Mobilis.Lib.Util
     public class Constants
     {
         private const string MOBILIS_BASE_URL = "http://apolo11teste.virtual.ufc.br/solar/";
+        public const string AUDIO_FILE_EXTENSION = ".wav";
         public static string RECORGING_PATH
         {
             get
             {
                 #if MONODROID
-                string path = Environment.ExternalStorageDirectory.AbsolutePath;
+                string path = Environment.ExternalStorageDirectory.AbsolutePath + "/Mobilis/TTS/";
                 return path;
                 #else
                 return "";

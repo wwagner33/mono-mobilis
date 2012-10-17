@@ -84,8 +84,7 @@ namespace Mobilis
 
             play.Click += (o, e) => 
             {
-                // TODO checar se já estiver tocando e pausar
-                manager.start(posts[selectedPosition]);
+                manager.start(posts[selectedPosition],finishedPlayingPost);
             };
 
             stop = FindViewById<ImageButton>(Resource.Id.button_stop);
@@ -95,7 +94,7 @@ namespace Mobilis
                 play.SetImageResource(Resource.Drawable.playback_play);
                 manager.releaseResources();
                 togglePlayerBar(false);
-                selectedPosition = -1;
+                unmarkSelectedPost();
             };
 
             next = FindViewById<ImageButton>(Resource.Id.button_next);
@@ -104,10 +103,10 @@ namespace Mobilis
             {
                 if (selectedPosition != posts.Count - 1) 
                 {
-                    selectedPosition++;
+                    togglePostMarked(selectedPosition + 1);
                     manager.releaseResources();
                     play.SetImageResource(Resource.Drawable.playback_pause);
-                    manager.start(posts[selectedPosition]);
+                    manager.start(posts[selectedPosition],finishedPlayingPost);
                 }
             };
 
@@ -117,12 +116,21 @@ namespace Mobilis
             {
                 if (selectedPosition != 0) 
                 {
-                    selectedPosition--;
+                    togglePostMarked(selectedPosition - 1);
                     manager.releaseResources();
                     play.SetImageResource(Resource.Drawable.playback_pause);
-                    manager.start(posts[selectedPosition]);
+                    manager.start(posts[selectedPosition],finishedPlayingPost);
                 }
             };
+        }
+
+        public void finishedPlayingPost() 
+        {
+            if (selectedPosition != posts.Count - 1)
+            {
+                togglePostMarked(selectedPosition + 1);
+                manager.start(posts[selectedPosition], finishedPlayingPost);
+            }
         }
 
         public void unmarkSelectedPost() 
@@ -146,6 +154,17 @@ namespace Mobilis
             if (dialog != null)
                 dialog.Dismiss();
             base.OnPause();
+        }
+
+        public void togglePostMarked(int position) 
+        {
+            if (selectedPosition != -1) 
+            {
+                posts[selectedPosition].marked = false;
+            }
+            posts[position].marked = true;
+            selectedPosition = position;
+            adapter.NotifyDataSetChanged();
         }
 
         public void toggleHeader() 

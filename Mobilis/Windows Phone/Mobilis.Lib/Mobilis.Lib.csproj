@@ -170,8 +170,8 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ServiceLocator.cs">
       <Link>ServiceLocator.cs</Link>
     </Compile>
-    <Compile Include="..\..\MonoDroid\Mobilis.Lib\SmsManager.cs">
-      <Link>SmsManager.cs</Link>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\TTSManager.cs">
+      <Link>TTSManager.cs</Link>
     </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Util\Constants.cs">
       <Link>Util\Constants.cs</Link>
@@ -207,7 +207,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" />
+      <UserProperties ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -32,16 +32,14 @@ namespace Mobilis.Lib
            //Para testes
            bingService = new BingService();
         }
-        
-        public void start(Post post) 
-        { 
-            // separa em blocos e começa as requisições
-            // Para TODAS as threads secundárias criadas pela aplicação.
+
+        public void start(Post post, PostFinishedPlaying callback)
+        {
             createBlocks(post);
-            makeRequests(post);
+            makeRequests(post,callback);
         }
 
-        private void playAudioBlock(int blockId) 
+        private void playAudioBlock(int blockId,PostFinishedPlaying callback) 
         {
             System.Diagnostics.Debug.WriteLine("Tocando Bloco " + blockId);
             isPlaying = true;
@@ -53,12 +51,14 @@ namespace Mobilis.Lib
                     // última posição.
                     System.Diagnostics.Debug.WriteLine("Última posição tocada, parando áudio.");
                     isPlaying = false;
+                    releaseResources();
+                    callback();
                 }
                 else if (blocksAvaliability[(blockId + 1)])
                 {
                     // Toca o próximo bloco
                     System.Diagnostics.Debug.WriteLine("Bloco " + blockId + " Tocado, Tocando bloco " + (blockId+1));
-                    playAudioBlock((blockId + 1));
+                    playAudioBlock((blockId + 1), callback);
                 }
                 else 
                 {
@@ -68,24 +68,20 @@ namespace Mobilis.Lib
                 }
             });
           }
-        
-        private void makeRequests(Post post) // TODO uma Thread para cada requisição
+
+        private void makeRequests(Post post,PostFinishedPlaying callback) // TODO uma Thread para cada requisição
         {
            ThreadPool.QueueUserWorkItem(state => 
            {
-                for (int i = 0; i < blocks.Count; i++)
+               for (int i = 0; i < blocks.Count; i++)
                {
-                    bingService.GetAsAudio2(blocks[i], i, r =>
+                   bingService.GetAsAudio2(blocks[i], i, r =>
                     {
                        System.Diagnostics.Debug.WriteLine("Block " + r + " Downloaded");
                         blocksAvaliability[r] = true;
-                        if (r == 0) 
+                        if (r == 0 || ((r - 1 == playedLast) && !isPlaying)) 
                         {
-                            playAudioBlock(r); 
-                        }
-                        else if ((r - 1 == playedLast) && !isPlaying) 
-                        {
-                            playAudioBlock(r);
+                            playAudioBlock(r, callback);
                         }
                     });
                 }

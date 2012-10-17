@@ -21,7 +21,7 @@ namespace Mobilis.Lib.DataServices
         public static int METHOD_POST = 2;
         public static string CONTENT_TYPE_AUDIO = "audio/3gpp";
         public static string CONTENT_TYPE_JSON = "application/json";
-        private WebRequest TTSRequest;
+        public List<WebRequest> activeConnections;
 
         protected void Get(string source,string token,ResultCallback<IEnumerable<T>> callback) 
         {
@@ -104,7 +104,16 @@ namespace Mobilis.Lib.DataServices
 
         public void getAudio(string teste,int id,AudioCallback callback) 
         {
-            TTSRequest = WebRequest.Create(teste);
+            WebRequest TTSRequest = WebRequest.Create(teste);
+            if (activeConnections != null)
+            {
+                activeConnections.Add(TTSRequest);
+            }
+            else 
+            {
+                activeConnections = new List<WebRequest>();
+                activeConnections.Add(TTSRequest);
+            }
             HttpWebResponse response = null;
             System.Diagnostics.Debug.WriteLine("BING URL =" + teste);
 
@@ -113,17 +122,23 @@ namespace Mobilis.Lib.DataServices
                     try
                     {
                         response = (HttpWebResponse)TTSRequest.EndGetResponse(responseResult);
-                        if (response != null) 
+                        if (response != null)
                         {
                             System.Diagnostics.Debug.WriteLine("Bing status code = " + response.StatusCode);
-                            HttpUtils.SaveFileToStorage(response,id);
-                            callback(id);    
+                            HttpUtils.SaveFileToStorage(response, id);
+                            callback(id);
                         }
                     }
+
+                    catch (WebException we) 
+                    {
+                        System.Diagnostics.Debug.WriteLine("WEBEXCEPTION");
+                        System.Diagnostics.Debug.WriteLine(we.StackTrace);
+                    }
+
                     catch (Exception e)
                     {
                         System.Diagnostics.Debug.WriteLine("Exception no Bing " + e.StackTrace);
-                        throw;
                     }
                     finally 
                     {
@@ -136,12 +151,23 @@ namespace Mobilis.Lib.DataServices
 
                 }, TTSRequest);
         }
-        public void abortTTSRequests() 
+        public void abortTTSRequests()
         {
-            if (TTSRequest != null) 
+            if (activeConnections != null)
             {
-                TTSRequest.Abort();
-            }         
+                foreach (WebRequest item in activeConnections)
+                {
+                    try
+                    {
+                        item.Abort();
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+                activeConnections.Clear();
+            }
         }
     }
 }

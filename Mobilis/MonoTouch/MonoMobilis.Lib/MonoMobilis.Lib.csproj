@@ -140,6 +140,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\CoursesViewModel.cs">
       <Link>ViewModel\CoursesViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\DiscussionsViewModel.cs">
+      <Link>ViewModel\DiscussionsViewModel.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\LoginViewModel.cs">
       <Link>ViewModel\LoginViewModel.cs</Link>
     </Compile>

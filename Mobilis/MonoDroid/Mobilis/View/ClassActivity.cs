@@ -1,10 +1,7 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using Mobilis.Lib.Database;
 using Mobilis.Lib.Model;
-using Mobilis.Lib.Util;
-using Mobilis.Lib.DataServices;
 using Android.Content;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;

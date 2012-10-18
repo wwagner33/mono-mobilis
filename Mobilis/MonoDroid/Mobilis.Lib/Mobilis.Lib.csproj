@@ -114,6 +114,7 @@
     <Compile Include="Util\JSON.cs" />
     <Compile Include="ViewModel\ClassViewModel.cs" />
     <Compile Include="ViewModel\CoursesViewModel.cs" />
+    <Compile Include="ViewModel\DiscussionsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>

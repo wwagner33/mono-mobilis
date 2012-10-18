@@ -1,16 +1,9 @@
 ﻿using Android.App;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Mobilis.Lib;
-using Mobilis.Lib.Util;
-using Mobilis.Lib.DataServices;
 using Android.Content;
-using Mobilis.Lib.Database;
-using Android.Util;
-using Mobilis.Lib.Model;
 using Com.Actionbarsherlock.App;
-using System;
 using Mobilis.Lib.ViewModel;
 
 namespace Mobilis

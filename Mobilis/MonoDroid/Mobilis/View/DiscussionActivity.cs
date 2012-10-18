@@ -1,14 +1,11 @@
-
 using Android.App;
 using Android.OS;
 using Android.Widget;
 using Mobilis.Lib.Model;
-using Mobilis.Lib.Database;
-using Mobilis.Lib.Util;
-using Mobilis.Lib.DataServices;
 using Android.Content;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
+using Mobilis.Lib.ViewModel;
 
 namespace Mobilis
 {
@@ -16,26 +13,19 @@ namespace Mobilis
     public class DiscussionActivity : SherlockActivity
     {
         private SimpleListAdapter<Discussion> adapter;
-        private DiscussionDao discussionDao;
-        private UserDao userDao;
-        private PostDao postDao;
-        private PostService postService;
         private Intent intent;
         private ProgressDialog dialog;
         private ActionBar actionBar;
-        private Discussion selectedDiscussion;
+        private DiscussionsViewModel discussionViewModel;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.SimpleList);
+            discussionViewModel = new DiscussionsViewModel();
             FindViewById<TextView>(Resource.Id.screen_title).Text = "Fóruns Disponíveis";
-            discussionDao = new DiscussionDao();
-            userDao = new UserDao();
-            postDao = new PostDao();
-            postService = new PostService();
             ListView list = FindViewById<ListView>(Resource.Id.list);
-            adapter = new SimpleListAdapter<Discussion>(this, discussionDao.getDiscussionsFromClass(ContextUtil.Instance.Class));
+            adapter = new SimpleListAdapter<Discussion>(this, discussionViewModel.discussions);
             list.Adapter = adapter;
             list.ItemClick += new System.EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
 
@@ -63,9 +53,7 @@ namespace Mobilis
                     StartActivity(intent);
                     return true;
                 case Resource.Id.menu_logout:
-                    User user = userDao.getUser();
-                    user.token = null;
-                    userDao.addUser(user);
+                    discussionViewModel.logout();
                     intent = new Intent(this, typeof(LoginActivity));
                     intent.SetFlags(ActivityFlags.ClearTop);
                     StartActivity(intent);
@@ -89,9 +77,7 @@ namespace Mobilis
 
         void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            selectedDiscussion = adapter.getItemAtPosition(e.Position);
-            ContextUtil.Instance.Discussion = selectedDiscussion._id;
-            if (postDao.existPostsAtDiscussion(selectedDiscussion._id))
+            if (discussionViewModel.existPostsAtDiscussion(e.Position))
             {
                 intent = new Intent(this, typeof(PostActivity));
                 StartActivity(intent);
@@ -99,16 +85,10 @@ namespace Mobilis
             else
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                postService.getPosts(Constants.NewPostURL(Constants.OLD_POST_DATE), userDao.getToken(), r =>
+                discussionViewModel.requestPosts(() => 
                 {
-                    System.Diagnostics.Debug.WriteLine("Posts callback");
-                    postDao.insertPost(r.Value);
-                    selectedDiscussion.nextPosts = ContextUtil.Instance.postsAfter;
-                    selectedDiscussion.previousPosts = ContextUtil.Instance.postsBefore;
-                    discussionDao.updateDiscussion(selectedDiscussion);
-                    System.Diagnostics.Debug.WriteLine("Insert OK");
                     intent = new Intent(this, typeof(PostActivity));
-                    StartActivity(intent);
+                    StartActivity(intent);                
                 });
             }
         }

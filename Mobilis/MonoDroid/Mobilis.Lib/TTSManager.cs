@@ -27,12 +27,6 @@ namespace Mobilis.Lib
             bingService = new BingService();
         }
 
-        public TTSManager() 
-        {
-           //Para testes
-           bingService = new BingService();
-        }
-
         public void start(Post post, PostFinishedPlaying callback)
         {
             createBlocks(post);
@@ -69,7 +63,7 @@ namespace Mobilis.Lib
             });
           }
 
-        private void makeRequests(Post post,PostFinishedPlaying callback) // TODO uma Thread para cada requisição
+        private void makeRequests(Post post,PostFinishedPlaying callback)
         {
            ThreadPool.QueueUserWorkItem(state => 
            {

@@ -13,28 +13,8 @@ namespace Mobilis
 
         /*Implementação do player de posts na plataforma Android 
           
-         * O player deve ter conhecimento do endereço dos blocos a
-         * serem tocados e tocar o próximo bloco se já tiver sido
-         * baixado.
-         * 
          * Os posts estarão localizados na pasta Mobilis/TTS/:(id do post)
          * onde haverá um arquivo para cada bloco.
-         * 
-         * A pasta, juntamente com os arquivos da mesma, devem ser deletados
-         * ao terminar de tocar um bloco.
-         * 
-         */
-
-        /*
-        public override void Start()
-        {
-            Sobrescrevendo o start para ser rodado em uma thread separada.
-            base.Reset();
-            ThreadPool.QueueUserWorkItem(state => 
-            {
-                base.Start();
-            });
-        }
          */
 
         public PlayerAdapter() 

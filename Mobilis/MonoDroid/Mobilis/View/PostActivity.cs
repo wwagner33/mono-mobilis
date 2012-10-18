@@ -131,6 +131,11 @@ namespace Mobilis
                 togglePostMarked(selectedPosition + 1);
                 manager.start(posts[selectedPosition], finishedPlayingPost);
             }
+            else 
+            {
+                unmarkSelectedPost();
+                togglePlayerBar(false);
+            }
         }
 
         public void unmarkSelectedPost() 

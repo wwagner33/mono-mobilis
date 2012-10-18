@@ -11,6 +11,7 @@ using Android.Util;
 using Mobilis.Lib.Model;
 using Com.Actionbarsherlock.App;
 using System;
+using Mobilis.Lib.ViewModel;
 
 namespace Mobilis
 {
@@ -19,24 +20,19 @@ namespace Mobilis
     {
         private Button submit;
         private EditText loginField, passwordField;
-        private LoginService loginService;
-        private CourseService courseService;
         private Intent intent;
-        private CourseDao courseDao;
         public const string TAG = "mobilis";
-        private UserDao userDao;
         private ProgressDialog dialog;
+
+        private LoginViewModel loginViewModel;
         
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SupportActionBar.Hide();
             SetContentView(Resource.Layout.Login);
-            courseDao = new CourseDao();
-            userDao = new UserDao();
+            loginViewModel = new LoginViewModel();
             ServiceLocator.Dispatcher = new DispatchAdapter(this);
-            loginService = new LoginService();
-            courseService = new CourseService();
             loginField = FindViewById<EditText>(Resource.Id.username);
             passwordField = FindViewById<EditText>(Resource.Id.password);
             submit = FindViewById<Button>(Resource.Id.submit);
@@ -54,47 +50,20 @@ namespace Mobilis
 
         public void OnClick(Android.Views.View v)
         {
-            if (v.Id == Resource.Id.submit) {
-                string loginData = JSON.generateLoginObject(loginField.Text, passwordField.Text);
-                Log.Info(TAG,"User data = " + loginData);
-                dialog = ProgressDialog.Show(this,"Carregando","Por favor, aguarde...",true);
-                loginService.getToken(Constants.tokenURL,loginField.Text, passwordField.Text, r => {
-                    var enumerator = r.Value.GetEnumerator();
-                    enumerator.MoveNext();
-                    string token = enumerator.Current;
-                    Log.Info(TAG,"Token = " + enumerator.Current);
-
-                    try
-                    {
-                        // updates user token
-                        User user = userDao.getUser();
-                        user.token = token;
-                        userDao.addUser(user);
-                        Log.Info("mobilis", "updating old user");
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Info("mobilis", "creating new user");
-                        // no previous user
-                        User user = new User();
-                        user.token = token;
-                        user._id = 1;
-                        user.autoLogin = true;
-                        userDao.addUser(user);
-                    }
-                 
-                    ServiceLocator.Dispatcher.invoke(() => {
-                        getCourses(token);
-                   });
+            dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
+            loginViewModel.submitLoginData(loginField.Text, passwordField.Text, () => 
+            {
+                ServiceLocator.Dispatcher.invoke(() =>
+                {
+                    getCourses();
                 });
-            }
+            });
         }
 
-        public void getCourses(string token)
+        public void getCourses()
         {
-            courseService.getCourses(Constants.CoursesURL, token, r => {
-                courseDao.insertAll(r.Value);
-                Log.Info(TAG, "Insert OK");
+            loginViewModel.requestCourses(() => 
+            {
                 intent = new Intent(this, typeof(CoursesActivity));
                 intent.SetFlags(ActivityFlags.ClearTop);
                 StartActivity(intent);

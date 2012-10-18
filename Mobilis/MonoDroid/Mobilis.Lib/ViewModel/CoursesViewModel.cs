@@ -23,17 +23,16 @@ namespace Mobilis.Lib.ViewModel
             listContent = courseDao.getAllCourses();
         }
 
-        public  void logout(NotifyView callback)
+        public  void logout()
         {
             User user = userDao.getUser();
             user.token = null;
             userDao.addUser(user);
-            callback();
         }
 
-        public bool existClasses(int position) 
+        public bool existClasses(int coursePosition) 
         {
-            Course selectedCourse = listContent[position];
+            Course selectedCourse = listContent[coursePosition];
             ContextUtil.Instance.Course = selectedCourse._id;
             return classDao.existClassAtCourse(selectedCourse._id);
         }

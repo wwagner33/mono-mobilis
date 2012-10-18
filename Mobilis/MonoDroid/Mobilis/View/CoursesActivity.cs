@@ -54,12 +54,10 @@ namespace Mobilis
                     StartActivity(intent);
                     return true;
                 case Resource.Id.menu_logout:
-                    coursesViewModel.logout(() => 
-                    {
-                        intent = new Intent(this, typeof(LoginActivity));
-                        intent.SetFlags(ActivityFlags.ClearTop);
-                        StartActivity(intent);                    
-                    });     
+                    coursesViewModel.logout();
+                    intent = new Intent(this, typeof(LoginActivity));
+                    intent.SetFlags(ActivityFlags.ClearTop);
+                    StartActivity(intent);                    
                     return true;
                 case Resource.Id.menu_refresh:
                     // TODO testar observable collection

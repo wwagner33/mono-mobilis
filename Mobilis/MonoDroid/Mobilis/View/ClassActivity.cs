@@ -8,16 +8,14 @@ using Mobilis.Lib.DataServices;
 using Android.Content;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
+using Mobilis.Lib.ViewModel;
 
 namespace Mobilis
 {
     [Activity(Label = "ClassActivity",Theme = "@style/Theme.Mobilis")]
     public class ClassActivity : SherlockActivity
     {
-        private ClassDao classDao;
-        private UserDao userDao;
-        private DiscussionDao discussionDao;
-        private DiscussionService discussionService;
+        private ClassViewModel classViewModel;
         private SimpleListAdapter<Class> adapter;
         private Intent intent;
         private ProgressDialog dialog;
@@ -27,13 +25,10 @@ namespace Mobilis
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.SimpleList);
+            classViewModel = new ClassViewModel();
             FindViewById<TextView>(Resource.Id.screen_title).Text = "Turmas Disponíveis";
-            classDao = new ClassDao();
-            userDao = new UserDao();
-            discussionDao = new DiscussionDao();
-            discussionService = new DiscussionService();
             ListView list = FindViewById<ListView>(Resource.Id.list);
-            adapter = new SimpleListAdapter<Class>(this, classDao.getClassesFromCourse(ContextUtil.Instance.Course));
+            adapter = new SimpleListAdapter<Class>(this, classViewModel.classes);
             list.Adapter = adapter;
             list.ItemClick += new System.EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
 
@@ -62,9 +57,7 @@ namespace Mobilis
                     StartActivity(intent);
                     return true;
                 case Resource.Id.menu_logout:
-                    User user = userDao.getUser();
-                    user.token = null;
-                    userDao.addUser(user);
+                    classViewModel.logout();
                     intent = new Intent(this, typeof(LoginActivity));
                     intent.SetFlags(ActivityFlags.ClearTop);
                     StartActivity(intent);
@@ -88,10 +81,8 @@ namespace Mobilis
 
         public void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e) 
         {
-            System.Diagnostics.Debug.WriteLine("Click item de turmas");
-            Class selectedClass = adapter.getItemAtPosition(e.Position);
-            ContextUtil.Instance.Class = selectedClass._id;
-            if (discussionDao.existDiscussionsAtClass(selectedClass._id))
+
+            if (classViewModel.existDiscussionsAtClass(e.Position))
             {
                 intent = new Intent(this, typeof(DiscussionActivity));
                 StartActivity(intent);
@@ -99,11 +90,8 @@ namespace Mobilis
             else
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                discussionService.getDiscussions(Constants.DiscussionURL, userDao.getToken(), r =>
+                classViewModel.requestDiscussions(() => 
                 {
-                    System.Diagnostics.Debug.WriteLine("Discussions callback");
-                    discussionDao.insertDiscussion(r.Value);
-                    System.Diagnostics.Debug.WriteLine("Insert OK");
                     intent = new Intent(this, typeof(DiscussionActivity));
                     StartActivity(intent);
                 });

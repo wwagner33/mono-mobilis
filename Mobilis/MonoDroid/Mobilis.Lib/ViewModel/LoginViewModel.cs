@@ -22,7 +22,7 @@ namespace Mobilis.Lib.ViewModel
             courseDao = new CourseDao();
         }
 
-        public void submitLoginData(string name, string password,ConnectionFinished callback) 
+        public void submitLoginData(string name, string password,NotifyView callback) 
         {
              loginService.getToken(Constants.tokenURL,name, password, r => 
              {
@@ -52,7 +52,7 @@ namespace Mobilis.Lib.ViewModel
              });
         }
 
-        public void requestCourses(ConnectionFinished callback)
+        public void requestCourses(NotifyView callback)
         {
             courseService.getCourses(Constants.CoursesURL, userDao.getToken(), r =>
             {

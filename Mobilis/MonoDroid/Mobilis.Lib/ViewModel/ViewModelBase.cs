@@ -13,6 +13,6 @@ namespace Mobilis.Lib.ViewModel
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
-        }   
+        }
     }
 }

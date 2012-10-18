@@ -10,8 +10,8 @@ namespace Mobilis.Lib.DataServices
     public delegate void ResultCallback<T>(Result<T> result);
     // Callback usado para as chamadas de áudio
     public delegate void AudioCallback(int blockId);
-    // Callback usado para o ViewModel informar a View o fim de uma operação asíncrona
-    public delegate void ConnectionFinished();
+    // Callback usado para o ViewModel informar a View o fim de uma operação qualquer
+    public delegate void NotifyView();
 
     public class Result<T>
     {

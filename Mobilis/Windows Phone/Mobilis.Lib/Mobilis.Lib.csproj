@@ -185,6 +185,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Util\JSON.cs">
       <Link>Util\JSON.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\CoursesViewModel.cs">
+      <Link>ViewModel\CoursesViewModel.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\LoginViewModel.cs">
       <Link>ViewModel\LoginViewModel.cs</Link>
     </Compile>
@@ -207,7 +210,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

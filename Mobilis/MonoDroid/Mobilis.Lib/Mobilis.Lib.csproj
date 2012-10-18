@@ -112,6 +112,7 @@
     <Compile Include="Util\ContextUtil.cs" />
     <Compile Include="Util\HttpUtils.cs" />
     <Compile Include="Util\JSON.cs" />
+    <Compile Include="ViewModel\CoursesViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>

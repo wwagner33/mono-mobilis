@@ -29,6 +29,7 @@ namespace Mobilis.Lib
 
         public void start(Post post, PostFinishedPlaying callback)
         {
+            releaseResources(); //
             createBlocks(post);
             makeRequests(post,callback);
         }

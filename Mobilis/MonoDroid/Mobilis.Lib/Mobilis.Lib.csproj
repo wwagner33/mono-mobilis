@@ -100,6 +100,8 @@
     <Compile Include="IAsyncPlayer.cs" />
     <Compile Include="IDispatchOnUIThread.cs" />
     <Compile Include="IRecordAudio.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\PostViewMessage.cs" />
     <Compile Include="Model\Class.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Discussion.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Messages\TinyMessenger.cs" />
     <Compile Include="TTSManager.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ContextUtil.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="ViewModel\CoursesViewModel.cs" />
     <Compile Include="ViewModel\DiscussionsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\PostsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,19 +2,14 @@ using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using Mobilis.Lib.Database;
 using Mobilis.Lib.Util;
 using Com.Actionbarsherlock.App;
-using Com.Actionbarsherlock.View;
-using System.Collections.ObjectModel;
-using Mobilis.Lib.Model;
 using Android.Graphics.Drawables;
 using Android.Views;
-using Mobilis.Lib.DataServices;
-using System.Collections.Generic;
-using Android.Util;
 using Mobilis.Lib;
 using Android.Content;
+using Mobilis.Lib.ViewModel;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis
 {
@@ -23,32 +18,21 @@ namespace Mobilis
     {
         private PostAdapter adapter;
         private ListView list;
-        private PostDao postDao;
         private ActionBar actionBar;
-        private bool actionBarSelected = false;
-        private int selectedPosition = -1;
-        private ObservableCollection<Post> posts;
-        private DiscussionDao discussionDao;
         private View footerRefresh, footerNextPosts, headerPreviousPosts;
-        private Discussion selectedDiscussion;
-        private PostService postService;
-        private UserDao userDao;
         private ProgressDialog dialog;
         private Intent intent;
         private ImageButton play, next, prev, stop;
-        private TTSManager manager;
+        private PostsViewModel postsViewModel;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Post);
-            postDao = new PostDao();
-            userDao = new UserDao();
+            postsViewModel = new PostsViewModel(new PlayerAdapter());
             ServiceLocator.Dispatcher = new DispatchAdapter(this);
-            postService = new PostService();
-            posts = new ObservableCollection<Post>(postDao.getPostsFromDiscussion(ContextUtil.Instance.Discussion));
             list = FindViewById<ListView>(Resource.Id.list);
-            adapter = new PostAdapter(this, posts);
+            adapter = new PostAdapter(this, postsViewModel.posts);
             actionBar = SupportActionBar;
             setActionBarIdle();
             list.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(list_ItemClick);
@@ -67,24 +51,17 @@ namespace Mobilis
             {
                 loadPreviousPosts();
             };
-            discussionDao = new DiscussionDao();
-            selectedDiscussion = discussionDao.getDiscussion(ContextUtil.Instance.Discussion);
-            FindViewById<TextView>(Resource.Id.forum_title).Text = selectedDiscussion.name;
-            FindViewById<TextView>(Resource.Id.forum_range).Text = HttpUtils.discussionDateToShowFormat(selectedDiscussion.startDate) + " - "
-                + HttpUtils.discussionDateToShowFormat(selectedDiscussion.endDate);
-            ContextUtil.Instance.postsBefore = selectedDiscussion.previousPosts;
-            ContextUtil.Instance.postsAfter = selectedDiscussion.nextPosts;
+            FindViewById<TextView>(Resource.Id.forum_title).Text = postsViewModel.selectedDiscussion.name;
+            FindViewById<TextView>(Resource.Id.forum_range).Text = HttpUtils.discussionDateToShowFormat(postsViewModel.selectedDiscussion.startDate) + " - "
+                + HttpUtils.discussionDateToShowFormat(postsViewModel.selectedDiscussion.endDate);
             toggleHeader();
             toggleFooter();
             list.Adapter = adapter;
-
-            manager = new TTSManager(new PlayerAdapter());
-            // player
             play = FindViewById<ImageButton>(Resource.Id.button_play);
 
             play.Click += (o, e) => 
             {
-                manager.start(posts[selectedPosition],finishedPlayingPost);
+                postsViewModel.playSelectedPost();
             };
 
             stop = FindViewById<ImageButton>(Resource.Id.button_stop);
@@ -92,84 +69,58 @@ namespace Mobilis
             stop.Click += (o, e) =>
             {
                 play.SetImageResource(Resource.Drawable.playback_play);
-                manager.releaseResources();
                 togglePlayerBar(false);
-                unmarkSelectedPost();
+                postsViewModel.releaseResources();
+                postsViewModel.removeSelection();
             };
 
             next = FindViewById<ImageButton>(Resource.Id.button_next);
 
             next.Click += (o, e) =>
             {
-                if (selectedPosition != posts.Count - 1) 
-                {
-                    togglePostMarked(selectedPosition + 1);
-                    manager.releaseResources();
-                    play.SetImageResource(Resource.Drawable.playback_pause);
-                    manager.start(posts[selectedPosition],finishedPlayingPost);
-                }
+                play.SetImageResource(Resource.Drawable.playback_pause);
+                postsViewModel.playNextInSelection();
             };
 
             prev = FindViewById<ImageButton>(Resource.Id.button_prev);
 
             prev.Click += (o, e) =>
             {
-                if (selectedPosition != 0) 
-                {
-                    togglePostMarked(selectedPosition - 1);
-                    manager.releaseResources();
-                    play.SetImageResource(Resource.Drawable.playback_pause);
-                    manager.start(posts[selectedPosition],finishedPlayingPost);
-                }
+                play.SetImageResource(Resource.Drawable.playback_pause);
+                postsViewModel.playPreviousInSelection();
             };
-        }
 
-        public void finishedPlayingPost() 
-        {
-            if (selectedPosition != posts.Count - 1)
+            ServiceLocator.Messenger.Subscribe<PostViewMessage>(m =>
             {
-                togglePostMarked(selectedPosition + 1);
-                manager.start(posts[selectedPosition], finishedPlayingPost);
-            }
-            else 
-            {
-                unmarkSelectedPost();
-                togglePlayerBar(false);
-            }
-        }
-
-        public void unmarkSelectedPost() 
-        {
-            if (selectedPosition != -1)
-            {
-                posts[selectedPosition].marked = false;
-                adapter.NotifyDataSetChanged();
-                actionBarSelected = false;
-                selectedPosition = -1;
-                setActionBarIdle();
-                SupportInvalidateOptionsMenu();
-            }
+                switch (m.Content.message) 
+                {
+                    case PostViewMessage.NO_NEW_POSTS:
+                    Toast.MakeText(this, "Não há novos posts", ToastLength.Short).Show();
+                    break;
+                    case PostViewMessage.FUTURE_POSTS_LOADED:
+                    toggleFooter();
+                    break;
+                    case PostViewMessage.PREVIOUS_POSTS_LOADED:
+                    toggleHeader();
+                    break;
+                    case PostViewMessage.FINISHED_PLAYING:
+                    togglePlayerBar(false);
+                    break;
+                    case PostViewMessage.UPDATE_SCREEN:
+                    updateScreen();
+                    break;
+                    default:
+                    break;
+                }            
+            });
         }
 
         protected override void OnPause()
         {
-            selectedDiscussion.nextPosts = ContextUtil.Instance.postsAfter;
-            selectedDiscussion.previousPosts = ContextUtil.Instance.postsBefore;
-            discussionDao.updateDiscussion(selectedDiscussion);
+            postsViewModel.saveSelection();
             if (dialog != null)
                 dialog.Dismiss();
             base.OnPause();
-        }
-
-        public void togglePostMarked(int position) 
-        {
-            if (selectedPosition != -1) 
-            {
-                posts[selectedPosition].marked = false;
-            }
-            posts[position].marked = true;
-            selectedPosition = position;
-            adapter.NotifyDataSetChanged();
         }
 
         public void toggleHeader() 
@@ -220,86 +171,23 @@ namespace Mobilis
             }
         }
 
-        public void loadFuturePosts() 
+        public void loadFuturePosts()
         {
-            unmarkSelectedPost();
-            int oldNext = ContextUtil.Instance.postsAfter;
-            int oldPrevious = ContextUtil.Instance.postsBefore;
-
-            string date;
-            if (posts.Count == 0)
-            {
-                date = Constants.OLD_POST_DATE;
-            }
-            else 
-            {
-                date = HttpUtils.postDateToServerFormat(posts[posts.Count-1].updatedAt);  
-            }
-            postService.getPosts(Constants.NewPostURL(date), userDao.getToken(), r => {
-                List<Post> newPosts = new List<Post>(r.Value);
-                if (newPosts.Count == 0)
-                {
-                    ServiceLocator.Dispatcher.invoke(() => {
-                        Toast.MakeText(this, "Não há novos posts", ToastLength.Short).Show();
-                    });
-                }
-                 ServiceLocator.Dispatcher.invoke(() => {
-                    foreach (Post post in newPosts)
-                      {
-                        posts.Add(post);
-                      }
-                    });
-
-                 List<Post> postsFromDatabse = postDao.getPostsFromDiscussion(selectedDiscussion._id);
-                 postsFromDatabse.AddRange(newPosts);
-                    while (postsFromDatabse.Count > 20) 
-                    {
-                        postsFromDatabse.RemoveAt(0);
-                    }
-                    ContextUtil.Instance.postsBefore = oldPrevious + newPosts.Count;
-                  postDao.insertPost(postsFromDatabse);
-                  ServiceLocator.Dispatcher.invoke(() => {
-                     toggleFooter();
-                 });
-            });
+            postsViewModel.removeSelection();
+            postsViewModel.loadFuturePosts();
         }
 
         public void loadPreviousPosts() 
         {
-            unmarkSelectedPost();
-            int oldNext = ContextUtil.Instance.postsAfter;
-            int oldPrevious = ContextUtil.Instance.postsBefore;
-
-            string date = HttpUtils.postDateToServerFormat(posts[0].updatedAt);
-            postService.getPosts(Constants.HistoryPostURL(date), userDao.getToken(), r => {
-                List<Post> oldPosts = new List<Post>(r.Value);
-                int newPostCount = oldPosts.Count;
-                ServiceLocator.Dispatcher.invoke(() => {
-                    foreach (Post post in oldPosts)
-                    {
-                        posts.Insert(0, post);
-                    }
-                });
-                List<Post> postsFromDatabse = postDao.getPostsFromDiscussion(selectedDiscussion._id);
-                oldPosts.AddRange(postsFromDatabse);
-                while (oldPosts.Count > 20)
-                {
-                    oldPosts.RemoveAt(oldPosts.Count-1);
-                }
-                postDao.insertPost(oldPosts);
-                ContextUtil.Instance.postsAfter = oldNext + newPostCount;
-                ServiceLocator.Dispatcher.invoke(() =>
-                {
-                    toggleHeader();
-                });
-            });
+            postsViewModel.removeSelection();
+            postsViewModel.loadPreviousPosts();
         }
 
         public override bool OnCreateOptionsMenu(Com.Actionbarsherlock.View.IMenu menu)
         {
             menu.Clear();
             Com.Actionbarsherlock.View.MenuInflater inflater = SupportMenuInflater;
-            if (actionBarSelected)
+            if (postsViewModel.contextualSelection)
             {
                 inflater.Inflate(Resource.Menu.action_bar_selected, menu);
                 setActionBarSelected();
@@ -353,38 +241,23 @@ namespace Mobilis
         void list_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             int position = (list.HeaderViewsCount > 0) ? e.Position - 1 : e.Position;
-            ContextUtil.Instance.Post = posts[position]._id;
-            Log.Info("teste", "postId = " + posts[position]._id);
-            if (selectedPosition == -1) 
-            {
-                posts[position].marked = true;
-                selectedPosition = position;
-                actionBarSelected = true;
-            }
-            else if (selectedPosition == position)
-            {
-                posts[position].marked = false;
-                selectedPosition = -1;
-                actionBarSelected = false;
-            }
-            else 
-            {
-                posts[position].marked = true;
-                posts[selectedPosition].marked = false;
-                selectedPosition = position;
-                actionBarSelected = true;
-            }
-            adapter.NotifyDataSetChanged();
-            SupportInvalidateOptionsMenu();
+            postsViewModel.togglePostMarked(position);
+            updateScreen();
         }
         public override void OnBackPressed()
         {
-            if (selectedPosition != -1)
+            if (postsViewModel.contextualSelection)
             {
-                unmarkSelectedPost();
+                postsViewModel.removeSelection();
             }
             else
                 base.OnBackPressed();
+        }
+
+        public void updateScreen() 
+        {
+            adapter.NotifyDataSetChanged();
+            SupportInvalidateOptionsMenu();
         }
     }
 }

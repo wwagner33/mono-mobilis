@@ -39,7 +39,6 @@
     <Reference Include="monotouch" />
     <Reference Include="System.Json" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\ClassDao.cs">
       <Link>Database\ClassDao.cs</Link>
@@ -101,6 +100,15 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\IRecordAudio.cs">
       <Link>IRecordAudio.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Messages\Message.cs">
+      <Link>Messages\Message.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Messages\PostViewMessage.cs">
+      <Link>Messages\PostViewMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\Messages\TinyMessenger.cs">
+      <Link>Messages\TinyMessenger.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Model\Class.cs">
       <Link>Model\Class.cs</Link>
     </Compile>
@@ -146,6 +154,9 @@
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\LoginViewModel.cs">
       <Link>ViewModel\LoginViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\PostsViewModel.cs">
+      <Link>ViewModel\PostsViewModel.cs</Link>
+    </Compile>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\ViewModel\ViewModelBase.cs">
       <Link>ViewModel\ViewModelBase.cs</Link>
     </Compile>
@@ -153,7 +164,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="dfee9f1f-5f28-4a67-9b9b-0780a39aaeec" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

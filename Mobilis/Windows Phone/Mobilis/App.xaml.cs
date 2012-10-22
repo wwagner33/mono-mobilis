@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Mobilis.Lib.Database;
 
 namespace Mobilis
 {
@@ -57,6 +58,31 @@ namespace Mobilis
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+           RootFrame.Navigating += new NavigatingCancelEventHandler(RootFrame_Navigating);
+        }
+
+        void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            CourseDao courseDao = new CourseDao();
+            // se a navegação não for para a MainPage(login) não há mudança na navegação
+            if (e.Uri.ToString().Contains("/MainPage.xaml") != true)
+                return;
+
+            if (courseDao.existCourses())
+            {
+                e.Cancel = true;
+                RootFrame.Dispatcher.BeginInvoke(delegate 
+                {
+                    System.Diagnostics.Debug.WriteLine("TO COURSES");
+                    RootFrame.Navigate(new Uri("/Views/CoursePage.xaml", UriKind.Relative));
+                });
+            }
+            else 
+            {
+                System.Diagnostics.Debug.WriteLine("TO LOGIN");
+                e.Cancel = false;
+                return;
+            }
         }
 
         // Code to execute when the application is launching (eg, from Start)

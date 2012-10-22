@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Net;
 using System.IO;
 using System.Threading;
 using Mobilis.Lib.Util;
-using System.Collections.Specialized;
-using System.Web;
 
 namespace Mobilis.Lib.DataServices
 {
@@ -68,7 +65,7 @@ namespace Mobilis.Lib.DataServices
             System.Diagnostics.Debug.WriteLine("URL = " + source);
             System.Diagnostics.Debug.WriteLine("Temanho do array de bytes = " + content.Length);
             webRequest.ContentType = contentType;
-            webRequest.ContentLength = content.Length;
+            //webRequest.ContentLength = content.Length; WP7 não aceita
             webRequest.Method = "POST";
             webRequest.BeginGetRequestStream(responseResult =>
             {

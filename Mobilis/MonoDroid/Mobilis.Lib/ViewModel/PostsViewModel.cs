@@ -131,6 +131,7 @@ namespace Mobilis.Lib.ViewModel
             if (selectedPosition != posts.Count - 1)
             {
                 togglePostMarked(selectedPosition + 1);
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.UPDATE_SCREEN)));
                 manager.releaseResources();
                 manager.start(posts[selectedPosition], finishedPlaying);
             }
@@ -141,6 +142,7 @@ namespace Mobilis.Lib.ViewModel
             if (selectedPosition != 0)
             {
                 togglePostMarked(selectedPosition - 1);
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.UPDATE_SCREEN)));
                 manager.releaseResources();
                 manager.start(posts[selectedPosition], finishedPlaying);
             }

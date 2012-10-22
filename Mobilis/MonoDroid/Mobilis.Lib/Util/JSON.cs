@@ -30,6 +30,7 @@ namespace Mobilis.Lib.Util
 
         public static IEnumerable<Course> parseCourses(string content)
         {
+            System.Diagnostics.Debug.WriteLine(content);
             List<Course> parsedValues = new List<Course>();
             JArray jArray = JArray.Parse(content);
             System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
@@ -39,8 +40,6 @@ namespace Mobilis.Lib.Util
                 Course course = new Course();
                 course.name = (string)innerObject.SelectToken("name");
                 course._id = (int)innerObject.SelectToken("id");
-                course.allocationTagId = Convert.ToInt32((string)innerObject.SelectToken("allocation_tag_id"));
-                course.curriculumUnitTypeId = (int)innerObject.SelectToken("curriculum_unit_type_id");
                 parsedValues.Add(course);
             }
             return parsedValues;
@@ -116,11 +115,17 @@ namespace Mobilis.Lib.Util
                 }
 
                 post.discussionId = ContextUtil.Instance.Discussion;
+                System.Diagnostics.Debug.WriteLine("ContextUtil mod");
                 post.userId = (int)innerObject.SelectToken("user_id");
+                System.Diagnostics.Debug.WriteLine("user_id OK");
                 post.content = HttpUtils.Strip((string)innerObject.SelectToken("content"));
+                System.Diagnostics.Debug.WriteLine("content OK");
                 post.userName = (string)innerObject.SelectToken("user_nick");
+                System.Diagnostics.Debug.WriteLine("user_nick OK");
                 post.updatedAt = (string)innerObject.SelectToken("updated_at");
+                System.Diagnostics.Debug.WriteLine("Updated At OK");
                 post.level = (int)innerObject.SelectToken("level");
+                System.Diagnostics.Debug.WriteLine("Level OK");
                 parsedValues.Add(post);
             }
             return parsedValues;

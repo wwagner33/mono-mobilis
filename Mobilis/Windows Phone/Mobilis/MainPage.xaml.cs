@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Mobilis.Lib;
-using Mobilis.Lib.DataServices;
-using Mobilis.Lib.Database;
+using Mobilis.Lib.ViewModel;
 
 namespace Mobilis
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private CourseService courseService;
-        private LoginService loginService;
-        private CourseDao courseDao;
+        //private CourseService courseService;
+       // private LoginService loginService;
+        //rivate CourseDao courseDao;
+        private LoginViewModel loginViewModel;
 
         public MainPage()
         {
@@ -30,35 +21,27 @@ namespace Mobilis
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            courseService = new CourseService();
-            loginService = new LoginService();
             ServiceLocator.Dispatcher = new DispatchAdapter();
-            courseDao = new CourseDao();
+            loginViewModel = new LoginViewModel();
         }
 
-        public void getCourses(string token) 
+        public void getCourses() 
         {
-            courseService.getCourses("curriculum_units/list.json", token, r => {
-                System.Diagnostics.Debug.WriteLine("Teste");
-                courseDao.insertAll(r.Value);
-                System.Diagnostics.Debug.WriteLine("Insert OK");
-                ServiceLocator.Dispatcher.invoke(() => {
-                    NavigationService.Navigate(new Uri("/CoursePage.xaml", UriKind.Relative));
+            loginViewModel.requestCourses(() => 
+            {
+                ServiceLocator.Dispatcher.invoke(() =>
+                {
+                    NavigationService.Navigate(new Uri("/Views/CoursePage.xaml", UriKind.Relative));
                 });
             });
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-               loginService.getToken(login.Text, password.Password, r => {
-                var enumerator = r.Value.GetEnumerator();
-                enumerator.MoveNext();
-                string token = enumerator.Current;
-                System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);
-                ServiceLocator.Dispatcher.invoke(() => {
-                    getCourses(token);
-                });
-             });
+            loginViewModel.submitLoginData(login.Text, password.Password, () => 
+            {
+                getCourses();
+            });
         }
     }
 }

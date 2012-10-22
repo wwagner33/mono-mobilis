@@ -3,6 +3,7 @@ using System;
 using System.Net;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 namespace Mobilis.Lib.Util
 {
@@ -125,6 +126,63 @@ namespace Mobilis.Lib.Util
             fs.Close();
             memoryStream.Close();
             responseStream.Close();
+        }
+
+        public static string HtmlEncode(string s)
+        {
+            if (s == null)
+                return null;
+
+            StringBuilder output = new StringBuilder();
+
+            foreach (char c in s)
+                switch (c)
+                {
+                    case '&':
+                        output.Append("&amp;");
+                        break;
+                    case '>':
+                        output.Append("&gt;");
+                        break;
+                    case '<':
+                        output.Append("&lt;");
+                        break;
+                    case '"':
+                        output.Append("&quot;");
+                        break;
+                    default:
+                        // MS starts encoding with &# from 160 and stops at 255.
+                        // We don't do that. One reason is the 65308/65310 unicode
+                        // characters that look like '<' and '>'.
+                        if (c > 159)
+                        {
+                            output.Append("&#");
+                            output.Append(((int)c).ToString(CultureInfo.InvariantCulture));
+                            output.Append(";");
+                        }
+                        else
+                        {
+                            output.Append(c);
+                        }
+                        break;
+                }
+            return output.ToString();
+        }
+
+        /// <summary>
+        /// HTML-encodes a string and sends the resulting output to a TextWriter output stream.
+        /// </summary>
+        /// <param name="s">The string to encode. </param>
+        /// <param name="output">The TextWriter output stream containing the encoded string. </param>
+        public static void HtmlEncode(string s, TextWriter output)
+        {
+            if (s != null)
+                output.Write(HtmlEncode(s));
+        }
+
+        public static string UrlEncode(string uri) 
+        {
+            return Uri.EscapeUriString(uri);
         }
     }
 }

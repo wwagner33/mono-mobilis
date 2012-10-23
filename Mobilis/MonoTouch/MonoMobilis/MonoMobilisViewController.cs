@@ -7,17 +7,15 @@ using Mobilis.Lib.Util;
 using Mobilis.Lib.DataServices;
 using Mobilis.Lib.Database;
 using Mobilis.Lib;
+using Mobilis.Lib.ViewModel;
 
 namespace MonoMobilis
 {
 	public partial class MonoMobilisViewController : UIViewController
 	{
-		private UITextField teste;
-		private LoginService loginService;
-		private CourseService courseService;
-		private CourseDao courseDao;
-		private CoursesViewController coursesPage;
 
+		private CoursesViewController coursesPage;
+		private LoginViewModel loginViewModel;
 
 		public MonoMobilisViewController () : base ("MonoMobilisViewController", null)
 		{
@@ -26,58 +24,42 @@ namespace MonoMobilis
 		
 		public override void DidReceiveMemoryWarning ()
 		{
-			// Releases the view if it doesn't have a superview.
 			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
 		}
 		
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			loginService = new LoginService();
-			courseService = new CourseService();
-			courseDao = new CourseDao();
-			/*
-			teste = new UITextField();
-			teste.ShouldReturn = delegate
-			{
-			teste.ResignFirstResponder();
-			return true;
-			};
-			View.AddSubview(teste);
-			*/
+			loginViewModel = new LoginViewModel();
 
 			this.submit.TouchUpInside += (sender, e) => {
-				System.Diagnostics.Debug.WriteLine("Teste");
-				System.Diagnostics.Debug.WriteLine("Login = " + login.Text);
-				System.Diagnostics.Debug.WriteLine("Password = " + password.Text);
-				string loginData = JSON.generateLoginObject(login.Text,password.Text);
-				System.Diagnostics.Debug.WriteLine("Login data = " + loginData);
-				loginService.getToken(login.Text,password.Text,r => {
-					var enumerator = r.Value.GetEnumerator();
-                    enumerator.MoveNext();
-                    string token = enumerator.Current;
-                    System.Diagnostics.Debug.WriteLine("Token = " + enumerator.Current);
-					getCourses(token);
+			
+				loginViewModel.submitLoginData(login.Text,password.Text,() =>
+				{
+					getCourses();
 				});
+
 			};
 		}
 
-		public void getCourses(string token) 
+		public void getCourses() 
 		{
-			courseService.getCourses("curriculum_units/list.json",token,r => {
-				courseDao.insertAll(r.Value);
-                System.Diagnostics.Debug.WriteLine("Insert OK");
-				ServiceLocator.Dispatcher.invoke(() => {
-					if (this.coursesPage ==	null) 
+			loginViewModel.requestCourses(() =>
+			{
+				ServiceLocator.Dispatcher = new DispatchAdapter(this);
+				ServiceLocator.Dispatcher.invoke(() =>
 				{
-					coursesPage = new CoursesViewController();	
-				}
-				this.NavigationController.PushViewController(this.coursesPage,true);
+					coursesPage = new CoursesViewController();
+					this.NavigationController.PushViewController(this.coursesPage,true);
 				});
+
 			});
 		}
+
+		/* Navegacao
+		 * coursesPage = new CoursesViewController();
+		   this.NavigationController.PushViewController(this.coursesPage,true);
+		 */
 
 
 		partial void actionSubmit (NSObject sender)
@@ -101,6 +83,19 @@ namespace MonoMobilis
 		{
 			// Return true for supported orientations
 			return (toInterfaceOrientation != UIInterfaceOrientation.PortraitUpsideDown);
+		}
+
+		public override void TouchesEnded (NSSet touches, UIEvent evt)
+		{
+			foreach (var item in this) 
+			{
+				var tf = item as UITextField;
+				if (tf != null && tf.IsFirstResponder) 
+				{
+				tf.ResignFirstResponder ();
+				}		
+			}
+		base.TouchesEnded (touches, evt);
 		}
 	}
 }

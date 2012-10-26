@@ -46,7 +46,9 @@ namespace Mobilis.Lib.ViewModel
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine("Updated at = " + posts[posts.Count - 1].updatedAt);
                 date = HttpUtils.postDateToServerFormat(posts[posts.Count - 1].updatedAt);
+                System.Diagnostics.Debug.WriteLine("Formatted date = " + date);
             }
             postService.getPosts(Constants.NewPostURL(date), userDao.getToken(), r =>
             {
@@ -56,7 +58,7 @@ namespace Mobilis.Lib.ViewModel
                     ServiceLocator.Dispatcher.invoke(() =>
                     {
                         System.Diagnostics.Debug.WriteLine("NO NEW POSTS");
-                        ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.NO_NEW_POSTS)));
+                        ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.NO_NEW_POSTS)));
                     });
                 }
                 ServiceLocator.Dispatcher.invoke(() =>
@@ -77,7 +79,7 @@ namespace Mobilis.Lib.ViewModel
                 postDao.insertPost(postsFromDatabse);
                 ServiceLocator.Dispatcher.invoke(() =>
                 {
-                    ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.FUTURE_POSTS_LOADED)));
+                    ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.FUTURE_POSTS_LOADED)));
                 });
             });
         }
@@ -109,7 +111,7 @@ namespace Mobilis.Lib.ViewModel
                 ContextUtil.Instance.postsAfter = oldNext + newPostCount;
                 ServiceLocator.Dispatcher.invoke(() =>
                 {
-                    ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.PREVIOUS_POSTS_LOADED)));
+                    ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.PREVIOUS_POSTS_LOADED)));
                 });
             });
         }
@@ -131,7 +133,7 @@ namespace Mobilis.Lib.ViewModel
             if (selectedPosition != posts.Count - 1)
             {
                 togglePostMarked(selectedPosition + 1);
-                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.UPDATE_SCREEN)));
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.UPDATE_SCREEN)));
                 manager.releaseResources();
                 manager.start(posts[selectedPosition], finishedPlaying);
             }
@@ -142,7 +144,7 @@ namespace Mobilis.Lib.ViewModel
             if (selectedPosition != 0)
             {
                 togglePostMarked(selectedPosition - 1);
-                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.UPDATE_SCREEN)));
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.UPDATE_SCREEN)));
                 manager.releaseResources();
                 manager.start(posts[selectedPosition], finishedPlaying);
             }
@@ -158,7 +160,7 @@ namespace Mobilis.Lib.ViewModel
             else
             {
                 removeSelection();
-                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.FINISHED_PLAYING)));
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.FINISHED_PLAYING)));
             }
         }
 
@@ -191,7 +193,7 @@ namespace Mobilis.Lib.ViewModel
             {
                 posts[selectedPosition].marked = false;
                 contextualSelection = false;
-                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(PostViewMessage.UPDATE_SCREEN)));
+                ServiceLocator.Messenger.Publish(new PostViewMessage(this, new Message(BaseViewMessage.MessageTypes.UPDATE_SCREEN)));
             }       
         }
     }

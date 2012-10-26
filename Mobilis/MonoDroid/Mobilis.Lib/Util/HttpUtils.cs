@@ -18,7 +18,23 @@ namespace Mobilis.Lib.Util
 
         public static string postDateToServerFormat(string date)
         {
-            return date.Substring(0, 19).Replace("T", string.Empty).Replace("-", string.Empty).Replace(":", string.Empty);
+            string formated = date.Substring(0, 19).Replace("T", string.Empty).Replace("-", string.Empty).Replace(":", string.Empty);
+            #if WINDOWS_PHONE
+            // No windows phone a data é recuperada em um formato diferente e, portanto,
+            // o tratament muda.
+            string month = date.Substring(0,2);
+            System.Diagnostics.Debug.WriteLine("month = " + month);
+            string day = date.Substring(3,2);
+            System.Diagnostics.Debug.WriteLine("day = " + day);
+            string year = date.Substring(6,4);
+            System.Diagnostics.Debug.WriteLine("year = " + year);
+            string rest = date.Substring(11,8).Replace(":",string.Empty);
+            System.Diagnostics.Debug.WriteLine("rest = " + rest);
+            string result = year + month + day + rest;
+            System.Diagnostics.Debug.WriteLine("result = " + result);
+            formated = result;
+            #endif
+            return formated;
         }
 
         public static string discussionDateToShowFormat(string date)

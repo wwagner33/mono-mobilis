@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mobilis.Lib.Database;
 using Mobilis.Lib.DataServices;
 using Mobilis.Lib.Util;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis.Lib.ViewModel
 {
@@ -23,7 +24,7 @@ namespace Mobilis.Lib.ViewModel
             listContent = courseDao.getAllCourses();
         }
 
-        public  void logout()
+        public void logout()
         {
             User user = userDao.getUser();
             user.token = null;
@@ -37,12 +38,19 @@ namespace Mobilis.Lib.ViewModel
             return classDao.existClassAtCourse(selectedCourse._id);
         }
 
-        public void requestClass(NotifyView callback) 
+        public void requestClass() 
         {
             classService.getClasses(Constants.ClassesURL, userDao.getToken(), r =>
              {
-               classDao.insertClasses(r.Value);
-               callback();
+                 if (r.hasError())
+                 {
+                     ServiceLocator.Messenger.Publish<BaseViewMessage>(new BaseViewMessage(this, new Message(BaseViewMessage.MessageTypes.CONNECTION_ERROR)));
+                 }
+                 else
+                 {
+                     classDao.insertClasses(r.Value);
+                     ServiceLocator.Messenger.Publish<BaseViewMessage>(new BaseViewMessage(this, new Message(BaseViewMessage.MessageTypes.CLASS_CONNECTION_OK)));
+                 }
             });
         }
     }

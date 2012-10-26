@@ -42,9 +42,7 @@ namespace Mobilis.Lib.DataServices
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                        System.Diagnostics.Debug.WriteLine("Response IS null");
-                        callback(new Result<IEnumerable<T>>(ex));
+                       callback(new Result<IEnumerable<T>>(ex));
                     }
 
                 },webRequest);
@@ -52,9 +50,9 @@ namespace Mobilis.Lib.DataServices
 
         protected void Post(string source,string token, string content,string contentType, ResultCallback<IEnumerable<T>> callback)
         {
-            ThreadPool.QueueUserWorkItem(state => 
+            ThreadPool.QueueUserWorkItem(state =>
             {
-                Post(source,token,HttpUtils.toByteArray(content),contentType,callback);
+                    Post(source, token, HttpUtils.toByteArray(content), contentType, callback);
             });
         }
 
@@ -67,36 +65,46 @@ namespace Mobilis.Lib.DataServices
             webRequest.ContentType = contentType;
             //webRequest.ContentLength = content.Length; WP7 não aceita
             webRequest.Method = "POST";
-            webRequest.BeginGetRequestStream(responseResult =>
-            {
-                try
+                webRequest.BeginGetRequestStream(responseResult =>
                 {
-                    // Envia dados ao servidor
-                    Stream streamResponse = webRequest.EndGetRequestStream(responseResult);
-                    byte[] byteArray = content;
-                    streamResponse.Write(byteArray, 0, content.Length);
-                    streamResponse.Close();
-
-                    webRequest.BeginGetResponse(result =>
+                    try
                     {
-                        var response = (HttpWebResponse)webRequest.EndGetResponse(result);
-                        System.Diagnostics.Debug.WriteLine("StatusCode = " + response.StatusCode.ToString());
+                        // Envia dados ao servidor
+                        Stream streamResponse = webRequest.EndGetRequestStream(responseResult);
+                        byte[] byteArray = content;
+                        streamResponse.Write(byteArray, 0, content.Length);
+                        streamResponse.Close();
 
-                        if (response != null)
+                        webRequest.BeginGetResponse(result =>
                         {
-                            var postResult = parseJSON(response, METHOD_POST);
-                            response.Close();
-                            callback(new Result<IEnumerable<T>>(postResult));
-                        }
-                    }, webRequest);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("PostException");
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
-                    callback(new Result<IEnumerable<T>>(ex));
-                }
-            }, webRequest);
+                            try
+                            {
+                                System.Diagnostics.Debug.WriteLine("TESTE 6");
+                                var response = (HttpWebResponse)webRequest.EndGetResponse(result);
+                                System.Diagnostics.Debug.WriteLine("StatusCode = " + response.StatusCode.ToString());
+
+                                if (response != null)
+                                {
+                                    var postResult = parseJSON(response, METHOD_POST);
+                                    response.Close();
+                                    callback(new Result<IEnumerable<T>>(postResult));
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                System.Diagnostics.Debug.WriteLine("WebException");
+                                callback(new Result<IEnumerable<T>>(e));
+                            }
+
+                        }, webRequest);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("PostException");
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+                        callback(new Result<IEnumerable<T>>(ex));
+                    }
+                }, webRequest);
         }
 
         public void getAudio(string teste,int id,AudioCallback callback) 
@@ -125,12 +133,6 @@ namespace Mobilis.Lib.DataServices
                             HttpUtils.SaveFileToStorage(response, id);
                             callback(id);
                         }
-                    }
-
-                    catch (WebException we) 
-                    {
-                        System.Diagnostics.Debug.WriteLine("WEBEXCEPTION");
-                        System.Diagnostics.Debug.WriteLine(we.StackTrace);
                     }
 
                     catch (Exception e)

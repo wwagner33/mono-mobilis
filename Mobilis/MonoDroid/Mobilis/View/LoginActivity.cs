@@ -5,6 +5,7 @@ using Mobilis.Lib;
 using Android.Content;
 using Com.Actionbarsherlock.App;
 using Mobilis.Lib.ViewModel;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis
 {
@@ -30,6 +31,26 @@ namespace Mobilis
             passwordField = FindViewById<EditText>(Resource.Id.password);
             submit = FindViewById<Button>(Resource.Id.submit);
             submit.SetOnClickListener(this);
+
+            ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m => 
+            {
+                switch (m.Content.message) 
+                {
+                    case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
+                        Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+                        break;
+                    case BaseViewMessage.MessageTypes.LOGIN_CONNECTION_OK:
+                        getCourses();
+                        break;
+                    case BaseViewMessage.MessageTypes.COURSE_CONNECTION_OK:
+                        intent = new Intent(this, typeof(CoursesActivity));
+                        intent.SetFlags(ActivityFlags.ClearTop);
+                        StartActivity(intent);
+                        break;
+                    default:
+                        break;
+                }            
+            });
         }
 
         protected override void OnStop()
@@ -44,23 +65,12 @@ namespace Mobilis
         public void OnClick(Android.Views.View v)
         {
             dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-            loginViewModel.submitLoginData(loginField.Text, passwordField.Text, () => 
-            {
-                ServiceLocator.Dispatcher.invoke(() =>
-                {
-                    getCourses();
-                });
-            });
+            loginViewModel.submitLoginData(loginField.Text, passwordField.Text);
         }
 
         public void getCourses()
         {
-            loginViewModel.requestCourses(() => 
-            {
-                intent = new Intent(this, typeof(CoursesActivity));
-                intent.SetFlags(ActivityFlags.ClearTop);
-                StartActivity(intent);
-            });
+            loginViewModel.requestCourses();
         }
 
         public override void OnBackPressed()

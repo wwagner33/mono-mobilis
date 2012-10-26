@@ -90,23 +90,23 @@ namespace Mobilis
                 postsViewModel.playPreviousInSelection();
             };
 
-            ServiceLocator.Messenger.Subscribe<PostViewMessage>(m =>
+            ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m =>
             {
                 switch (m.Content.message) 
                 {
-                    case PostViewMessage.NO_NEW_POSTS:
+                    case BaseViewMessage.MessageTypes.NO_NEW_POSTS:
                     Toast.MakeText(this, "Não há novos posts", ToastLength.Short).Show();
                     break;
-                    case PostViewMessage.FUTURE_POSTS_LOADED:
+                    case BaseViewMessage.MessageTypes.FUTURE_POSTS_LOADED:
                     toggleFooter();
                     break;
-                    case PostViewMessage.PREVIOUS_POSTS_LOADED:
+                    case BaseViewMessage.MessageTypes.PREVIOUS_POSTS_LOADED:
                     toggleHeader();
                     break;
-                    case PostViewMessage.FINISHED_PLAYING:
+                    case BaseViewMessage.MessageTypes.FINISHED_PLAYING:
                     togglePlayerBar(false);
                     break;
-                    case PostViewMessage.UPDATE_SCREEN:
+                    case BaseViewMessage.MessageTypes.UPDATE_SCREEN:
                     updateScreen();
                     break;
                     default:

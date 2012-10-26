@@ -6,6 +6,8 @@ using Android.Content;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 using Mobilis.Lib.ViewModel;
+using Mobilis.Lib;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis
 {
@@ -35,6 +37,37 @@ namespace Mobilis
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
             actionBar.Title = "Fóruns";
+
+            ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m =>
+            {
+                switch (m.Content.message)
+                {
+                    case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        break;
+
+                    case BaseViewMessage.MessageTypes.FUTURE_POSTS_LOADED:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            intent = new Intent(this, typeof(PostActivity));
+                            StartActivity(intent);        
+                        });
+                        break;
+                    case BaseViewMessage.MessageTypes.NO_NEW_POSTS:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            Toast.MakeText(this, "Não há novos posts", ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -85,11 +118,7 @@ namespace Mobilis
             else
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                discussionViewModel.requestPosts(() => 
-                {
-                    intent = new Intent(this, typeof(PostActivity));
-                    StartActivity(intent);                
-                });
+                discussionViewModel.requestPosts();
             }
         }
     }

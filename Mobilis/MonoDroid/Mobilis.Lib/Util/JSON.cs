@@ -30,7 +30,6 @@ namespace Mobilis.Lib.Util
 
         public static IEnumerable<Course> parseCourses(string content)
         {
-            System.Diagnostics.Debug.WriteLine(content);
             List<Course> parsedValues = new List<Course>();
             JArray jArray = JArray.Parse(content);
             System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
@@ -47,6 +46,7 @@ namespace Mobilis.Lib.Util
 
         public static IEnumerable<Class> parseClasses(string content) 
         {
+            System.Diagnostics.Debug.WriteLine(content);
             List<Class> parsedValues = new List<Class>();
             JArray jArray = JArray.Parse(content);
             System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
@@ -56,7 +56,6 @@ namespace Mobilis.Lib.Util
                 Class mClass = new Class();
                 mClass.code = (string)innerObject.SelectToken("code");
                 mClass._id = (int)innerObject.SelectToken("id");
-                mClass.status = (bool)innerObject.SelectToken("status");
                 mClass.courseId = ContextUtil.Instance.Course;
                 parsedValues.Add(mClass);
             }
@@ -88,6 +87,7 @@ namespace Mobilis.Lib.Util
 
         public static IEnumerable<Post> parsePosts(string content) 
         {
+            System.Diagnostics.Debug.WriteLine(content);
             List<Post> parsedValues = new List<Post>();
             JArray jArray = JArray.Parse(content);
             System.Diagnostics.Debug.WriteLine("JArray size = " + jArray.Count);
@@ -122,7 +122,8 @@ namespace Mobilis.Lib.Util
                 System.Diagnostics.Debug.WriteLine("content OK");
                 post.userName = (string)innerObject.SelectToken("user_nick");
                 System.Diagnostics.Debug.WriteLine("user_nick OK");
-                post.updatedAt = (string)innerObject.SelectToken("updated_at");
+                //post.updatedAt = (string)innerObject.SelectToken("updated_at");
+                post.updatedAt = Convert.ToString(innerObject.SelectToken("updated_at"));
                 System.Diagnostics.Debug.WriteLine("Updated At OK");
                 post.level = (int)innerObject.SelectToken("level");
                 System.Diagnostics.Debug.WriteLine("Level OK");

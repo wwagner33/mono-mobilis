@@ -23,32 +23,60 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="Mobilis" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<StackPanel Orientation="Horizontal">
             <TextBlock x:Name="PageTitle" Text="Fóruns" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			
+			</StackPanel>
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
+
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
-        	<ListBox x:Name="_posts">
+        	<ListBox x:Name="_posts" Margin="0,0,0,8" Style="{StaticResource ListBoxStyle1}">
         		  <ListBox.ItemTemplate>
         		  	  		<DataTemplate>
-        		  	  			 <StackPanel Orientation="Horizontal">
-        							<Image Margin="8"
+        		  	  		<StackPanel Orientation="Horizontal">
+        		  	  				<Image Margin="8"
                						 VerticalAlignment="Top"
+									 HorizontalAlignment="Left"
                 				     Source="/Images/stock_person.png"
-               						 Width="100"
-                					 Height="100" />
-									 <TextBlock 
-									 Width="300"
-                      				 Margin="8,0,8,8"
-									 TextWrapping="Wrap"
-                      			     VerticalAlignment="Top"
-                      				 HorizontalAlignment="Left"
-                      				 Text="{Binding content}" />
-       								 </StackPanel>	  	  		
+               						 Width="75"
+                					 Height="75" />	
+        		  	  			<StackPanel Orientation="Vertical">
+        		  	  					<TextBlock
+										Width="100"
+										TextWrapping="Wrap"
+										Margin="5,5,0,5"
+										Text="{Binding userName}"
+										VerticalAlignment="Top"
+                      				 	HorizontalAlignment="Left"
+									 	/>
+										<TextBlock 
+									 	Width="300"
+            							TextWrapping="Wrap"
+										Margin="5,5,0,5"
+                      			     	VerticalAlignment="Center"
+                      				 	HorizontalAlignment="Left"
+                      				 	Text="{Binding content}" />  	  			
+								</StackPanel> 		  	  		
+							</StackPanel> 	  		
 							</DataTemplate>  
 				  </ListBox.ItemTemplate>  	
 			</ListBox>
 		</Grid>
     </Grid>
+	
+	<phone:PhoneApplicationPage.ApplicationBar>
+    <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBarIconButton IconUri="/Images/appbar.transport.rew.rest.png" Text="Previous"/>
+        <shell:ApplicationBarIconButton IconUri="/Images/appbar.stop.rest.png" Text="Stop"/>
+		 <shell:ApplicationBarIconButton IconUri="/Images/appbar.transport.play.rest.png" Text="Play"/>
+		  <shell:ApplicationBarIconButton IconUri="/Images/appbar.transport.ff.rest.png" Text="Next"/>
+        <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarMenuItem Text="Logout"/>
+            <shell:ApplicationBarMenuItem Text="Config"/>
+        </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
+</phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
+

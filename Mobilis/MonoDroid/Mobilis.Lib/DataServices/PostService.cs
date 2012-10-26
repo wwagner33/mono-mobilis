@@ -11,6 +11,7 @@ namespace Mobilis.Lib.DataServices
 
         public void getPosts(string source,string token,ResultCallback<IEnumerable<Post>> callback) 
         {
+            System.Diagnostics.Debug.WriteLine("FUTURE POSTS url = " + source);
             Get(source, token, callback);
         }
 

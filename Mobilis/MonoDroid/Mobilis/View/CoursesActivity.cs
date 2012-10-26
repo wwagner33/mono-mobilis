@@ -7,6 +7,8 @@ using Mobilis.Lib.Model;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 using Mobilis.Lib.ViewModel;
+using Mobilis.Lib;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis
 {
@@ -36,6 +38,38 @@ namespace Mobilis
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
             actionBar.Title = "Cursos";
+
+            ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m =>
+            {
+                switch (m.Content.message)
+                {
+                    case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        break;
+                    case BaseViewMessage.MessageTypes.CLASS_CONNECTION_OK:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            ServiceLocator.Dispatcher.invoke(() =>
+                            {
+                                intent = new Intent(this, typeof(ClassActivity));
+                                StartActivity(intent);
+                            });
+                        });
+                        break;
+                    case BaseViewMessage.MessageTypes.COURSE_CONNECTION_OK:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            //TODO refresh.
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
 
         public override bool OnCreateOptionsMenu(Com.Actionbarsherlock.View.IMenu menu)
@@ -87,11 +121,7 @@ namespace Mobilis
             else 
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                coursesViewModel.requestClass(() => 
-                {
-                    intent = new Intent(this, typeof(ClassActivity));
-                    StartActivity(intent);
-                });
+                coursesViewModel.requestClass();
             }
         }
 

@@ -8,8 +8,15 @@ namespace Mobilis.Lib.DataServices
     {
         public void getToken(string source,string name, string password,ResultCallback<IEnumerable<string>> callback)
         {
-            string content = JSON.generateLoginObject(name, password);
-            Post(source,null, content,CONTENT_TYPE_JSON, callback);
+            try
+            {
+                string content = JSON.generateLoginObject(name, password);
+                Post(source, null, content, CONTENT_TYPE_JSON, callback);
+            }
+            catch (Exception e) 
+            {
+                System.Diagnostics.Debug.WriteLine("Erro de cnxao");
+            }
         }
 
         /*

@@ -6,6 +6,8 @@ using Android.Content;
 using Com.Actionbarsherlock.App;
 using Com.Actionbarsherlock.View;
 using Mobilis.Lib.ViewModel;
+using Mobilis.Lib;
+using Mobilis.Lib.Messages;
 
 namespace Mobilis
 {
@@ -35,7 +37,30 @@ namespace Mobilis
             actionBar.SetDisplayUseLogoEnabled(false);
             actionBar.SetDisplayShowHomeEnabled(false);
             actionBar.Title = "Turmas";
-           
+
+            ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m =>
+            {
+                switch (m.Content.message)
+                {
+                    case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+                            dialog.Dismiss();
+                        });
+                        break;
+
+                    case BaseViewMessage.MessageTypes.DISCUSSION_CONNECTION_OK:
+                        ServiceLocator.Dispatcher.invoke(() =>
+                        {
+                            intent = new Intent(this, typeof(DiscussionActivity));
+                            StartActivity(intent);
+                        });
+                        break;
+                    default:
+                        break;
+                }
+            });
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -87,11 +112,7 @@ namespace Mobilis
             else
             {
                 dialog = ProgressDialog.Show(this, "Carregando", "Por favor, aguarde...", true);
-                classViewModel.requestDiscussions(() => 
-                {
-                    intent = new Intent(this, typeof(DiscussionActivity));
-                    StartActivity(intent);
-                });
+                classViewModel.requestDiscussions();
             }
         }
     }

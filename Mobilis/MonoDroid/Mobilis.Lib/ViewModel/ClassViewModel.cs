@@ -3,6 +3,8 @@ using Mobilis.Lib.Model;
 using Mobilis.Lib.Database;
 using Mobilis.Lib.DataServices;
 using Mobilis.Lib.Util;
+using Mobilis.Lib.Messages;
+
 namespace Mobilis.Lib.ViewModel
 {
     public class ClassViewModel
@@ -36,12 +38,19 @@ namespace Mobilis.Lib.ViewModel
             return discussionDao.existDiscussionsAtClass(selectedClass._id);
         }
 
-        public void requestDiscussions(NotifyView callback) 
+        public void requestDiscussions() 
         {
             discussionService.getDiscussions(Constants.DiscussionURL, userDao.getToken(), r =>
             {
-                discussionDao.insertDiscussion(r.Value);
-                callback();
+                if (r.hasError())
+                {
+                    ServiceLocator.Messenger.Publish<BaseViewMessage>(new BaseViewMessage(this, new Message(BaseViewMessage.MessageTypes.CONNECTION_ERROR)));
+                }
+                else
+                {
+                    discussionDao.insertDiscussion(r.Value);
+                    ServiceLocator.Messenger.Publish<BaseViewMessage>(new BaseViewMessage(this, new Message(BaseViewMessage.MessageTypes.DISCUSSION_CONNECTION_OK)));
+                }
             });
         }
     }

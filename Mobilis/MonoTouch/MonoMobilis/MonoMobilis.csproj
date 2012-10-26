@@ -10,75 +10,75 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MonoMobilis</RootNamespace>
     <AssemblyName>MonoMobilis</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchProfiling>True</MtouchProfiling>
+    <MtouchLink>None</MtouchLink>
+    <MtouchI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <BuildIpa>true</BuildIpa>
+    <ConsolePause>False</ConsolePause>
+    <BuildIpa>True</BuildIpa>
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\iPhone\AppStore</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
   </ItemGroup>
@@ -94,14 +94,11 @@
       <DependentUpon>MonoMobilisViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="DIspatchAdapter.cs" />
-    <Compile Include="CoursesViewController.cs" />
-    <Compile Include="CoursesViewController.designer.cs">
+    <Compile Include="ViewControllers\CoursesViewController.cs" />
+    <Compile Include="ViewControllers\CoursesViewController.designer.cs">
       <DependentUpon>CoursesViewController.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MonoMobilisViewController.xib" />
-    <Page Include="CoursesViewController.xib" />
+    <Compile Include="SimpleTableViewSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -109,5 +106,12 @@
       <Project>{3ED55A28-890A-48A3-A3ED-65237064474C}</Project>
       <Name>MonoMobilis.Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MonoMobilisViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\CoursesViewController.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewControllers\" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MonoMobilis.Lib</RootNamespace>
     <AssemblyName>MonoMobilis.Lib</AssemblyName>
-    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +36,9 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="System.Json" />
+    <Reference Include="Newtonsoft.Json.MonoTouch">
+      <HintPath>..\..\Dependencies\Json.Net Monodroid-MonoTouch\ayoung-Newtonsoft.Json-a77ac54\Newtonsoft.Json\bin\Debug\Newtonsoft.Json.MonoTouch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\MonoDroid\Mobilis.Lib\Database\ClassDao.cs">

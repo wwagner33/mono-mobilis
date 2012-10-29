@@ -25,6 +25,14 @@ namespace MonoMobilis
 			cell.TextLabel.Text = rows[indexPath.Row].ToString();
 			return cell;
 		} 
+
+		/*
+		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+		{
+			new UIAlertView("Row Selected","Teste", null, "OK", null).Show();
+			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
+		}
+		*/
 	}
 }
 

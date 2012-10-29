@@ -99,6 +99,11 @@
       <DependentUpon>CoursesViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="SimpleTableViewSource.cs" />
+    <Compile Include="ViewControllers\ClassesViewController.cs" />
+    <Compile Include="ViewControllers\ClassesViewController.designer.cs">
+      <DependentUpon>ClassesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UILoadingView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -110,6 +115,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="MonoMobilisViewController.xib" />
     <InterfaceDefinition Include="ViewControllers\CoursesViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\ClassesViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewControllers\" />

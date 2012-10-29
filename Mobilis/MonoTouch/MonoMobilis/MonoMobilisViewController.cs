@@ -8,6 +8,7 @@ using Mobilis.Lib.DataServices;
 using Mobilis.Lib.Database;
 using Mobilis.Lib;
 using Mobilis.Lib.ViewModel;
+using Mobilis.Lib.Messages;
 
 namespace MonoMobilis
 {
@@ -30,30 +31,42 @@ namespace MonoMobilis
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			this.NavigationController.NavigationBar.Hidden = true;
 			loginViewModel = new LoginViewModel();
 
 			this.submit.TouchUpInside += (sender, e) => {
 			
-				loginViewModel.submitLoginData(login.Text,password.Text,() =>
-				{
-					getCourses();
-				});
-
+				loginViewModel.submitLoginData(login.Text,password.Text);
 			};
+
+			ServiceLocator.Messenger.Subscribe<BaseViewMessage>(m => 
+			{
+				switch (m.Content.message) 
+				{
+				case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
+					//Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+					break;
+				case BaseViewMessage.MessageTypes.LOGIN_CONNECTION_OK:
+					getCourses();
+					break;
+				case BaseViewMessage.MessageTypes.COURSE_CONNECTION_OK:
+					ServiceLocator.Dispatcher = new DispatchAdapter(this);
+					ServiceLocator.Dispatcher.invoke(() =>
+					{
+						coursesPage = new CoursesViewController();
+						this.NavigationController.PushViewController(this.coursesPage,true);
+					});
+					break;
+				default:
+					break;
+				}            
+			});
 		}
+
 
 		public void getCourses() 
 		{
-			loginViewModel.requestCourses(() =>
-			{
-				ServiceLocator.Dispatcher = new DispatchAdapter(this);
-				ServiceLocator.Dispatcher.invoke(() =>
-				{
-					coursesPage = new CoursesViewController();
-					this.NavigationController.PushViewController(this.coursesPage,true);
-				});
-
-			});
+			loginViewModel.requestCourses();
 		}
 
 		/* Navegacao

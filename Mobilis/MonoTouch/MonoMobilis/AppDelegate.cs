@@ -5,6 +5,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Mobilis.Lib;
+using Mobilis.Lib.Database;
 
 namespace MonoMobilis
 {
@@ -16,6 +17,8 @@ namespace MonoMobilis
 	{
 		// class-level declarations
 		UIWindow window;
+		private UserDao userDao;
+		private CourseDao courseDao;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -26,10 +29,25 @@ namespace MonoMobilis
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			userDao = new UserDao ();
+			courseDao = new CourseDao ();
 			this.window = new UIWindow (UIScreen.MainScreen.Bounds);
-			var rootNavigationController = new UINavigationController();
-			MonoMobilisViewController loginView = new MonoMobilisViewController();
-			rootNavigationController.PushViewController(loginView,false);
+			var rootNavigationController = new UINavigationController ();
+
+			if (userDao.tokenExists () && courseDao.existCourses ()) 
+			{
+				CoursesViewController courseView = new CoursesViewController();
+				rootNavigationController.PushViewController(courseView,false);
+			} 
+			else 
+			{
+				MonoMobilisViewController loginView = new MonoMobilisViewController();
+				rootNavigationController.PushViewController(loginView,false);
+			}
+
+			//MonoMobilisViewController loginView = new MonoMobilisViewController();
+			//rootNavigationController.PushViewController(loginView,false);
+
 			this.window.RootViewController = rootNavigationController;
 			this.window.MakeKeyAndVisible();
 			ServiceLocator.Dispatcher = new DispatchAdapter(this);

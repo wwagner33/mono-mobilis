@@ -8,10 +8,9 @@ using MonoTouch.Foundation;
 
 namespace MonoMobilis
 {
-	[Register ("CoursesViewController")]
-	partial class CoursesViewController
+	[Register ("DiscussionViewController")]
+	partial class DiscussionViewController
 	{
-		
 		void ReleaseDesignerOutlets ()
 		{
 		}

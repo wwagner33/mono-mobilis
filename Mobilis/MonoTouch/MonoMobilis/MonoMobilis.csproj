@@ -104,6 +104,12 @@
       <DependentUpon>ClassesViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="UILoadingView.cs" />
+    <Compile Include="Table\SimpleTableItem.cs" />
+    <Compile Include="Table\SimpleTableSource.cs" />
+    <Compile Include="ViewControllers\DiscussionViewController.cs" />
+    <Compile Include="ViewControllers\DiscussionViewController.designer.cs">
+      <DependentUpon>DiscussionViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -116,8 +122,14 @@
     <InterfaceDefinition Include="MonoMobilisViewController.xib" />
     <InterfaceDefinition Include="ViewControllers\CoursesViewController.xib" />
     <InterfaceDefinition Include="ViewControllers\ClassesViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\DiscussionViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewControllers\" />
+    <Folder Include="Table\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo%402x.png" />
+    <Content Include="logo.png" />
   </ItemGroup>
 </Project>

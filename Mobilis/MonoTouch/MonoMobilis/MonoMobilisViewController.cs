@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Mobilis.Lib.Util;
@@ -17,6 +16,7 @@ namespace MonoMobilis
 
 		private CoursesViewController coursesPage;
 		private LoginViewModel loginViewModel;
+		private UILoadingView dialog;
 
 		public MonoMobilisViewController () : base ("MonoMobilisViewController", null)
 		{
@@ -34,8 +34,10 @@ namespace MonoMobilis
 			this.NavigationController.NavigationBar.Hidden = true;
 			loginViewModel = new LoginViewModel();
 
-			this.submit.TouchUpInside += (sender, e) => {
-			
+			this.submit.TouchUpInside += (sender, e) => 
+			{
+				dialog = new UILoadingView("Carregando","Por favor aguarde");
+				dialog.Show();
 				loginViewModel.submitLoginData(login.Text,password.Text);
 			};
 
@@ -44,13 +46,19 @@ namespace MonoMobilis
 				switch (m.Content.message) 
 				{
 				case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
-					//Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
+					ServiceLocator.Dispatcher.invoke(() =>
+					{
+						if (dialog != null) 
+						{
+							dialog.DismissWithClickedButtonIndex(0,true);
+						}
+						new UIAlertView("Erro","Nao foi possivel se conectar com o servidor",null,"Fechar",null).Show();
+					});
 					break;
 				case BaseViewMessage.MessageTypes.LOGIN_CONNECTION_OK:
 					getCourses();
 					break;
 				case BaseViewMessage.MessageTypes.COURSE_CONNECTION_OK:
-					ServiceLocator.Dispatcher = new DispatchAdapter(this);
 					ServiceLocator.Dispatcher.invoke(() =>
 					{
 						coursesPage = new CoursesViewController();
@@ -63,6 +71,14 @@ namespace MonoMobilis
 			});
 		}
 
+		public override void ViewDidDisappear (bool animated)
+		{
+			base.ViewDidDisappear (animated);
+			if (dialog != null) 
+			{
+				dialog.DismissWithClickedButtonIndex(0,true);
+			}
+		}
 
 		public void getCourses() 
 		{

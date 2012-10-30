@@ -13,9 +13,11 @@ namespace MonoMobilis
 {
 	public partial class CoursesViewController : UIViewController
 	{
-		private UITableView table;
 		protected static CoursesViewModel coursesViewModel;
 		public static UINavigationController navController;
+		private static UILoadingView dialog;
+		private UITableView table;
+		private static ClassesViewController classViewController;
 
 		public CoursesViewController () : base ("CoursesViewController", null)
 		{
@@ -32,7 +34,10 @@ namespace MonoMobilis
 			navController = this.NavigationController;
 			this.NavigationController.NavigationBar.Hidden = true;
 			coursesViewModel = new CoursesViewModel();
-			table = new UITableView(View.Bounds);
+
+			table = new UITableView(new RectangleF (
+				0,50, this.View.Frame.Width,
+				this.View.Frame.Height));
 			table.AutoresizingMask = UIViewAutoresizing.All;
 			table.Source = new TableViewSource2(coursesViewModel.listContent);
 			Add(table);
@@ -43,17 +48,18 @@ namespace MonoMobilis
 				{
 				case BaseViewMessage.MessageTypes.CONNECTION_ERROR:
 					ServiceLocator.Dispatcher.invoke(() =>
-					                                 {
-						//Toast.MakeText(this, "Erro de conexão", ToastLength.Short).Show();
-						//dialog.Dismiss();
+					{
+						if (dialog != null) 
+						{
+							dialog.DismissWithClickedButtonIndex(0,true);
+						}
+						new UIAlertView("Erro","Nao foi possivel se conectar com o servidor",null,"Fechar",null).Show();
 					});
 					break;
 				case BaseViewMessage.MessageTypes.CLASS_CONNECTION_OK:
 					ServiceLocator.Dispatcher.invoke(() =>
 					{
-						//intent = new Intent(this, typeof(ClassActivity));
-						//StartActivity(intent);
-						new UIAlertView("Row Selected","Para a lista de turmas", null, "OK", null).Show();
+						navController.PushViewController(classViewController,true);
 					});
 					break;
 				case BaseViewMessage.MessageTypes.COURSE_CONNECTION_OK:
@@ -66,8 +72,15 @@ namespace MonoMobilis
 					break;
 				}
 			});
+		}
 
-
+		public override void ViewDidDisappear (bool animated)
+		{
+			base.ViewDidDisappear (animated);
+			if (dialog != null) 
+			{
+				dialog.DismissWithClickedButtonIndex(0,true);
+			}
 		}
 
 		/*
@@ -78,7 +91,7 @@ namespace MonoMobilis
 		}
 		*/
 
-		public class TableViewSource2 : UITableViewSource
+		private class TableViewSource2 : UITableViewSource
 		{
 			private List<Course> teste;
 
@@ -101,7 +114,8 @@ namespace MonoMobilis
 
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
-				ClassesViewController classViewController = new ClassesViewController();
+				tableView.DeselectRow(indexPath, true);
+				classViewController = new ClassesViewController();
 
 				if (coursesViewModel.existClasses(indexPath.Row)) 
 				{
@@ -109,12 +123,13 @@ namespace MonoMobilis
 				} 
 				else 
 				{
-					new UILoadingView("Carregando","Por favor aguarde").Show();
+					dialog = new UILoadingView("Carregando","Por favor aguarde");
+					dialog.Show();
 					coursesViewModel.requestClass();
-					//new UIAlertView("Row Selected","Nao existem cursos", null, "OK", null).Show();
 				}
 			}
 		}
+
 	}
 }
 

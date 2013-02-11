@@ -107,3 +107,4 @@ obj/
 bin/
 Bin/
 Mobilis/MonoTouch/MonoMobilis.userprefs
+Mobilis/MonoDroid/Mobilis/Resources/Resource.Designer.cs

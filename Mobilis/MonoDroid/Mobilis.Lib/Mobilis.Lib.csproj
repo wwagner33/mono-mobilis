@@ -74,7 +74,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\System.Data.SQLite\2010\bin\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Json" />
     <Reference Include="System.Web.Services" />

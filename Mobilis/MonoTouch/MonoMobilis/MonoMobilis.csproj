@@ -111,7 +111,7 @@
       <DependentUpon>DiscussionViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\MonoMobilis.Lib\MonoMobilis.Lib.csproj">
       <Project>{3ED55A28-890A-48A3-A3ED-65237064474C}</Project>
